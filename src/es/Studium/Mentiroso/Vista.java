@@ -1,5 +1,6 @@
 package es.Studium.Mentiroso;
 
+//ESTRUCTURA DE LA CLASE VISTA
 import java.awt.Button;
 import java.awt.FlowLayout;
 import java.awt.Frame;
