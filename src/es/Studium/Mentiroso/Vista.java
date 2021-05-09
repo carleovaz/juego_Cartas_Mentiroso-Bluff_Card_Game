@@ -3,9 +3,9 @@ package es.Studium.Mentiroso;
 //ESTRUCTURA DE LA CLASE VISTA
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Label;
 import java.awt.TextArea;
@@ -35,18 +35,26 @@ public class Vista  extends Frame
 
 	//VENTANA INICIAL DEL JUEGO
 	Frame ventanaPrincipal = new Frame ("¡El Mentiroso!");
-	Label labelBienvenido = new Label ("Bienvenido al Mentiroso");
-	Button buttonCrear = new Button ("Crear Partida");//PASA A VENTANA DE CREAR PARTIDA
+	Label labelBienvenido = new Label ("¡BIENVENIDO AL MENTIROSO!");
+	Button buttonCrearJugador = new Button ("Crear Mentiroso");
+	Button buttonCrearPartida = new Button ("Crear Partida");//PASA A VENTANA DE CREAR PARTIDA
 	Button buttonMejores = new Button ("Mejores jugadores");//SIMILAR A CONSULTA DE PROGRAMA DE GESTIÓN
+	Button buttonComoSeJuega = new Button ("Como se juega?");
 	Button buttonSalir = new Button ("Salir");//CIERRA EL PROGRAMA
+	
+	//VENTANA CREAR MENTIROSO
+	Frame ventanaCrearJugador = new Frame ("¡El Mentiroso!: Crear Jugador");
+	Label labelNombreJugador = new Label ("Nombre del Mentiroso");
+	TextField textoNombreJugador = new TextField (25);
+	Button crearJugador = new Button ("Crear"); //AL CREAR PARTIDA, INICIAMOS EL JUEGO Y SE GUARDA EL NOMBRE
+	Button cerrarJugador = new Button ("Cerrar");
 
 	//VENTANA CREAR PARTIDA
-	Frame ventanaCrear = new Frame ("¡El Mentiroso!: Crear Partida");
+	Frame ventanaCrearPartida = new Frame ("¡El Mentiroso!: Crear Partida");
 	Label labelNombrePartida = new Label ("Nombre de la Partida");
-	TextField textoNombre = new TextField (25);
-	Button crearPartida = new Button ("Crear"); //AL CREAR PARTIDA, INICIAMOS EL JUEGO Y SE GUARDA EL NOMBRE
-	Button cancelar = new Button ("Cancelar"); //CIERRA LA PANTALLA DE CREAR
-	Button comoseJuega = new Button ("¿Como se juega?"); //ABRE LA VENTANA DE COMO SE JUEGA
+	TextField textoNombrePartida = new TextField (25);
+	Button crearPartida = new Button ("Crear"); //AL CREAR PARTIDA, COMO SI HICIERAMOS UN ALTA
+	Button cerrarPartida = new Button ("Cerrar"); //CIERRA LA PANTALLA DE CREAR
 
 	//VENTANA MEJORES JUGADORES
 	Frame ventanaMejoresJugadores = new Frame("Consulta");
@@ -65,34 +73,50 @@ public class Vista  extends Frame
 	TextArea ayuda3 = new TextArea(10, 60);//PONER IMAGEN AL LADO
 	Button cerrarAyuda = new Button("Cerrar");
 
-	//DECLARAMOS EL OBJETO TOOLKIT PARA MANIPULAR LAS IMAGENES
-
+	//PANTALLA DEL JUEGO
+	Frame ventanaJuego = new Frame ("Jugando");
 
 
 	public Vista()
 	{
+		//CONTENEDOR DE VENTANA PRINCIPAL
 		ventanaPrincipal.setLayout(new FlowLayout());
 		ventanaPrincipal.add(labelBienvenido);
-		ventanaPrincipal.add(buttonCrear);
+		ventanaPrincipal.add(buttonCrearJugador);
+		ventanaPrincipal.add(buttonCrearPartida);
 		ventanaPrincipal.add(buttonMejores);
+		ventanaPrincipal.add(buttonComoSeJuega);
 		ventanaPrincipal.add(buttonSalir);
-		ventanaPrincipal.setSize(180,210);
+		ventanaPrincipal.setSize(290,210);
 		ventanaPrincipal.setBackground(Color.yellow);
 		ventanaPrincipal.setVisible(true);
-		ventanaPrincipal.setResizable(false);
+		ventanaPrincipal.setResizable(true);
 		ventanaPrincipal.setLocationRelativeTo(null);
-
-		ventanaCrear.setLayout(new FlowLayout());
-		ventanaCrear.add(labelNombrePartida);
-		ventanaCrear.add(textoNombre);
-		ventanaCrear.add(crearPartida);
-		ventanaCrear.add(cancelar);
-		ventanaCrear.add(comoseJuega);
-		ventanaCrear.setSize(300,200);
-		ventanaCrear.setBackground(Color.yellow);
-		ventanaCrear.setLocationRelativeTo(null);
-		ventanaCrear.setResizable(false);
-
+		
+		//CONTENEDOR DE CREAR JUGADOR (ACTUA COMO UNA ALTA)
+		ventanaCrearJugador.setLayout(new FlowLayout());
+		ventanaCrearJugador.add(labelNombreJugador);
+		ventanaCrearJugador.add(textoNombreJugador);
+		ventanaCrearJugador.add(crearJugador);
+		ventanaCrearJugador.add(cerrarJugador);
+		ventanaCrearJugador.setSize(300,200);
+		ventanaCrearJugador.setBackground(Color.yellow);
+		ventanaCrearJugador.setLocationRelativeTo(null);
+		ventanaCrearJugador.setResizable(false);
+		
+		
+		//CONTENEDOR DE CREAR PARTIDA (ACTUA COMO UNA ALTA)
+		ventanaCrearPartida.setLayout(new FlowLayout());
+		ventanaCrearPartida.add(labelNombrePartida);
+		ventanaCrearPartida.add(textoNombrePartida);
+		ventanaCrearPartida.add(crearPartida);
+		ventanaCrearPartida.add(cerrarPartida);
+		ventanaCrearPartida.setSize(300,200);
+		ventanaCrearPartida.setBackground(Color.yellow);
+		ventanaCrearPartida.setLocationRelativeTo(null);
+		ventanaCrearPartida.setResizable(false);
+		
+		//CONTENEDOR DE MEJORES JUGADORES (ACTUA COMO UNA CONSULTA)
 		ventanaMejoresJugadores.setLayout(new FlowLayout());
 		ventanaMejoresJugadores.add(labelMejores);
 		ventanaMejoresJugadores.add(listadoJugadores);
@@ -102,6 +126,7 @@ public class Vista  extends Frame
 		ventanaMejoresJugadores.setLocationRelativeTo(null);
 		ventanaMejoresJugadores.setResizable(false);
 
+		//CONTENEDOR DE COMO SE JUEGA
 		ventanaComoSeJuega.setLayout(new FlowLayout());
 		ventanaComoSeJuega.add(ayuda1);
 		ventanaComoSeJuega.add(labelAyuda1);
@@ -112,16 +137,16 @@ public class Vista  extends Frame
 		ventanaComoSeJuega.add(labelAyuda3);
 		ventanaComoSeJuega.add(cerrarAyuda);
 		ventanaComoSeJuega.setBackground(Color.lightGray);
-		ventanaComoSeJuega.setSize(950,600);
+		ventanaComoSeJuega.setSize(500,700);
+		ventanaComoSeJuega.setLocationRelativeTo(null);
+		ventanaComoSeJuega.setResizable(false);
+		
+		//CONTENEDOR DE VENTANA DE JUEGO
+		ventanaJuego.setLayout(new FlowLayout());
+		ventanaComoSeJuega.setSize(500,700);
 		ventanaComoSeJuega.setLocationRelativeTo(null);
 		ventanaComoSeJuega.setResizable(false);
 
-
-
 	}
-	public void paint(Graphics g) 
-	{ 
-
-	} 
 
 }

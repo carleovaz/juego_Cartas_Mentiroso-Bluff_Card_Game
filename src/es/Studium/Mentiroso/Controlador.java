@@ -6,9 +6,19 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Controlador implements ActionListener, WindowListener,MouseListener
 {
+	BaseDeDatos bd;
+	String sentencia = "";
+	Connection connection = null;
+	Statement statement = null;
+	ResultSet rs = null;
+	
 	Vista vista;
 	Modelo modelo;
 	int mazoJugador1[] = new int[24];
@@ -28,15 +38,18 @@ public class Controlador implements ActionListener, WindowListener,MouseListener
 		this.vista.addMouseListener(this);
 
 		objvista.ventanaPrincipal.addWindowListener(this);
-		objvista.ventanaCrear.addWindowListener(this);
+		objvista.ventanaCrearJugador.addWindowListener(this);
+		objvista.ventanaCrearPartida.addWindowListener(this);
 		objvista.ventanaComoSeJuega.addWindowListener(this);
 		objvista.ventanaMejoresJugadores.addWindowListener(this);
 
-		objvista.buttonCrear.addActionListener(this);
+		objvista.buttonCrearJugador.addActionListener(this);
+		objvista.buttonCrearPartida.addActionListener(this);
 		objvista.buttonMejores.addActionListener(this);
 		objvista.buttonSalir.addActionListener(this);
-		objvista.cancelar.addActionListener(this);
-		objvista.comoseJuega.addActionListener(this);
+		objvista.cerrarJugador.addActionListener(this);
+		objvista.cerrarPartida.addActionListener(this);
+		objvista.buttonComoSeJuega.addActionListener(this);
 		objvista.cerrar.addActionListener(this);
 		objvista.cerrarAyuda.addActionListener(this);
 
@@ -48,11 +61,37 @@ public class Controlador implements ActionListener, WindowListener,MouseListener
 	@Override
 	public void actionPerformed(ActionEvent evento) 
 	{
-		if(vista.buttonCrear.equals(evento.getSource()))
+		if(vista.buttonCrearPartida.equals(evento.getSource()))
 		{
-			vista.ventanaCrear.setVisible(true);
-			this.modelo.barajar(mazoJugador1, mazoJugador2);
+			vista.ventanaCrearPartida.setVisible(true);
 
+//			bd = new BaseDeDatos();
+//			connection = bd.conectar();
+//			try
+//			{
+//				sentencia="INSERT INTO peliculas VALUES(null,'"
+//						+textoNombrePelicula.getText()+"','"
+//						+textoDirectorPelicula.getText()+"','"
+//						+textoPrecioPelicula.getText()+"',"
+//						//SELECICONAMOS EL PROPIETARIO, SACAMOS EL ITEM ELEGIDO Y NOS QUEDAMOS CON UNICO ELEMENTO
+//						+choPropietarios.getSelectedItem().split("-")[0]
+//								+")";
+//				//CREAMOS SENTENCIA
+//				statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+//						ResultSet.CONCUR_READ_ONLY);
+//				statement.executeUpdate(sentencia);
+//				
+//			}
+//			catch (SQLException sqle)
+//			{
+//				
+//			}
+
+		}
+		
+		else if(vista.buttonCrearJugador.equals(evento.getSource()))
+		{
+			vista.ventanaCrearJugador.setVisible(true);
 		}
 
 		else if(vista.buttonMejores.equals(evento.getSource()))
@@ -60,7 +99,7 @@ public class Controlador implements ActionListener, WindowListener,MouseListener
 			vista.ventanaMejoresJugadores.setVisible(true);	
 		}
 
-		else if(vista.comoseJuega.equals(evento.getSource()))
+		else if(vista.buttonComoSeJuega.equals(evento.getSource()))
 		{
 			vista.ventanaComoSeJuega.setVisible(true);
 		}
@@ -71,11 +110,18 @@ public class Controlador implements ActionListener, WindowListener,MouseListener
 			System.exit(0);
 		}
 
-		else if(vista.cancelar.equals(evento.getSource()))
+		else if(vista.cerrarJugador.equals(evento.getSource()))
 		{
-			vista.ventanaCrear.setVisible(false);
+			vista.ventanaCrearJugador.setVisible(false);
+			
 		}
-
+		
+		else if(vista.cerrarPartida.equals(evento.getSource()))
+		{
+			vista.ventanaCrearPartida.setVisible(false);
+			
+		}
+		
 		else if(vista.cerrar.equals(evento.getSource()))
 		{
 			vista.ventanaMejoresJugadores.setVisible(false);
@@ -91,7 +137,8 @@ public class Controlador implements ActionListener, WindowListener,MouseListener
 	public void windowClosing(WindowEvent arg0) 
 	{
 		vista.ventanaPrincipal.setVisible(false);
-		vista.ventanaCrear.setVisible(false);
+		vista.ventanaCrearPartida.setVisible(false);
+		vista.ventanaCrearJugador.setVisible(false);
 		vista.ventanaMejoresJugadores.setVisible(false);
 		vista.ventanaComoSeJuega.setVisible(false);
 	}
