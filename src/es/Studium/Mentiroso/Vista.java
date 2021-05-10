@@ -44,8 +44,10 @@ public class Vista  extends Frame
 	
 	//VENTANA CREAR MENTIROSO
 	Frame ventanaCrearJugador = new Frame ("¡El Mentiroso!: Crear Jugador");
+	Label labelcodigojugador = new Label ("Codigo jugador");
+	TextField textocodigoJugador = new TextField (30);
 	Label labelNombreJugador = new Label ("Nombre del Mentiroso");
-	TextField textoNombreJugador = new TextField (25);
+	TextField textoNombreJugador = new TextField (30);
 	Dialog dialogoMensajeJugadorCreado = new Dialog(ventanaCrearJugador, "Perfil creado", true);
 	Label perfilCreado = new Label ("Tu perfil ha sido creado");
 	Button crearJugador = new Button ("Crear"); //AL CREAR PARTIDA, INICIAMOS EL JUEGO Y SE GUARDA EL NOMBRE
@@ -54,9 +56,11 @@ public class Vista  extends Frame
 	//VENTANA CREAR PARTIDA
 	Frame ventanaCrearPartida = new Frame ("¡El Mentiroso!: Crear Partida");
 	Label labelNombrePartida = new Label ("Nombre de la Partida");
-	Dialog dialogoMensajePartidaCreada = new Dialog(ventanaCrearPartida, "Confirmación", true);
-	TextField textoNombrePartida = new TextField (25);
-	Button iniciarPartida = new Button ("Iniciar"); //AL CREAR PARTIDA, COMO SI HICIERAMOS UN ALTA
+	TextField textoNombrePartida = new TextField (30);
+	Label labelCreadordePartida = new Label ("Introduce tu codigo:");
+	TextField textoCodigoJugadorPartida = new TextField (30);
+	Dialog dialogoMensajePartidaCreada = new Dialog(ventanaCrearPartida, "Partida creada", true);
+	Button buttonIniciarPartida = new Button ("Iniciar"); //AL CREAR PARTIDA, COMO SI HICIERAMOS UN ALTA
 	Button cerrarPartida = new Button ("Cerrar"); //CIERRA LA PANTALLA DE CREAR
 
 	//VENTANA MEJORES JUGADORES
@@ -98,6 +102,8 @@ public class Vista  extends Frame
 		
 		//CONTENEDOR DE CREAR JUGADOR (ACTUA COMO UNA ALTA)
 		ventanaCrearJugador.setLayout(new FlowLayout());
+		ventanaCrearJugador.add(labelcodigojugador);
+		ventanaCrearJugador.add(textocodigoJugador);
 		ventanaCrearJugador.add(labelNombreJugador);
 		ventanaCrearJugador.add(textoNombreJugador);
 		ventanaCrearJugador.add(crearJugador);
@@ -112,7 +118,9 @@ public class Vista  extends Frame
 		ventanaCrearPartida.setLayout(new FlowLayout());
 		ventanaCrearPartida.add(labelNombrePartida);
 		ventanaCrearPartida.add(textoNombrePartida);
-		ventanaCrearPartida.add(iniciarPartida);
+		ventanaCrearPartida.add(labelCreadordePartida);
+		ventanaCrearPartida.add(textoCodigoJugadorPartida);
+		ventanaCrearPartida.add(buttonIniciarPartida);
 		ventanaCrearPartida.add(cerrarPartida);
 		ventanaCrearPartida.setSize(300,200);
 		ventanaCrearPartida.setBackground(Color.yellow);

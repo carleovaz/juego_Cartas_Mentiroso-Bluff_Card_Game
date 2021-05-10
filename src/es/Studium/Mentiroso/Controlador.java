@@ -49,7 +49,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		objvista.buttonCrearPartida.addActionListener(this);
 		objvista.crearJugador.addActionListener(this);
 		objvista.buttonMejores.addActionListener(this);
-		objvista.iniciarPartida.addActionListener(this);
+		objvista.buttonIniciarPartida.addActionListener(this);
 		objvista.buttonSalir.addActionListener(this);
 		objvista.cerrarJugador.addActionListener(this);
 		objvista.cerrarPartida.addActionListener(this);
@@ -71,16 +71,48 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 
 		}
 
-		else if(vista.iniciarPartida.equals(evento.getSource()))
+		else if(vista.buttonComoSeJuega.equals(evento.getSource()))
 		{
-			vista.ventanaJuego.setVisible(true);
+			vista.ventanaComoSeJuega.setVisible(true);
+		}
+
+
+		else if(vista.buttonIniciarPartida.equals(evento.getSource()))
+		{
+			bd = new BaseDeDatos();
+			connection = bd.conectar();
+			try
+			{
+				vista.ventanaJuego.setVisible(true);
+				//CREAMOS LA SENTENCIA
+				statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY);
+				//TOMAMOS EL TEXTO
+				if((vista.textoNombrePartida.getText().length()!=0))
+				{
+					sentencia = "INSERT INTO partidas VALUES (null, '" + 
+							vista.textoNombrePartida.getText() + "','" + 
+							vista.textoCodigoJugadorPartida.getText() + "')";
+					System.out.println(sentencia);
+					statement.executeUpdate(sentencia);
+				}
+				else
+				{
+					vista.perfilCreado.setText("FALLO: Faltan datos");
+				}
+			}
+			catch (SQLException sqle)
+			{
+				vista.perfilCreado.setText("Error al crear partida.");
+			}
 		}
 
 		else if(vista.buttonCrearJugador.equals(evento.getSource()))
 		{
 			vista.ventanaCrearJugador.setVisible(true);
 		}
-		
+
+		//AGREGAMOS LOS DATOS DEL NOMBRE DEL JUGADOR EN LA BASE DE DATOS
 		else if(vista.crearJugador.equals(evento.getSource()))
 		{
 			bd = new BaseDeDatos();
@@ -94,25 +126,27 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 
 				if((vista.textoNombreJugador.getText().length()!=0))
 				{
-					sentencia = "INSERT INTO jugadores VALUES (null, '" + 
-							vista.textoNombreJugador.getText() + "', null)";
+					sentencia = "INSERT INTO jugadores VALUES ('" + 
+							vista.textocodigoJugador.getText() + "','" + 
+							vista.textoNombreJugador.getText() + "'," + 
+							"null)";
 					System.out.println(sentencia);
 					statement.executeUpdate(sentencia);
 				}
 				else
 				{
-					vista.perfilCreado.setText("FALLO: Faltan datos");
+					vista.perfilCreado.setText("FALLO: Faltan datos, revisa los campos por favor.");
 				}
 			}
 			catch (SQLException sqle)
 			{
-				vista.perfilCreado.setText("Error al crear perfil.");
+				vista.perfilCreado.setText("ERROR: ese codigo ya pertenece a otro jugador, introduce otro por favor.");
 			}
 			finally
 			{
 				vista.dialogoMensajeJugadorCreado.setLayout(new FlowLayout());
 				vista.dialogoMensajeJugadorCreado.addWindowListener(this);
-				vista.dialogoMensajeJugadorCreado.setSize(200,100);
+				vista.dialogoMensajeJugadorCreado.setSize(430,100);
 				vista.dialogoMensajeJugadorCreado.setResizable(false);
 				vista.dialogoMensajeJugadorCreado.setLocationRelativeTo(null);
 				vista.dialogoMensajeJugadorCreado.add(vista.perfilCreado);
@@ -120,17 +154,11 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			}
 		}
 
-
-		//INGRESAMOS LOS DATOS DE LA TABLA CLIENTES DE LA BASE DE DATOS
 		else if(vista.buttonMejores.equals(evento.getSource()))
 		{
 			vista.ventanaMejoresJugadores.setVisible(true);	
 		}
 
-		else if(vista.buttonComoSeJuega.equals(evento.getSource()))
-		{
-			vista.ventanaComoSeJuega.setVisible(true);
-		}
 
 		//BOTONES QUE CIERRAN VENTANAS
 		if(vista.buttonSalir.equals(evento.getSource()))
