@@ -70,7 +70,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			vista.ventanaCrearPartida.setVisible(true);
 
 		}
-
+		
 		else if(vista.buttonComoSeJuega.equals(evento.getSource()))
 		{
 			vista.ventanaComoSeJuega.setVisible(true);
@@ -83,7 +83,6 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			connection = bd.conectar();
 			try
 			{
-				vista.ventanaJuego.setVisible(true);
 				//CREAMOS LA SENTENCIA
 				statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_READ_ONLY);
@@ -95,15 +94,26 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 							vista.textoCodigoJugadorPartida.getText() + "')";
 					System.out.println(sentencia);
 					statement.executeUpdate(sentencia);
+					vista.ventanaJuego.setVisible(true);
 				}
 				else
 				{
-					vista.perfilCreado.setText("FALLO: Faltan datos");
+					vista.partidaCreada.setText("FALLO: Faltan datos, revisa los campos por favor.");
 				}
 			}
 			catch (SQLException sqle)
 			{
-				vista.perfilCreado.setText("Error al crear partida.");
+				vista.partidaCreada.setText("ERROR: Tu partida no pudo ser creada.");
+			}
+			finally
+			{
+				vista.dialogoMensajeJugadorCreado.setLayout(new FlowLayout());
+				vista.dialogoMensajeJugadorCreado.addWindowListener(this);
+				vista.dialogoMensajeJugadorCreado.setSize(430,100);
+				vista.dialogoMensajeJugadorCreado.setResizable(false);
+				vista.dialogoMensajeJugadorCreado.setLocationRelativeTo(null);
+				vista.dialogoMensajeJugadorCreado.add(vista.partidaCreada);
+				vista.dialogoMensajeJugadorCreado.setVisible(true);
 			}
 		}
 
@@ -111,7 +121,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		{
 			vista.ventanaCrearJugador.setVisible(true);
 		}
-
+		
 		//AGREGAMOS LOS DATOS DEL NOMBRE DEL JUGADOR EN LA BASE DE DATOS
 		else if(vista.crearJugador.equals(evento.getSource()))
 		{
@@ -193,6 +203,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	public void windowClosing(WindowEvent arg0) 
 	{
 		vista.dialogoMensajeJugadorCreado.setVisible(false);
+		vista.dialogoMensajePartidaCreada.setVisible(false);
 		vista.ventanaPrincipal.setVisible(false);
 		vista.ventanaCrearPartida.setVisible(false);
 		vista.ventanaCrearJugador.setVisible(false);

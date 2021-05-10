@@ -60,6 +60,7 @@ public class Vista  extends Frame
 	Label labelCreadordePartida = new Label ("Introduce tu codigo:");
 	TextField textoCodigoJugadorPartida = new TextField (30);
 	Dialog dialogoMensajePartidaCreada = new Dialog(ventanaCrearPartida, "Partida creada", true);
+	Label partidaCreada = new Label ("Tu partida no pudo ser creada.");
 	Button buttonIniciarPartida = new Button ("Iniciar"); //AL CREAR PARTIDA, COMO SI HICIERAMOS UN ALTA
 	Button cerrarPartida = new Button ("Cerrar"); //CIERRA LA PANTALLA DE CREAR
 
