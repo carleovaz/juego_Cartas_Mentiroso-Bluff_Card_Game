@@ -166,7 +166,29 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 
 		else if(vista.buttonMejores.equals(evento.getSource()))
 		{
-			vista.ventanaMejoresJugadores.setVisible(true);	
+			vista.ventanaMejoresJugadores.setVisible(true);
+			bd = new BaseDeDatos();
+			connection = bd.conectar();
+			sentencia = "SELECT idJugador , nombreJugador, puntosJugador FROM jugadores ORDER BY 3;";
+			try
+			{
+				statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY);
+				rs = statement.executeQuery(sentencia);
+				vista.listadoJugadores.selectAll();
+				vista.listadoJugadores.setText("");
+				vista.listadoJugadores.append("id\tJugador   \tPuntos   \n");
+				while(rs.next())
+				{
+							vista.listadoJugadores.append(rs.getInt("idJugador")
+							+"----------"+rs.getString("nombreJugador") +"-------------"+rs.getString("puntosJugador")+"\n");
+				}
+			}
+			//EN EL CASO QUE FALLE LA CONSULTA
+			catch (SQLException sqle)
+			{
+				vista.labelMejores.setText("Error del proceso");
+			}
 		}
 
 
