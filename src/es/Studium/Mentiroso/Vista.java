@@ -39,26 +39,29 @@ public class Vista  extends Frame
 	Button buttonCrearJugador = new Button ("Crear Mentiroso");
 	Button buttonCrearPartida = new Button ("Crear Partida");//PASA A VENTANA DE CREAR PARTIDA
 	Button buttonMejores = new Button ("Mejores jugadores");//SIMILAR A CONSULTA DE PROGRAMA DE GESTIÓN
-	Button buttonComoSeJuega = new Button ("Como se juega?");
+	Button buttonComoSeJuega = new Button ("¿Como se juega?");
 	Button buttonSalir = new Button ("Salir");//CIERRA EL PROGRAMA
 	
 	//VENTANA CREAR MENTIROSO
 	Frame ventanaCrearJugador = new Frame ("¡El Mentiroso!: Crear Jugador");
 	Label labelNombreJugador = new Label ("Nombre del Mentiroso");
 	TextField textoNombreJugador = new TextField (25);
+	Dialog dialogoMensajeJugadorCreado = new Dialog(ventanaCrearJugador, "Perfil creado", true);
+	Label perfilCreado = new Label ("Tu perfil ha sido creado");
 	Button crearJugador = new Button ("Crear"); //AL CREAR PARTIDA, INICIAMOS EL JUEGO Y SE GUARDA EL NOMBRE
 	Button cerrarJugador = new Button ("Cerrar");
 
 	//VENTANA CREAR PARTIDA
 	Frame ventanaCrearPartida = new Frame ("¡El Mentiroso!: Crear Partida");
 	Label labelNombrePartida = new Label ("Nombre de la Partida");
+	Dialog dialogoMensajePartidaCreada = new Dialog(ventanaCrearPartida, "Confirmación", true);
 	TextField textoNombrePartida = new TextField (25);
-	Button crearPartida = new Button ("Crear"); //AL CREAR PARTIDA, COMO SI HICIERAMOS UN ALTA
+	Button iniciarPartida = new Button ("Iniciar"); //AL CREAR PARTIDA, COMO SI HICIERAMOS UN ALTA
 	Button cerrarPartida = new Button ("Cerrar"); //CIERRA LA PANTALLA DE CREAR
 
 	//VENTANA MEJORES JUGADORES
-	Frame ventanaMejoresJugadores = new Frame("Consulta");
-	Label labelMejores = new Label ("¡Mejores Mentirosos!");
+	Frame ventanaMejoresJugadores = new Frame("Mejores Mentirosos");
+	Label labelMejores = new Label ("El Mentiroso: ¡Mejores Mentirosos!");
 	TextArea listadoJugadores = new TextArea(5, 30);
 	Button cerrar = new Button("cerrar"); //CIERRA LA VENTANA DE MEJORES JUGADORES
 
@@ -109,7 +112,7 @@ public class Vista  extends Frame
 		ventanaCrearPartida.setLayout(new FlowLayout());
 		ventanaCrearPartida.add(labelNombrePartida);
 		ventanaCrearPartida.add(textoNombrePartida);
-		ventanaCrearPartida.add(crearPartida);
+		ventanaCrearPartida.add(iniciarPartida);
 		ventanaCrearPartida.add(cerrarPartida);
 		ventanaCrearPartida.setSize(300,200);
 		ventanaCrearPartida.setBackground(Color.yellow);
@@ -136,16 +139,16 @@ public class Vista  extends Frame
 		ventanaComoSeJuega.add(ayuda3);
 		ventanaComoSeJuega.add(labelAyuda3);
 		ventanaComoSeJuega.add(cerrarAyuda);
-		ventanaComoSeJuega.setBackground(Color.lightGray);
+		ventanaComoSeJuega.setBackground(Color.yellow);
 		ventanaComoSeJuega.setSize(500,700);
 		ventanaComoSeJuega.setLocationRelativeTo(null);
 		ventanaComoSeJuega.setResizable(false);
 		
 		//CONTENEDOR DE VENTANA DE JUEGO
 		ventanaJuego.setLayout(new FlowLayout());
-		ventanaComoSeJuega.setSize(500,700);
-		ventanaComoSeJuega.setLocationRelativeTo(null);
-		ventanaComoSeJuega.setResizable(false);
+		ventanaJuego.setSize(900,600);
+		ventanaJuego.setLocationRelativeTo(null);
+		ventanaJuego.setResizable(false);
 
 	}
 

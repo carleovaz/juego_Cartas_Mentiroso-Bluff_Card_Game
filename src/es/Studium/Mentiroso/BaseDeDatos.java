@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class BaseDeDatos 
 {
 	String driver = "com.mysql.cj.jdbc.Driver";
-    String url = "jdbc:mysql://localhost:3306/juego?serverTimezone=UTC";//ESPECIFICAMOS LA URL
+    String url = "jdbc:mysql://localhost:3306/el_mentiroso?serverTimezone=UTC";//ESPECIFICAMOS LA URL
     String Login = "root";
     String password = "Studium2020;";
 	String sentencia = "";
