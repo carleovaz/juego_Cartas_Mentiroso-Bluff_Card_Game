@@ -9,12 +9,15 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 
 import es.Studium.Vistas.VistaCrearJugador;
-import es.Studium.Vistas.VistaMenu;
+import es.Studium.Vistas.VistaCrearPartida;
+import es.Studium.Vistas.VistaJugando;
+import es.Studium.Vistas.VistaMenuPrincipal;
 
 public class Controlador implements ActionListener, WindowListener, MouseListener
 {
-	VistaMenu vistaMenu;
+	VistaMenuPrincipal vistaMenu;
 	VistaCrearJugador vistaCrearJ;
+	VistaCrearPartida vistaCrearP;
 	Vista vista;
 	Modelo modelo;
 	Connection conexion = null;
@@ -30,7 +33,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	int turno = 0; // 0 turno jugador 1, 1 turno jugador 2
 	int uno, dos;
 
-	public Controlador(Vista objvista, VistaMenu objvistaM,  Modelo objmodelo)
+	public Controlador(Vista objvista, VistaMenuPrincipal objvistaM,  Modelo objmodelo)
 	{
 		this.vista = objvista;
 		this.vistaMenu = objvistaM;
@@ -72,13 +75,14 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	{
 		if(vistaMenu.buttonCrearPartida.equals(evento.getSource()))
 		{
-			vista.ventanaCrearPartida.setVisible(true);
+			new VistaCrearPartida();
 
 		}
 		
 		if(vista.buttonIniciarPartida.equals(evento.getSource()))
 		{
 			vista.ventanaJuego.setVisible(true);
+			new VistaJugando();
 		}
 
 		else if(vistaMenu.buttoncomoSeJuega.equals(evento.getSource()))

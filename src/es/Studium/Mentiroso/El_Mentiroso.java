@@ -1,6 +1,7 @@
 package es.Studium.Mentiroso;
 
-import es.Studium.Vistas.VistaMenu;
+import Musica.Sonido;
+import es.Studium.Vistas.VistaMenuPrincipal;
 
 public class El_Mentiroso
 {
@@ -9,7 +10,7 @@ public class El_Mentiroso
 	{
 		Modelo modelo = new Modelo();
 		Vista vista = new Vista();
-		VistaMenu vistaMenu = new VistaMenu();
+		VistaMenuPrincipal vistaMenu = new VistaMenuPrincipal();
 		new Controlador (vista, vistaMenu, modelo); 
 		Sonido sonido = new Sonido();
 

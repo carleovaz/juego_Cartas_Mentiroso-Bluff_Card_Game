@@ -34,7 +34,7 @@ public class Vista  extends Frame
 	int Mentiroso1 = 0;
 	int Mentiroso2 = 0;
 
-	//VENTANA CREAR MENTIROSO
+	//VENTANA CREAR MENTIROSO (YA TERMINADA Y REALIZADA EN UNA VISTA APARTE)
 	Frame ventanaCrearJugador = new Frame ("¡El Mentiroso!: Crear Jugador");
 	Label labelcodigojugador = new Label ("Codigo jugador");
 	TextField textocodigoJugador = new TextField (30);
@@ -45,7 +45,7 @@ public class Vista  extends Frame
 	Button crearJugador = new Button ("Crear"); 
 	Button cerrarJugador = new Button ("Cerrar");
 
-	//VENTANA CREAR PARTIDA
+	//VENTANA CREAR PARTIDA (YA TERMINADA Y REALIZADA EN UNA VISTA APARTE)
 	Frame ventanaCrearPartida = new Frame ("¡El Mentiroso!: Crear Partida");
 	Label labelNombrePartida = new Label ("Nombre de la Partida");
 	TextField textoNombrePartida = new TextField (30);

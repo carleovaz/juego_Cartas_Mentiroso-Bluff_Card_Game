@@ -44,6 +44,7 @@ public class VistaCrearJugador extends Frame
 		setVisible(true);
 		setSize(300,365); 
 		setLocationRelativeTo(null);
+		setResizable(false);
 	}
 	
 	public void paint(Graphics g) 
