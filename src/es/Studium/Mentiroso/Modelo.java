@@ -99,7 +99,7 @@ public class Modelo
 		String datos ="";
 		Statement statement = null;
 		ResultSet rs = null;
-		String sentencia = "SELECT idJugador, nombreJugador, puntosJugador FROM jugadores ORDER BY 3;";
+		String sentencia = "SELECT idJugador, nombreJugador, puntosJugador FROM jugadores ORDER BY puntosJugador DESC;";
 		
 		try
 		{
