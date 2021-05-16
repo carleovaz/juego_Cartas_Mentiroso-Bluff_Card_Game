@@ -46,7 +46,7 @@ public class VistaCrearPartida extends Frame implements WindowListener, ActionLi
 		add(cerrarPartida);
 		herramienta = getToolkit(); 
 		fondoMenu = herramienta.getImage("fondoCrearPartida.jpg");
-		setVisible(true);
+		setVisible(false);
 		setSize(300,365); 
 		setLocationRelativeTo(null);
 		setResizable(false);

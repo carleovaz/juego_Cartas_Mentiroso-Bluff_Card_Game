@@ -41,7 +41,7 @@ public class VistaCrearJugador extends Frame
 		add(cerrarJugador);
 		herramienta = getToolkit(); 
 		fondoMenu = herramienta.getImage("fondoVentanas.jpg");
-		setVisible(true);
+		setVisible(false);
 		setSize(300,365); 
 		setLocationRelativeTo(null);
 		setResizable(false);

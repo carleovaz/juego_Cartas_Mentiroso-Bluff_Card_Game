@@ -11,6 +11,7 @@ import java.sql.Connection;
 import es.Studium.Vistas.VistaCrearJugador;
 import es.Studium.Vistas.VistaCrearPartida;
 import es.Studium.Vistas.VistaJugando;
+import es.Studium.Vistas.VistaMejoresJ;
 import es.Studium.Vistas.VistaMenuPrincipal;
 
 public class Controlador implements ActionListener, WindowListener, MouseListener
@@ -18,7 +19,8 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	VistaMenuPrincipal vistaMenu;
 	VistaCrearJugador vistaCrearJ;
 	VistaCrearPartida vistaCrearP;
-	Vista vista;
+	VistaJugando vistaJugando;
+	VistaMejoresJ vistaMejoresJ;
 	Modelo modelo;
 	Connection conexion = null;
 	String informacion ="";
@@ -33,36 +35,50 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	int turno = 0; // 0 turno jugador 1, 1 turno jugador 2
 	int uno, dos;
 
-	public Controlador(Vista objvista, VistaMenuPrincipal objvistaM,  Modelo objmodelo)
+	public Controlador(VistaMejoresJ objvista, VistaMenuPrincipal objvistaM, VistaCrearJugador objvistaJ, VistaCrearPartida objvistaP, VistaJugando objvistaJug, Modelo objmodelo)
 	{
-		this.vista = objvista;
+		this.vistaMejoresJ = objvista;
 		this.vistaMenu = objvistaM;
+		this.vistaCrearJ = objvistaJ;
+		this.vistaCrearP = objvistaP;
+		this.vistaJugando = objvistaJug;
 
 		this.modelo = objmodelo;
-		this.vista.addWindowListener(this);
+		this.vistaMejoresJ.addWindowListener(this);
 		this.vistaMenu.addWindowListener(this);
-		this.vista.addMouseListener(this);
+		this.vistaMejoresJ.addMouseListener(this);
 		
-		vistaMenu.ventanaMenu.addWindowListener(this);
-		vistaMenu.buttonCrearPartida.addActionListener(this);
-		vistaMenu.buttonCrearJugador.addActionListener(this);
-		vistaMenu.buttoncomoSeJuega.addActionListener(this);
-		vistaMenu.buttonMejoresJugadores.addActionListener(this);
-		vistaMenu.buttonSalirMenu.addActionListener(this);
+		//ELEMENTOS VISTA JUGADOR
+		objvistaJ.addWindowListener(this);
+		objvistaJ.ventanaCrearJugador.addWindowListener(this);
+		objvistaJ.dialogoMensajeJugadorCreado.addWindowListener(this);
+		objvistaJ.crearJugador.addActionListener(this);
+		objvistaJ.cerrarJugador.addActionListener(this);
 		
-		objvista.ventanaCrearJugador.addWindowListener(this);
-		objvista.ventanaCrearPartida.addWindowListener(this);
-		objvista.ventanaComoSeJuega.addWindowListener(this);
+		//ELEMENTOS VISTA PARTIDA
+		objvistaP.addWindowListener(this);
+		objvistaP.ventanaCrearPartida.addWindowListener(this);
+		objvistaP.dialogoMensajePartidaCreada.addWindowListener(this);
+		objvistaP.buttonIniciarPartida.addActionListener(this);
+		objvistaP.cerrarPartida.addActionListener(this);
+
+		//ELEMENTOS VISTA MENU
+		objvistaM.ventanaMenu.addWindowListener(this);
+		objvistaM.buttonCrearPartida.addActionListener(this);
+		objvistaM.buttonMenuCrearJugador.addActionListener(this);
+		objvistaM.buttoncomoSeJuega.addActionListener(this);
+		objvistaM.buttonMejoresJugadores.addActionListener(this);
+		objvistaM.buttonSalirMenu.addActionListener(this);
+		
+		//ELEMENTOS VISTA JUGANDO
+		objvistaJug.ventanaJuego.addWindowListener(this);
+		objvistaJug.ventanaJuego.addMouseListener(this);
+		
+		
+		//ELEMENTOS VISTA GENERAL
 		objvista.ventanaMejoresJugadores.addWindowListener(this);
-		objvista.ventanaJuego.addWindowListener(this);
-
-		objvista.crearJugador.addActionListener(this);
-		objvista.buttonIniciarPartida.addActionListener(this);
-		objvista.cerrarJugador.addActionListener(this);
-		objvista.cerrarPartida.addActionListener(this);
+		objvistaJug.ventanaJuego.addWindowListener(this);
 		objvista.cerrar.addActionListener(this);
-		objvista.cerrarAyuda.addActionListener(this);
-
 		objvista.addWindowListener(this);
 		objvista.setLocationRelativeTo(null);
 		
@@ -73,55 +89,47 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	@Override
 	public void actionPerformed(ActionEvent evento) 
 	{
+		//CREAR PARTIDA
 		if(vistaMenu.buttonCrearPartida.equals(evento.getSource()))
 		{
+			this.vistaCrearP.setVisible(true);
 			new VistaCrearPartida();
 
 		}
-		
-		if(vista.buttonIniciarPartida.equals(evento.getSource()))
+		//INICIO DE LA PARTIDA
+		if(vistaCrearP.buttonIniciarPartida.equals(evento.getSource()))
 		{
-			vista.ventanaJuego.setVisible(true);
+			this.vistaJugando.setVisible(true);
 			new VistaJugando();
 		}
-
-		else if(vistaMenu.buttoncomoSeJuega.equals(evento.getSource()))
+		
+		//CREAR JUGADOR
+		else if(vistaMenu.buttonMenuCrearJugador.equals(evento.getSource()))
 		{
-			vista.ventanaComoSeJuega.setVisible(true);
-		}
-
-
-		else if(vista.buttonIniciarPartida.equals(evento.getSource()))
-		{
-			
-		}
-
-		else if(vistaMenu.buttonCrearJugador.equals(evento.getSource()))
-		{
+			this.vistaCrearJ.setVisible(true);
 			new VistaCrearJugador();
 			
 		}
 		
-		//CREACIÓN DE JUGADOR
-		else if(vista.crearJugador.equals(evento.getSource()))
+		//COMO SE JUEGA
+		else if(vistaMenu.buttoncomoSeJuega.equals(evento.getSource()))
 		{
-
+			this.modelo.ayuda();
 		}
 		
 		//CONSULTA MEJORES JUGADORES
 		else if(vistaMenu.buttonMejoresJugadores.equals(evento.getSource()))
 		{
-			vista.ventanaMejoresJugadores.setVisible(true);
+			vistaMejoresJ.ventanaMejoresJugadores.setVisible(true);
 			//CONECTAMOS A LA BASE DE DATOS
 			conexion = this.modelo.conectar();
 			//REALIZAR LA CONSULTA E INSERTAR INFORMACIÓN
 			informacion = this.modelo.mejoresJugadores(conexion);
 			//RELLENAMOS EL TEXTAREA
-			this.vista.listadoJugadores.append(informacion);
+			this.vistaMejoresJ.listadoJugadores.append(informacion);
 			//CERRAMOS CONEXION
 			this.modelo.cerrar(conexion);
 		}
-
 
 		//BOTONES QUE CIERRAN VENTANAS
 		if(vistaMenu.buttonSalirMenu.equals(evento.getSource()))
@@ -129,40 +137,31 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			System.exit(0);
 		}
 
-		else if(vista.cerrarJugador.equals(evento.getSource()))
+		else if(vistaCrearJ.cerrarJugador.equals(evento.getSource()))
 		{
-			vista.ventanaCrearJugador.setVisible(false);
+			this.vistaCrearJ.setVisible(false);
 
 		}
 
-		else if(vista.cerrarPartida.equals(evento.getSource()))
+		else if(vistaCrearP.cerrarPartida.equals(evento.getSource()))
 		{
-			vista.ventanaCrearPartida.setVisible(false);
+			this.vistaCrearP.setVisible(false);
 
 		}
 
-		else if(vista.cerrar.equals(evento.getSource()))
+		else if(vistaMejoresJ.cerrar.equals(evento.getSource()))
 		{
-			vista.ventanaMejoresJugadores.setVisible(false);
-		}
-
-		else if(vista.cerrarAyuda.equals(evento.getSource()))
-		{
-			vista.ventanaComoSeJuega.setVisible(false);
+			this.vistaMejoresJ.ventanaMejoresJugadores.setVisible(false);
 		}
 
 	}
 
-	public void windowClosing(WindowEvent arg0) 
-	{
-		vista.dialogoMensajeJugadorCreado.setVisible(false);
-		vista.dialogoMensajePartidaCreada.setVisible(false);
-		vistaMenu.ventanaMenu.setVisible(false);
-		vista.ventanaCrearPartida.setVisible(false);
-		vista.ventanaCrearJugador.setVisible(false);
-		vista.ventanaMejoresJugadores.setVisible(false);
-		vista.ventanaComoSeJuega.setVisible(false);
-		vista.ventanaJuego.setVisible(false);
+	public void windowClosing(WindowEvent evento) 
+	{		
+		this.vistaMenu.equals(evento.getSource());
+		{
+			System.exit(0);
+		}
 	}
 
 

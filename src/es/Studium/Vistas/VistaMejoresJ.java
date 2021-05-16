@@ -1,20 +1,18 @@
-package es.Studium.Mentiroso;
+package es.Studium.Vistas;
 
 //ESTRUCTURA DE LA CLASE VISTA
 import java.awt.Button;
 import java.awt.Color;
-import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Label;
 import java.awt.TextArea;
-import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.Graphics;
 
-public class Vista  extends Frame
+public class VistaMejoresJ  extends Frame
 {
 	private static final long serialVersionUID = 1L;
 	//IMAGENES
@@ -34,80 +32,16 @@ public class Vista  extends Frame
 	int Mentiroso1 = 0;
 	int Mentiroso2 = 0;
 
-	//VENTANA CREAR MENTIROSO (YA TERMINADA Y REALIZADA EN UNA VISTA APARTE)
-	Frame ventanaCrearJugador = new Frame ("¡El Mentiroso!: Crear Jugador");
-	Label labelcodigojugador = new Label ("Codigo jugador");
-	TextField textocodigoJugador = new TextField (30);
-	Label labelNombreJugador = new Label ("Nombre del Mentiroso");
-	TextField textoNombreJugador = new TextField (30);
-	Dialog dialogoMensajeJugadorCreado = new Dialog(ventanaCrearJugador, "Perfil creado", true);
-	Label perfilCreado = new Label ("Tu perfil ha sido creado");
-	Button crearJugador = new Button ("Crear"); 
-	Button cerrarJugador = new Button ("Cerrar");
-
-	//VENTANA CREAR PARTIDA (YA TERMINADA Y REALIZADA EN UNA VISTA APARTE)
-	Frame ventanaCrearPartida = new Frame ("¡El Mentiroso!: Crear Partida");
-	Label labelNombrePartida = new Label ("Nombre de la Partida");
-	TextField textoNombrePartida = new TextField (30);
-	Label labelCreadordePartida = new Label ("Introduce tu codigo:");
-	TextField textoCodigoJugadorPartida = new TextField (30);
-	Dialog dialogoMensajePartidaCreada = new Dialog(ventanaCrearPartida, "Partida creada", true);
-	Label partidaCreada = new Label ("Tu partida no pudo ser creada.");
-	Button buttonIniciarPartida = new Button ("Iniciar"); 
-	Button cerrarPartida = new Button ("Cerrar"); 
-
 	//VENTANA MEJORES JUGADORES
-	Frame ventanaMejoresJugadores = new Frame("Mejores Mentirosos");
-	Label labelMejores = new Label ("El Mentiroso: ¡Mejores Mentirosos!");
-	TextArea listadoJugadores = new TextArea(5, 30);
-	Button cerrar = new Button("cerrar");
+	public Frame ventanaMejoresJugadores = new Frame("Mejores Mentirosos");
+	public Label labelMejores = new Label ("El Mentiroso: ¡Mejores Mentirosos!");
+	public TextArea listadoJugadores = new TextArea(5, 30);
+	public Button cerrar = new Button("cerrar");
 
-	//VENTANA COMO SE JUEGA
-	Frame ventanaComoSeJuega = new Frame("¿Como se juega?");
-	Label labelAyuda1 = new Label ("info de ayuda 1");
-	Label imagenayuda = new Label("iconoAyuda.png");
-	TextArea ayuda1 = new TextArea(10, 60);
-	Label labelAyuda2 = new Label ("info de ayuda 2");
-	TextArea ayuda2 = new TextArea(10, 60);
-	Label labelAyuda3 = new Label ("info de ayuda 3");
-	TextArea ayuda3 = new TextArea(10, 60);
-	Button cerrarAyuda = new Button("Cerrar");
-
-	//PANTALLA DEL JUEGO
-	Frame ventanaJuego = new Frame ("Jugando");
-	Dialog dlgMensaje = new Dialog(this, "Fin", true);
-	Label lblMensaje = new Label("Gana Jugador 1");
-
-	public Vista()
+	public VistaMejoresJ()
 	{
 
-		//CONTENEDOR DE CREAR JUGADOR (ACTUA COMO UNA ALTA)
-		ventanaCrearJugador.setLayout(new FlowLayout());
-		ventanaCrearJugador.add(labelcodigojugador);
-		ventanaCrearJugador.add(textocodigoJugador);
-		ventanaCrearJugador.add(labelNombreJugador);
-		ventanaCrearJugador.add(textoNombreJugador);
-		ventanaCrearJugador.add(crearJugador);
-		ventanaCrearJugador.add(cerrarJugador);
-		ventanaCrearJugador.setSize(300,200);
-		ventanaCrearJugador.setBackground(Color.white);
-		ventanaCrearJugador.setLocationRelativeTo(null);
-		ventanaCrearJugador.setResizable(false);
-
-		//CONTENEDOR DE CREAR PARTIDA (ACTUA COMO UNA ALTA)
-		ventanaCrearPartida.setLayout(new FlowLayout());
-		ventanaCrearPartida.add(labelNombrePartida);
-		ventanaCrearPartida.add(textoNombrePartida);
-		ventanaCrearPartida.add(labelCreadordePartida);
-		ventanaCrearPartida.add(textoCodigoJugadorPartida);
-		ventanaCrearPartida.add(buttonIniciarPartida);
-		ventanaCrearPartida.add(cerrarPartida);
-		ventanaCrearPartida.setSize(300,200);
-		ventanaCrearPartida.setBackground(Color.white);
-		ventanaCrearPartida.setLocationRelativeTo(null);
-		ventanaCrearPartida.setResizable(false);
-
-		//CONTENEDOR DE MEJORES JUGADORES (ACTUA COMO UNA CONSULTA)
+		//MEJORES JUGADORES
 		ventanaMejoresJugadores.setLayout(new FlowLayout());
 		ventanaMejoresJugadores.add(labelMejores);
 		ventanaMejoresJugadores.add(listadoJugadores);
@@ -117,50 +51,6 @@ public class Vista  extends Frame
 		ventanaMejoresJugadores.setBackground(Color.white);
 		ventanaMejoresJugadores.setLocationRelativeTo(null);
 		ventanaMejoresJugadores.setResizable(false);
-
-		//CONTENEDOR DE COMO SE JUEGA
-		ventanaComoSeJuega.setLayout(new FlowLayout());
-		ventanaComoSeJuega.add(ayuda1);
-		String cadenaAyuda1 = new String("Bienvenido al Mentiroso, Jugador." 
-				+"\n"
-				+"\nSi has accedido aqui, eso significa que quieres ver el tutorial del Juego."
-				+ "\npor lo que dejame decirte que accediste al lugar adecuado.\nEl Mentiroso es un juego de baraja española de 40 cartas."
-				+ "\nEn la versión que aquí se ofrece, se jugaran con 48 cartas,"
-				+ "es decir la baraja completa española. ");
-		ayuda1.setText(cadenaAyuda1);
-		ventanaComoSeJuega.add(labelAyuda1);
-		ventanaComoSeJuega.add(ayuda2);
-		String cadenaAyuda2 = new String("Para jugar al juego, se reparte toda la baraja por igual a todos los jugadores,\nocultando cada uno las cartas a sus adversarios.\nEstos deben intentar "
-				+ "deshacerse cuanto antes de todas las cartas que tienen en su poder.\nEl jugador que inicia la partida deposita boca abajo una, dos o tres cartas"
-				+ "\ny dice en voz alta una combinación de cartas (todas del mismo número), y que será la jugada que afirma haber lanzado.");
-		ayuda2.setText(cadenaAyuda2);
-		ventanaComoSeJuega.add(labelAyuda2);
-		String cadenaAyuda3 = new String("Si el siguiente jugador (el que esté situado inmediatamente a su derecha), le cree, "
-				+ "\ndeberá continuar depositando una o varias cartas en la mesa, "
-				+ "\ncoincidiendo en el número de la baraja, pero no necesariamente en el número de cartas depositadas, "
-				+ "\ndiciendo explícitamente cuántas son las cartas que deposita "
-				+ "\n(por ejemplo, «otro caballo más», u «otros dos»). "
-				+ "\nEl juego terminara una vez que uno de los dos jugadores se quede sin cartas.");
-		ayuda3.setText(cadenaAyuda3);
-		ventanaComoSeJuega.add(ayuda3);
-		ventanaComoSeJuega.add(labelAyuda3);
-		ventanaComoSeJuega.add(cerrarAyuda);
-		ventanaComoSeJuega.setBackground(Color.white);
-		ventanaComoSeJuega.setSize(500,700);
-		ventanaComoSeJuega.setLocationRelativeTo(null);
-		ventanaComoSeJuega.setResizable(false);
-
-		//CONTENEDOR DE VENTANA DE JUEGO
-		ventanaJuego.setLayout(new FlowLayout());
-		ventanaJuego.setTitle("Jugando");
-		ventanaJuego.setSize(628,454);
-		ventanaJuego.setLocationRelativeTo(null);
-		ventanaJuego.setResizable(false);
-		dlgMensaje.setLayout(new FlowLayout());
-		dlgMensaje.setSize(100,100);
-		dlgMensaje.setLocationRelativeTo(null);
-		dlgMensaje.setResizable(false);
-		dlgMensaje.add(lblMensaje);
 
 	}
 	public void paint(Graphics g)

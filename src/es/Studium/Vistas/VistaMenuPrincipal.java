@@ -16,7 +16,7 @@ public class VistaMenuPrincipal extends Frame
 	public Frame ventanaMenu = new Frame ("¡El Mentiroso!");
 	public Label labelMenu = new Label("¡BIENVENIDO AL MENTIROSO!");
 	public Button buttonCrearPartida = new Button ("Nueva Partida");
-	public Button buttonCrearJugador = new Button ("Crear Jugador");
+	public Button buttonMenuCrearJugador = new Button ("Crear Jugador");
 	public Button buttonMejoresJugadores = new Button ("Mejores jugadores");//SIMILAR A CONSULTA DE PROGRAMA DE GESTIÓN
 	public Button buttoncomoSeJuega = new Button ("¿Como se juega?");
 	public Button buttonSalirMenu = new Button ("Salir");
@@ -31,7 +31,7 @@ public class VistaMenuPrincipal extends Frame
 		setLayout(new FlowLayout());
 		add(labelMenu);
 		add(buttonCrearPartida);
-		add(buttonCrearJugador);
+		add(buttonMenuCrearJugador);
 		add(buttonMejoresJugadores);
 		add(buttoncomoSeJuega);
 		add(buttonSalirMenu);

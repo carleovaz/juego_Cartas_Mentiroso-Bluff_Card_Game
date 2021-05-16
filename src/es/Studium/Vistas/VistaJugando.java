@@ -30,8 +30,9 @@ public class VistaJugando extends Frame
 	int puntosJugador1 = 0;
 	int puntosJugador2 = 0;
 
-	Dialog dlgMensaje = new Dialog(this, "Fin", true);
-	Label lblMensaje = new Label("Gana Jugador 1");
+	public Frame ventanaJuego = new Frame ("Jugando");
+	public Dialog dlgMensaje = new Dialog(this, "Fin", true);
+	public Label lblMensaje = new Label("Gana Jugador 1");
 
 	public VistaJugando()
 	{
@@ -43,13 +44,15 @@ public class VistaJugando extends Frame
 		this.setSize(820,490);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
-		this.setVisible(true);
+		this.setVisible(false);
 
 		dlgMensaje.setLayout(new FlowLayout());
 		dlgMensaje.setSize(100,100);
 		dlgMensaje.setLocationRelativeTo(null);
 		dlgMensaje.setResizable(false);
 		dlgMensaje.add(lblMensaje);
+		
+		
 	}
 
 	public void paint(Graphics g)

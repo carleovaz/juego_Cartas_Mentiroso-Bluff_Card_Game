@@ -1,5 +1,6 @@
 package es.Studium.Mentiroso;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ import java.util.Random;
 public class Modelo
 {
 	Random rnd = new Random();
-	
+
 	public void barajar(int uno[], int dos[])
 	{		
 		int jugador = 0;
@@ -39,7 +40,7 @@ public class Modelo
 			}
 		}
 	}
-	
+
 	public void rebarajar(int t[])
 	{
 		int aleatorio, auxiliar;
@@ -51,16 +52,16 @@ public class Modelo
 			t[aleatorio] = auxiliar;
 		}
 	}
-	
+
 	//METODO CONECTAR
 	public Connection conectar()
 	{
 		Connection c = null;
 		String driver = "com.mysql.cj.jdbc.Driver";
-	    String url = "jdbc:mysql://localhost:3306/el_mentiroso?serverTimezone=UTC";//ESPECIFICAMOS LA URL
-	    String Login = "root";
-	    String password = "Studium2020;";
-	    try
+		String url = "jdbc:mysql://localhost:3306/el_mentiroso?serverTimezone=UTC";//ESPECIFICAMOS LA URL
+		String Login = "root";
+		String password = "Studium2020;";
+		try
 		{
 			//Cargar los controladores para el acceso a la BD
 			Class.forName(driver);
@@ -91,7 +92,7 @@ public class Modelo
 		{
 			System.out.println("Error 3-" +error.getMessage());
 		}
-		
+
 	}
 
 	public String mejoresJugadores(Connection conexion) 
@@ -100,7 +101,7 @@ public class Modelo
 		Statement statement = null;
 		ResultSet rs = null;
 		String sentencia = "SELECT idJugador, nombreJugador, puntosJugador FROM jugadores ORDER BY puntosJugador DESC;";
-		
+
 		try
 		{
 			statement = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -119,5 +120,21 @@ public class Modelo
 		}
 		return(datos);
 	}
-	
+
+	public void ayuda() 
+	{
+		try 
+		{ 
+			//EJECUTA EL ARCHIVO DE AYUDA
+			Runtime.getRuntime().exec("hh.exe ayuda.chm"); 
+		} 
+		catch (IOException e) 
+		{ 
+			e.printStackTrace(); 
+		} 
+	}
+
 }
+
+
+
