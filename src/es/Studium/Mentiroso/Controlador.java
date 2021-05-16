@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
 
+import Musica.Sonido2;
 import es.Studium.Vistas.VistaCrearJugador;
 import es.Studium.Vistas.VistaCrearPartida;
 import es.Studium.Vistas.VistaJugando;
@@ -25,7 +26,6 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	Connection conexion = null;
 	String informacion ="";
 	
-
 	int mazoJugador1[] = new int[24];
 	int mazoJugador2[] = new int[24];
 	int cartaActualJugador1 = 0;
@@ -46,7 +46,9 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		this.modelo = objmodelo;
 		this.vistaMejoresJ.addWindowListener(this);
 		this.vistaMenu.addWindowListener(this);
-		this.vistaMejoresJ.addMouseListener(this);
+		this.vistaMejoresJ.addWindowListener(this);
+		this.vistaJugando.addWindowListener(this);
+		this.vistaJugando.addMouseListener(this);
 		
 		//ELEMENTOS VISTA JUGADOR
 		objvistaJ.addWindowListener(this);
@@ -73,16 +75,12 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		//ELEMENTOS VISTA JUGANDO
 		objvistaJug.ventanaJuego.addWindowListener(this);
 		objvistaJug.ventanaJuego.addMouseListener(this);
-		
-		
+			
 		//ELEMENTOS VISTA GENERAL
 		objvista.ventanaMejoresJugadores.addWindowListener(this);
-		objvistaJug.ventanaJuego.addWindowListener(this);
 		objvista.cerrar.addActionListener(this);
 		objvista.addWindowListener(this);
-		objvista.setLocationRelativeTo(null);
-		
-		
+		objvista.setLocationRelativeTo(null);		
 		
 	}
 
@@ -159,6 +157,11 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	public void windowClosing(WindowEvent evento) 
 	{		
 		this.vistaMenu.equals(evento.getSource());
+		{
+			System.exit(0);
+		}
+		
+		this.vistaJugando.ventanaJuego.equals(evento.getSource());
 		{
 			System.exit(0);
 		}

@@ -20,7 +20,8 @@ public class El_Mentiroso
 		VistaJugando vistaJugando = new VistaJugando();
 		new Controlador (vista, vistaMenu,vistaCrearJ,vistaCrearP, vistaJugando, modelo); 
 		Sonido sonido = new Sonido();
-
 	}
+	
+
 
 }

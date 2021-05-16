@@ -39,6 +39,7 @@ public class VistaMenuPrincipal extends Frame
 		fondoMenu = herramienta.getImage("fondoMenu.jpg"); 
 		setVisible(true);
 		setSize(295,365); 
+		setResizable(false);
 		setLocationRelativeTo(null);
 	}
 	
