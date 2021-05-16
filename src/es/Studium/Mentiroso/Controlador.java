@@ -8,7 +8,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
 
-import Musica.Sonido2;
 import es.Studium.Vistas.VistaCrearJugador;
 import es.Studium.Vistas.VistaCrearPartida;
 import es.Studium.Vistas.VistaJugando;
@@ -49,6 +48,12 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		this.vistaMejoresJ.addWindowListener(this);
 		this.vistaJugando.addWindowListener(this);
 		this.vistaJugando.addMouseListener(this);
+		this.modelo.barajar(mazoJugador1, mazoJugador2);
+		for(int i= 0; i < 24; i++)
+		{
+			System.out.println("Carta jugador1: " + mazoJugador1[i]+"   --    >"+"Carta jugador2: " +mazoJugador2[i]);
+
+		}
 		
 		//ELEMENTOS VISTA JUGADOR
 		objvistaJ.addWindowListener(this);
