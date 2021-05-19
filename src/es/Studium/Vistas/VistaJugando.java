@@ -10,8 +10,6 @@ import java.awt.Image;
 import java.awt.Label;
 import java.awt.Toolkit;
 
-import Musica.Sonido2;
-
 public class VistaJugando extends Frame
 {
 	private static final long serialVersionUID = 1L;
@@ -27,8 +25,12 @@ public class VistaJugando extends Frame
 	Image D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13;
 	int imagenAmostrar1 = 0;
 	int imagenAmostrar2 = 0;
+	int imagenAmostrar3 = 0;
+	int imagenAmostrar4 = 0;
 	int puntosJugador1 = 0;
 	int puntosJugador2 = 0;
+	int puntosJugador3 = 0;
+	int puntosJugador4 = 0;
 
 	public Frame ventanaJuego = new Frame ("Jugando");
 	public Dialog dlgMensaje = new Dialog(this, "Fin", true);
@@ -58,14 +60,19 @@ public class VistaJugando extends Frame
 	public void paint(Graphics g)
 	{
 		g.drawImage(tapete, 0, 30, this);
-		Font fuente = new Font("Arial", Font.BOLD, 24);
+		Font fuente = new Font("Arial", Font.BOLD, 18);
 		g.setFont(fuente);
 		g.setColor(Color.black);
-		g.drawString("Jugador 1: " + puntosJugador1 + " puntos", 280, 55);
+		g.drawString("Jugador 1: " + puntosJugador1 + " puntos", 310, 55);
 		g.drawImage(reverso, 340, 65, this);
-		g.setColor(Color.black);
-		g.drawString("Jugador 2: " + puntosJugador2 + " puntos", 280, 470);
-		g.drawImage(reverso, 340, 290, this);
+		g.drawString("Jugador 2: " + puntosJugador2 + " puntos", 310, 470);
+		g.drawImage(reverso, 340, 295, this);
+		g.drawString("Jugador 3: " + puntosJugador3 + " puntos", 30, 175);
+		g.drawImage(reverso, 60, 180, this);
+		g.drawString("Jugador 4: " + puntosJugador4 + " puntos", 610, 175);
+		g.drawImage(reverso, 650, 180, this); 
+		
+		//JUGADOR1
 		switch(imagenAmostrar1)
 		{
 		//ORO
@@ -220,7 +227,321 @@ public class VistaJugando extends Frame
 			g.drawImage(D12, 210, 80, this);
 			break;
 		}
+		
+		//JUGADOR2
 		switch(imagenAmostrar2)
+		{
+		//ORO
+		case 1:
+			g.drawImage(A1, 210, 80, this);
+			break;
+		case 2:
+			g.drawImage(A2, 210, 80, this);
+			break;
+		case 3:
+			g.drawImage(A3, 210, 80, this);
+			break;
+		case 4:
+			g.drawImage(A4, 210, 80, this);
+			break;
+		case 5:
+			g.drawImage(A5, 210, 80, this);
+			break;
+		case 6:
+			g.drawImage(A6, 210, 80, this);
+			break;
+		case 7:
+			g.drawImage(A7, 210, 80, this);
+			break;
+		case 8:
+			g.drawImage(A8, 210, 80, this);
+			break;
+		case 9:
+			g.drawImage(A9, 210, 80, this);
+			break;
+		case 10:
+			g.drawImage(A10, 210, 80, this);
+			break;
+		case 11:
+			g.drawImage(A11, 210, 80, this);
+			break;
+		case 12:
+			g.drawImage(A12, 210, 80, this);
+			break;
+
+			//BASTOS
+		case 13:
+			g.drawImage(B1, 210, 80, this);
+			break;
+		case 14:
+			g.drawImage(B2, 210, 80, this);
+			break;
+		case 15:
+			g.drawImage(B3, 210, 80, this);
+			break;
+		case 16:
+			g.drawImage(B4, 210, 80, this);
+			break;
+		case 17:
+			g.drawImage(B5, 210, 80, this);
+			break;
+		case 18:
+			g.drawImage(B6, 210, 80, this);
+			break;
+		case 19:
+			g.drawImage(B7, 210, 80, this);
+			break;
+		case 20:
+			g.drawImage(B8, 210, 80, this);
+			break;
+		case 21:
+			g.drawImage(B9, 210, 80, this);
+			break;
+		case 22:
+			g.drawImage(B10, 210, 80, this);
+			break;
+		case 23:
+			g.drawImage(B11, 210, 80, this);
+			break;
+		case 24:
+			g.drawImage(B12, 210, 80, this);
+			break;
+
+			//COPAS
+		case 25:
+			g.drawImage(C1, 210, 80, this);
+			break;
+		case 26:
+			g.drawImage(C2, 210, 80, this);
+			break;
+		case 27:
+			g.drawImage(C3, 210, 80, this);
+			break;
+		case 28:
+			g.drawImage(C4, 210, 80, this);
+			break;
+		case 29:
+			g.drawImage(C5, 210, 80, this);
+			break;
+		case 30:
+			g.drawImage(C6, 210, 80, this);
+			break;
+		case 31:
+			g.drawImage(C7, 210, 80, this);
+			break;
+		case 32:
+			g.drawImage(C8, 210, 80, this);
+			break;
+		case 33:
+			g.drawImage(C9, 210, 80, this);
+			break;
+		case 34:
+			g.drawImage(C10, 210, 80, this);
+			break;
+		case 35:
+			g.drawImage(C11, 210, 80, this);
+			break;
+		case 36:
+			g.drawImage(C12, 210, 80, this);
+			break;
+
+			//ESPADAS
+		case 37:
+			g.drawImage(D1, 210, 80, this);
+			break;
+		case 38:
+			g.drawImage(D2, 210, 80, this);
+			break;
+		case 39:
+			g.drawImage(D3, 210, 80, this);
+			break;
+		case 40:
+			g.drawImage(D4, 210, 80, this);
+			break;
+		case 41:
+			g.drawImage(D5, 210, 80, this);
+			break;
+		case 42:
+			g.drawImage(D6, 210, 80, this);
+			break;
+		case 43:
+			g.drawImage(D7, 210, 80, this);
+			break;
+		case 44:
+			g.drawImage(D8, 210, 80, this);
+			break;
+		case 45:
+			g.drawImage(D9, 210, 80, this);
+			break;
+		case 46:
+			g.drawImage(D10, 210, 80, this);
+			break;
+		case 47:
+			g.drawImage(D11, 210, 80, this);
+			break;
+		case 48:
+			g.drawImage(D12, 210, 80, this);
+			break;
+		}
+		
+		//JUGADOR 3
+		switch(imagenAmostrar3)
+		{
+		//ORO
+		case 1:
+			g.drawImage(A1, 210, 80, this);
+			break;
+		case 2:
+			g.drawImage(A2, 210, 80, this);
+			break;
+		case 3:
+			g.drawImage(A3, 210, 80, this);
+			break;
+		case 4:
+			g.drawImage(A4, 210, 80, this);
+			break;
+		case 5:
+			g.drawImage(A5, 210, 80, this);
+			break;
+		case 6:
+			g.drawImage(A6, 210, 80, this);
+			break;
+		case 7:
+			g.drawImage(A7, 210, 80, this);
+			break;
+		case 8:
+			g.drawImage(A8, 210, 80, this);
+			break;
+		case 9:
+			g.drawImage(A9, 210, 80, this);
+			break;
+		case 10:
+			g.drawImage(A10, 210, 80, this);
+			break;
+		case 11:
+			g.drawImage(A11, 210, 80, this);
+			break;
+		case 12:
+			g.drawImage(A12, 210, 80, this);
+			break;
+
+			//BASTOS
+		case 13:
+			g.drawImage(B1, 210, 80, this);
+			break;
+		case 14:
+			g.drawImage(B2, 210, 80, this);
+			break;
+		case 15:
+			g.drawImage(B3, 210, 80, this);
+			break;
+		case 16:
+			g.drawImage(B4, 210, 80, this);
+			break;
+		case 17:
+			g.drawImage(B5, 210, 80, this);
+			break;
+		case 18:
+			g.drawImage(B6, 210, 80, this);
+			break;
+		case 19:
+			g.drawImage(B7, 210, 80, this);
+			break;
+		case 20:
+			g.drawImage(B8, 210, 80, this);
+			break;
+		case 21:
+			g.drawImage(B9, 210, 80, this);
+			break;
+		case 22:
+			g.drawImage(B10, 210, 80, this);
+			break;
+		case 23:
+			g.drawImage(B11, 210, 80, this);
+			break;
+		case 24:
+			g.drawImage(B12, 210, 80, this);
+			break;
+
+			//COPAS
+		case 25:
+			g.drawImage(C1, 210, 80, this);
+			break;
+		case 26:
+			g.drawImage(C2, 210, 80, this);
+			break;
+		case 27:
+			g.drawImage(C3, 210, 80, this);
+			break;
+		case 28:
+			g.drawImage(C4, 210, 80, this);
+			break;
+		case 29:
+			g.drawImage(C5, 210, 80, this);
+			break;
+		case 30:
+			g.drawImage(C6, 210, 80, this);
+			break;
+		case 31:
+			g.drawImage(C7, 210, 80, this);
+			break;
+		case 32:
+			g.drawImage(C8, 210, 80, this);
+			break;
+		case 33:
+			g.drawImage(C9, 210, 80, this);
+			break;
+		case 34:
+			g.drawImage(C10, 210, 80, this);
+			break;
+		case 35:
+			g.drawImage(C11, 210, 80, this);
+			break;
+		case 36:
+			g.drawImage(C12, 210, 80, this);
+			break;
+
+			//ESPADAS
+		case 37:
+			g.drawImage(D1, 210, 80, this);
+			break;
+		case 38:
+			g.drawImage(D2, 210, 80, this);
+			break;
+		case 39:
+			g.drawImage(D3, 210, 80, this);
+			break;
+		case 40:
+			g.drawImage(D4, 210, 80, this);
+			break;
+		case 41:
+			g.drawImage(D5, 210, 80, this);
+			break;
+		case 42:
+			g.drawImage(D6, 210, 80, this);
+			break;
+		case 43:
+			g.drawImage(D7, 210, 80, this);
+			break;
+		case 44:
+			g.drawImage(D8, 210, 80, this);
+			break;
+		case 45:
+			g.drawImage(D9, 210, 80, this);
+			break;
+		case 46:
+			g.drawImage(D10, 210, 80, this);
+			break;
+		case 47:
+			g.drawImage(D11, 210, 80, this);
+			break;
+		case 48:
+			g.drawImage(D12, 210, 80, this);
+			break;
+		}
+		
+		//JUGADOR 4
+		switch(imagenAmostrar4)
 		{
 		//ORO
 		case 1:
@@ -446,6 +767,19 @@ public class VistaJugando extends Frame
 		imagenAmostrar2 = carta;
 		repaint();
 	}
+	
+	public void mostrarCartaMazo3(int carta)
+	{
+		imagenAmostrar3 = carta;
+		repaint();
+	}
+	
+	public void mostrarCartaMazo4(int carta)
+	{
+		imagenAmostrar4 = carta;
+		repaint();
+	}
+	
 	public void aumentarPuntosJugador1()
 	{
 		puntosJugador1++;
@@ -456,17 +790,26 @@ public class VistaJugando extends Frame
 		puntosJugador2++;
 		repaint();
 	}
+	
+	public void aumentarPuntosJugador3()
+	{
+		puntosJugador3++;
+		repaint();
+	}
+	
+	public void aumentarPuntosJugador4()
+	{
+		puntosJugador4++;
+		repaint();
+	}
+	
 	public void resetearContadores()
 	{
 		puntosJugador1 = 0;
 		puntosJugador2 = 0;
+		puntosJugador3 = 0;
+		puntosJugador4 = 0;
 		repaint();
-	}
-	
-	public static void main (String[]args)
-	{
-		new VistaJugando();
-		new Sonido2();
 	}
 
 

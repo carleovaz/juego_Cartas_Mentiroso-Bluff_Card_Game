@@ -13,25 +13,37 @@ public class Modelo
 {
 	Random rnd = new Random();
 
-	public void barajar(int uno[], int dos[])
+	public void barajar(int uno[], int dos[], int tres[], int[] cuatro)
 	{		
 		int jugador = 0;
 		int numeroArepartir = 1;
-		int contador1=0, contador2=0;
+		int contador1=0, contador2=0, contador3=0, contador4=0;
 		for(int i = 0; i < 48; i++)
 		{
 			jugador = rnd.nextInt(2);
-			if((jugador==0)&&(contador1<24))
+			if((jugador==0)&&(contador1<12))
 			{
 				uno[contador1] = numeroArepartir;
 				contador1++;
 			}
-			else if (contador2<24)
+			else if (contador2<12)
 			{
 				dos[contador2] = numeroArepartir;
 				contador2++;
 			}
-			if(numeroArepartir%12==0)
+			
+			else if (contador3<12)
+			{
+				tres[contador3] = numeroArepartir;
+				contador3++;
+			}
+			
+			else if (contador4<12)
+			{
+				cuatro[contador4] = numeroArepartir;
+				contador4++;
+			}
+			if(numeroArepartir%11==0)
 			{
 				numeroArepartir=1;
 			}
@@ -45,9 +57,9 @@ public class Modelo
 	public void rebarajar(int t[])
 	{
 		int aleatorio, auxiliar;
-		for(int i=0; i<24; i++)
+		for(int i=0; i<12; i++)
 		{
-			aleatorio = rnd.nextInt(23)+1;
+			aleatorio = rnd.nextInt(11)+1;
 			auxiliar = t[i];
 			t[i] = t[aleatorio];
 			t[aleatorio] = auxiliar;
@@ -122,6 +134,61 @@ public class Modelo
 		return(datos);
 	}
 
+
+
+	public String crearJugadorNuevo(Connection conexion) 
+	{
+		String datos ="";
+		Statement statement = null;
+		ResultSet rs = null;
+		String sentencia = "INSERT INTO jugadores VALUES ('','','0');";
+
+		try
+		{
+			statement = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY);
+			rs = statement.executeQuery(sentencia);
+			while(rs.next())
+			{
+				datos = datos + rs.getInt("idJugador");
+				datos = datos + rs.getString("nombreJugador");
+				datos = datos + rs.getInt("puntosJugador");
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return(datos);
+	}
+	
+	public String crearPartidaNueva(Connection conexion) 
+	{
+		String datos ="";
+		Statement statement = null;
+		ResultSet rs = null;
+		String sentencia = "INSERT INTO partidas VALUES ('null','','');";
+
+		try
+		{
+			statement = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY);
+			rs = statement.executeQuery(sentencia);
+			while(rs.next())
+			{
+				datos = datos + rs.getInt("idPartida");
+				datos = datos + rs.getString("nombrePartida");
+				datos = datos + rs.getInt("idJugadorFK");
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return(datos);
+	}
+
+	
 	public void ayuda() 
 	{
 		try 
@@ -134,6 +201,26 @@ public class Modelo
 			e.printStackTrace(); 
 		} 
 	}
+	
+//	//CREAMOS LA SENTENCIA
+//	statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+//			ResultSet.CONCUR_READ_ONLY);
+//	//TOMAMOS EL TEXTO
+//	if(((textoNombreCliente.getText().length())!=0)
+//			&& 	((textoDirreccionCliente.getText().length())!=0)
+//			&&	((textoCorreoCliente.getText().length())!=0)
+//			&&	((textoDNICliente.getText().length())!=0))
+//	{
+//		//INGRESAMOS LOS DATOS DE LA TABLA CLIENTES DE LA BASE DE DATOS
+//		sentencia = "INSERT INTO clientes VALUES (null, '" + 
+//				textoNombreCliente.getText() + "','" + 
+//				textoDirreccionCliente.getText() + "','" + 
+//				textoDNICliente.getText() + "', '" +
+//				textoCorreoCliente.getText() + "')";
+//		System.out.println(sentencia);
+//		log.guardar(usuario, sentencia);
+//		statement.executeUpdate(sentencia);
+
 
 }
 
