@@ -24,7 +24,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	Modelo modelo;
 	Connection conexion = null;
 	String informacion ="";
-	
+
 	int mazoJugador1[] = new int[12];
 	int mazoJugador2[] = new int[12];
 	int mazoJugador3[] = new int[12];
@@ -38,7 +38,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	int puntosJugador3 = 0;
 	int puntosJugador4 = 0;
 	int turno = 0; // 0 turno jugador 1, 1 turno jugador 2
-	int uno, dos;
+	int uno, dos,tres,cuatro;
 
 	public Controlador(VistaMejoresJ objvista, VistaMenuPrincipal objvistaM, VistaCrearJugador objvistaJ, VistaCrearPartida objvistaP, VistaJugando objvistaJug, Modelo objmodelo)
 	{
@@ -54,20 +54,15 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		this.vistaMejoresJ.addWindowListener(this);
 		this.vistaJugando.addWindowListener(this);
 		this.vistaJugando.addMouseListener(this);
-		this.modelo.barajar(mazoJugador1, mazoJugador2, mazoJugador3, mazoJugador4);
-		for(int i= 0; i < 12; i++)
-		{
-			System.out.println("Carta jugador1: " + mazoJugador1[i]+"   --    >"+"Carta jugador2: " +mazoJugador2[i]+"   --    >"+"Carta jugador3: " +mazoJugador3[i]+"   --    >"+"Carta jugador4: " +mazoJugador4[i]);
 
-		}
-		
+
 		//ELEMENTOS VISTA JUGADOR
 		objvistaJ.addWindowListener(this);
 		objvistaJ.ventanaCrearJugador.addWindowListener(this);
 		objvistaJ.dialogoMensajeJugadorCreado.addWindowListener(this);
 		objvistaJ.crearJugador.addActionListener(this);
 		objvistaJ.cerrarJugador.addActionListener(this);
-		
+
 		//ELEMENTOS VISTA PARTIDA
 		objvistaP.addWindowListener(this);
 		objvistaP.ventanaCrearPartida.addWindowListener(this);
@@ -82,18 +77,18 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		objvistaM.buttoncomoSeJuega.addActionListener(this);
 		objvistaM.buttonMejoresJugadores.addActionListener(this);
 		objvistaM.buttonSalirMenu.addActionListener(this);
-		
+
 		//ELEMENTOS VISTA JUGANDO
 		objvistaJug.ventanaJuego.addWindowListener(this);
 		objvistaJug.ventanaJuego.addMouseListener(this);
 		objvistaJug.dlgMensaje.addWindowListener(this);
-		
+
 		//ELEMENTOS VISTA GENERAL
 		objvista.ventanaMejoresJugadores.addWindowListener(this);
 		objvista.cerrar.addActionListener(this);
 		objvista.addWindowListener(this);
 		objvista.setLocationRelativeTo(null);		
-		
+
 	}
 
 	@Override
@@ -109,61 +104,58 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		//INICIO DE LA PARTIDA
 		if(vistaCrearP.buttonIniciarPartida.equals(evento.getSource()))
 		{
-//			//CONECTAMOS A LA BASE DE DATOS
-//			conexion = this.modelo.conectar();
-//			//REALIZAR LA CONSULTA E INSERTAR INFORMACIÓN
-//			informacion = this.modelo.crearPartidaNueva(conexion);
-//			//RELLENAMOS EL TEXTAREA
-//			this.vistaCrearJ.textocodigoJugador.append(informacion);
-//			this.vistaCrearJ.textoNombreJugador.append(informacion);
-//			//CERRAMOS CONEXION
-//			this.modelo.cerrar(conexion);
-			
+			//CONECTAMOS A LA BASE DE DATOS
+			//			conexion = this.modelo.conectar();
+			//			//REALIZAR LA CONSULTA E INSERTAR INFORMACIÓN
+			//			informacion = this.modelo.crearPartidaNueva(conexion);
+			//			//RELLENAMOS EL TEXTAREA
+			//			this.vistaCrearJ.textocodigoJugador.append(informacion);
+			//			this.vistaCrearJ.textoNombreJugador.append(informacion);
+			//			//CERRAMOS CONEXION
+			//			this.modelo.cerrar(conexion);
+
 			this.vistaJugando.setVisible(true);
 			new VistaJugando();
-			
+			this.modelo.barajar(mazoJugador1, mazoJugador2, mazoJugador3, mazoJugador4);
+			for(int i= 0; i < 12; i++)
+			{
+				System.out.println("Carta jugador1: " + mazoJugador1[i]+"   --    >"+"Carta jugador2: " +mazoJugador2[i]+"   --    >"+"Carta jugador3: " +mazoJugador3[i]+"   --    >"+"Carta jugador4: " +mazoJugador4[i]);
+
+			}
 
 		}
-		
+
 		//CREAR JUGADOR
 		else if(vistaMenu.buttonMenuCrearJugador.equals(evento.getSource()))
 		{
 			this.vistaCrearJ.setVisible(true);
 			new VistaCrearJugador();
-			
+
 		}
-		
+
 		else if(vistaCrearJ.crearJugador.equals(evento.getSource()))
 		{
-//			//CONECTAMOS A LA BASE DE DATOS
-//			conexion = this.modelo.conectar();
-//			//REALIZAR LA CONSULTA E INSERTAR INFORMACIÓN
-//			informacion = this.modelo.crearJugadorNuevo(conexion);
-//			//RELLENAMOS EL TEXTAREA
-//			this.vistaCrearJ.textocodigoJugador.append(informacion);
-//			this.vistaCrearJ.textoNombreJugador.append(informacion);
-//			//CERRAMOS CONEXION
-//			this.modelo.cerrar(conexion);
+
 		}
-		
+
 		//COMO SE JUEGA
 		else if(vistaMenu.buttoncomoSeJuega.equals(evento.getSource()))
 		{
 			this.modelo.ayuda();
 		}
-		
+
 		//CONSULTA MEJORES JUGADORES
 		else if(vistaMenu.buttonMejoresJugadores.equals(evento.getSource()))
 		{
-//			vistaMejoresJ.ventanaMejoresJugadores.setVisible(true);
-//			//CONECTAMOS A LA BASE DE DATOS
-//			conexion = this.modelo.conectar();
-//			//REALIZAR LA CONSULTA E INSERTAR INFORMACIÓN
-//			informacion = this.modelo.mejoresJugadores(conexion);
-//			//RELLENAMOS EL TEXTAREA
-//			this.vistaMejoresJ.listadoJugadores.append(informacion);
-//			//CERRAMOS CONEXION
-//			this.modelo.cerrar(conexion);
+			vistaMejoresJ.ventanaMejoresJugadores.setVisible(true);
+			//CONECTAMOS A LA BASE DE DATOS
+			conexion = this.modelo.conectar();
+			//REALIZAR LA CONSULTA E INSERTAR INFORMACIÓN
+			informacion = this.modelo.mejoresJugadores(conexion);
+			//RELLENAMOS EL TEXTAREA
+			this.vistaMejoresJ.listadoJugadores.append(informacion);
+			//CERRAMOS CONEXION
+			this.modelo.cerrar(conexion);
 		}
 
 		//BOTONES QUE CIERRAN VENTANAS
@@ -197,12 +189,12 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		{
 			System.exit(0);
 		}
-		
+
 		this.vistaJugando.ventanaJuego.equals(evento.getSource());
 		{
 			System.exit(0);
 		}
-		
+
 
 		if(this.vistaJugando.dlgMensaje.isActive())
 		{
@@ -229,17 +221,21 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	{		
 		int x = evento.getX();
 		int y = evento.getY();
-		if((x>=320)&&(x<=429)&&(y>=80)&&(y<=230)&&(turno==0))
+
+		if((x>=340)&&(x<=449)&&(y>=65)&&(y<=215)&&(turno==0))
 		{
-			// Mostrar la carta del Mazo 1
+			//MOSTRAR LA CARTA DEL MAZO 1
 			this.vistaJugando.mostrarCartaMazo1(mazoJugador1[cartaActualJugador1]);
 			turno = 1;
+			System.out.println("Pulsaste el mazo 1");
 		}
-		else if ((x>=320)&&(x<=429)&&(y>=250)&&(y<=400)&&(turno==1))
+
+		else if ((x>=340)&&(x<=449)&&(y>=295)&&(y<=445)&&(turno==1))
 		{
-			// Mostrar la carta del Mazo 2
+			//MOSTRAR LA CARTA DEL MAZO 2
 			this.vistaJugando.mostrarCartaMazo2(mazoJugador2[cartaActualJugador2]);
-			
+			System.out.println("Pulsaste el mazo 2");
+
 			uno = mazoJugador1[cartaActualJugador1] % 12;
 			if(uno==0)
 			{
@@ -264,6 +260,24 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			cartaActualJugador2++;
 			turno = 0;
 		}
+
+		else if((x>=60)&&(x<=169)&&(y>=180)&&(y<=330)&&(turno==2))
+		{
+			//MOSTRAR LA CARTA DEL MAZO 3
+			this.vistaJugando.mostrarCartaMazo3(mazoJugador3[cartaActualJugador3]);
+			turno = 2;
+			System.out.println("Pulsaste el mazo 3");
+		}
+
+		else if((x>=650)&&(x<=759)&&(y>=180)&&(y<=330)&&(turno==3))
+		{
+			//MOSTRAR LA CARTA DEL MAZO 4
+			this.vistaJugando.mostrarCartaMazo4(mazoJugador4[cartaActualJugador4]);
+			turno =3;
+			System.out.println("Pulsaste el mazo 4");
+		}
+
+
 		if(puntosJugador1 == 3)
 		{
 			// Ganador el Jugador 1

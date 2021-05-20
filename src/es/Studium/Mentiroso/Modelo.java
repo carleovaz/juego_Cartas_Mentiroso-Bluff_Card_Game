@@ -138,55 +138,35 @@ public class Modelo
 
 	public String crearJugadorNuevo(Connection conexion) 
 	{
-		String datos ="";
-		Statement statement = null;
-		ResultSet rs = null;
-		String sentencia = "INSERT INTO jugadores VALUES ('','','0');";
-
-		try
-		{
-			statement = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY);
-			rs = statement.executeQuery(sentencia);
-			while(rs.next())
-			{
-				datos = datos + rs.getInt("idJugador");
-				datos = datos + rs.getString("nombreJugador");
-				datos = datos + rs.getInt("puntosJugador");
-			}
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		return(datos);
+		return null;
+		
 	}
 	
-	public String crearPartidaNueva(Connection conexion) 
-	{
-		String datos ="";
-		Statement statement = null;
-		ResultSet rs = null;
-		String sentencia = "INSERT INTO partidas VALUES ('null','','');";
-
-		try
-		{
-			statement = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY);
-			rs = statement.executeQuery(sentencia);
-			while(rs.next())
-			{
-				datos = datos + rs.getInt("idPartida");
-				datos = datos + rs.getString("nombrePartida");
-				datos = datos + rs.getInt("idJugadorFK");
-			}
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		return(datos);
-	}
+//	public String crearPartidaNueva(Connection conexion) 
+//	{
+//		String datos ="";
+//		Statement statement = null;
+//		ResultSet rs = null;
+//		String sentencia = "INSERT INTO partidas VALUES ('null','','');";
+//
+//		try
+//		{
+//			statement = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+//					ResultSet.CONCUR_READ_ONLY);
+//			rs = statement.executeUpdate(sentencia);
+//			while(rs.next())
+//			{
+//				datos = datos + rs.getInt("idPartida");
+//				datos = datos + rs.getString("nombrePartida");
+//				datos = datos + rs.getInt("idJugadorFK");
+//			}
+//		}
+//		catch (SQLException e)
+//		{
+//			e.printStackTrace();
+//		}
+//		return(datos);
+//	}
 
 	
 	public void ayuda() 
@@ -201,26 +181,6 @@ public class Modelo
 			e.printStackTrace(); 
 		} 
 	}
-	
-//	//CREAMOS LA SENTENCIA
-//	statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-//			ResultSet.CONCUR_READ_ONLY);
-//	//TOMAMOS EL TEXTO
-//	if(((textoNombreCliente.getText().length())!=0)
-//			&& 	((textoDirreccionCliente.getText().length())!=0)
-//			&&	((textoCorreoCliente.getText().length())!=0)
-//			&&	((textoDNICliente.getText().length())!=0))
-//	{
-//		//INGRESAMOS LOS DATOS DE LA TABLA CLIENTES DE LA BASE DE DATOS
-//		sentencia = "INSERT INTO clientes VALUES (null, '" + 
-//				textoNombreCliente.getText() + "','" + 
-//				textoDirreccionCliente.getText() + "','" + 
-//				textoDNICliente.getText() + "', '" +
-//				textoCorreoCliente.getText() + "')";
-//		System.out.println(sentencia);
-//		log.guardar(usuario, sentencia);
-//		statement.executeUpdate(sentencia);
-
 
 }
 
