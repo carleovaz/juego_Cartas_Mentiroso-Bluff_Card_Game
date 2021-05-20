@@ -38,7 +38,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	int puntosJugador3 = 0;
 	int puntosJugador4 = 0;
 	int turno = 0; // 0 turno jugador 1, 1 turno jugador 2
-	int uno, dos,tres,cuatro;
+	int uno,dos,tres,cuatro;
 
 	public Controlador(VistaMejoresJ objvista, VistaMenuPrincipal objvistaM, VistaCrearJugador objvistaJ, VistaCrearPartida objvistaP, VistaJugando objvistaJug, Modelo objmodelo)
 	{
@@ -221,7 +221,8 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	{		
 		int x = evento.getX();
 		int y = evento.getY();
-
+		
+		//TURNOS
 		if((x>=340)&&(x<=449)&&(y>=65)&&(y<=215)&&(turno==0))
 		{
 			//MOSTRAR LA CARTA DEL MAZO 1
@@ -234,8 +235,39 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		{
 			//MOSTRAR LA CARTA DEL MAZO 2
 			this.vistaJugando.mostrarCartaMazo2(mazoJugador2[cartaActualJugador2]);
+			turno = 2;
 			System.out.println("Pulsaste el mazo 2");
+		
+		}
 
+		else if((x>=60)&&(x<=169)&&(y>=180)&&(y<=330)&&(turno==2))
+		{
+			//MOSTRAR LA CARTA DEL MAZO 3
+			this.vistaJugando.mostrarCartaMazo3(mazoJugador3[cartaActualJugador3]);
+			turno = 3;
+			System.out.println("Pulsaste el mazo 3");
+		}
+
+		else if((x>=650)&&(x<=759)&&(y>=180)&&(y<=330)&&(turno==3))
+		{
+			//MOSTRAR LA CARTA DEL MAZO 4
+			this.vistaJugando.mostrarCartaMazo4(mazoJugador4[cartaActualJugador4]);
+			turno =3;
+			System.out.println("Pulsaste el mazo 4");
+		}
+
+
+		if(puntosJugador1 == 1)
+		{
+			//GANADOR JUGADOR 1
+			this.vistaJugando.lblMensaje.setText("GANA Jugador 1");
+			this.vistaJugando.dlgMensaje.setVisible(true);
+		}
+		else if (puntosJugador2 == 1)
+		{
+			//GANADOR JUGADOR 2
+			this.vistaJugando.lblMensaje.setText("GANA Jugador 2");
+			this.vistaJugando.dlgMensaje.setVisible(true);
 			uno = mazoJugador1[cartaActualJugador1] % 12;
 			if(uno==0)
 			{
@@ -260,34 +292,16 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			cartaActualJugador2++;
 			turno = 0;
 		}
-
-		else if((x>=60)&&(x<=169)&&(y>=180)&&(y<=330)&&(turno==2))
+		else if (puntosJugador3 == 1)
 		{
-			//MOSTRAR LA CARTA DEL MAZO 3
-			this.vistaJugando.mostrarCartaMazo3(mazoJugador3[cartaActualJugador3]);
-			turno = 2;
-			System.out.println("Pulsaste el mazo 3");
-		}
-
-		else if((x>=650)&&(x<=759)&&(y>=180)&&(y<=330)&&(turno==3))
-		{
-			//MOSTRAR LA CARTA DEL MAZO 4
-			this.vistaJugando.mostrarCartaMazo4(mazoJugador4[cartaActualJugador4]);
-			turno =3;
-			System.out.println("Pulsaste el mazo 4");
-		}
-
-
-		if(puntosJugador1 == 3)
-		{
-			// Ganador el Jugador 1
-			this.vistaJugando.lblMensaje.setText("GANA Jugador 1");
+			//GANADOR JUGADOR 3
+			this.vistaJugando.lblMensaje.setText("GANA Jugador 3");
 			this.vistaJugando.dlgMensaje.setVisible(true);
 		}
-		else if (puntosJugador2 == 3)
+		else if (puntosJugador4 == 1)
 		{
-			// Ganador el Jugador 2
-			this.vistaJugando.lblMensaje.setText("GANA Jugador 2");
+			//GANADOR JUGADOR 4
+			this.vistaJugando.lblMensaje.setText("GANA Jugador 4");
 			this.vistaJugando.dlgMensaje.setVisible(true);
 		}
 	}
