@@ -78,310 +78,462 @@ public class VistaJugando extends Frame
 		{
 		//ORO
 		case 1:
-			g.drawImage(A1, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 2:
-			g.drawImage(A2, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 3:
-			g.drawImage(A3, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 4:
-			g.drawImage(A4, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 5:
-			g.drawImage(A5, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 6:
-			g.drawImage(A6, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 7:
-			g.drawImage(A7, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 8:
-			g.drawImage(A8, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 9:
-			g.drawImage(A9, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 10:
-			g.drawImage(A10, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 11:
-			g.drawImage(A11, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 12:
-			g.drawImage(A12, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 
 			//BASTOS
 		case 13:
-			g.drawImage(B1, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 14:
-			g.drawImage(B2, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 15:
-			g.drawImage(B3, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 16:
-			g.drawImage(B4, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 17:
-			g.drawImage(B5, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 18:
-			g.drawImage(B6, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 19:
-			g.drawImage(B7, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 20:
-			g.drawImage(B8, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 21:
-			g.drawImage(B9, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 22:
-			g.drawImage(B10, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 23:
-			g.drawImage(B11, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 24:
-			g.drawImage(B12, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 
 			//COPAS
 		case 25:
-			g.drawImage(C1, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 26:
-			g.drawImage(C2, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 27:
-			g.drawImage(C3, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 28:
-			g.drawImage(C4, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 29:
-			g.drawImage(C5, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 30:
-			g.drawImage(C6, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 31:
-			g.drawImage(C7, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 32:
-			g.drawImage(C8, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 33:
-			g.drawImage(C9, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 34:
-			g.drawImage(C10, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 35:
-			g.drawImage(C11, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 36:
-			g.drawImage(C12, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 
 			//ESPADAS
 		case 37:
-			g.drawImage(D1, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 38:
-			g.drawImage(D2, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 39:
-			g.drawImage(D3, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 40:
-			g.drawImage(D4, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 41:
-			g.drawImage(D5, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 42:
-			g.drawImage(D6, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 43:
-			g.drawImage(D7, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 44:
-			g.drawImage(D8, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 45:
-			g.drawImage(D9, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 46:
-			g.drawImage(D10, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 47:
-			g.drawImage(D11, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		case 48:
-			g.drawImage(D12, 285, 80, this);
+			g.drawImage(reverso, 285, 80, this);
 			break;
 		}
+//		//ORO
+//				case 1:
+//					g.drawImage(A1, 285, 80, this);
+//					break;
+//				case 2:
+//					g.drawImage(A2, 285, 80, this);
+//					break;
+//				case 3:
+//					g.drawImage(A3, 285, 80, this);
+//					break;
+//				case 4:
+//					g.drawImage(A4, 285, 80, this);
+//					break;
+//				case 5:
+//					g.drawImage(A5, 285, 80, this);
+//					break;
+//				case 6:
+//					g.drawImage(A6, 285, 80, this);
+//					break;
+//				case 7:
+//					g.drawImage(A7, 285, 80, this);
+//					break;
+//				case 8:
+//					g.drawImage(A8, 285, 80, this);
+//					break;
+//				case 9:
+//					g.drawImage(A9, 285, 80, this);
+//					break;
+//				case 10:
+//					g.drawImage(A10, 285, 80, this);
+//					break;
+//				case 11:
+//					g.drawImage(A11, 285, 80, this);
+//					break;
+//				case 12:
+//					g.drawImage(A12, 285, 80, this);
+//					break;
+//
+//					//BASTOS
+//				case 13:
+//					g.drawImage(B1, 285, 80, this);
+//					break;
+//				case 14:
+//					g.drawImage(B2, 285, 80, this);
+//					break;
+//				case 15:
+//					g.drawImage(B3, 285, 80, this);
+//					break;
+//				case 16:
+//					g.drawImage(B4, 285, 80, this);
+//					break;
+//				case 17:
+//					g.drawImage(B5, 285, 80, this);
+//					break;
+//				case 18:
+//					g.drawImage(B6, 285, 80, this);
+//					break;
+//				case 19:
+//					g.drawImage(B7, 285, 80, this);
+//					break;
+//				case 20:
+//					g.drawImage(B8, 285, 80, this);
+//					break;
+//				case 21:
+//					g.drawImage(B9, 285, 80, this);
+//					break;
+//				case 22:
+//					g.drawImage(B10, 285, 80, this);
+//					break;
+//				case 23:
+//					g.drawImage(B11, 285, 80, this);
+//					break;
+//				case 24:
+//					g.drawImage(B12, 285, 80, this);
+//					break;
+//
+//					//COPAS
+//				case 25:
+//					g.drawImage(C1, 285, 80, this);
+//					break;
+//				case 26:
+//					g.drawImage(C2, 285, 80, this);
+//					break;
+//				case 27:
+//					g.drawImage(C3, 285, 80, this);
+//					break;
+//				case 28:
+//					g.drawImage(C4, 285, 80, this);
+//					break;
+//				case 29:
+//					g.drawImage(C5, 285, 80, this);
+//					break;
+//				case 30:
+//					g.drawImage(C6, 285, 80, this);
+//					break;
+//				case 31:
+//					g.drawImage(C7, 285, 80, this);
+//					break;
+//				case 32:
+//					g.drawImage(C8, 285, 80, this);
+//					break;
+//				case 33:
+//					g.drawImage(C9, 285, 80, this);
+//					break;
+//				case 34:
+//					g.drawImage(C10, 285, 80, this);
+//					break;
+//				case 35:
+//					g.drawImage(C11, 285, 80, this);
+//					break;
+//				case 36:
+//					g.drawImage(C12, 285, 80, this);
+//					break;
+//
+//					//ESPADAS
+//				case 37:
+//					g.drawImage(D1, 285, 80, this);
+//					break;
+//				case 38:
+//					g.drawImage(D2, 285, 80, this);
+//					break;
+//				case 39:
+//					g.drawImage(D3, 285, 80, this);
+//					break;
+//				case 40:
+//					g.drawImage(D4, 285, 80, this);
+//					break;
+//				case 41:
+//					g.drawImage(D5, 285, 80, this);
+//					break;
+//				case 42:
+//					g.drawImage(D6, 285, 80, this);
+//					break;
+//				case 43:
+//					g.drawImage(D7, 285, 80, this);
+//					break;
+//				case 44:
+//					g.drawImage(D8, 285, 80, this);
+//					break;
+//				case 45:
+//					g.drawImage(D9, 285, 80, this);
+//					break;
+//				case 46:
+//					g.drawImage(D10, 285, 80, this);
+//					break;
+//				case 47:
+//					g.drawImage(D11, 285, 80, this);
+//					break;
+//				case 48:
+//					g.drawImage(D12, 285, 80, this);
+//					break;
+//				}
 		
 		//JUGADOR2
 		switch(imagenAmostrar2)
 		{
 		//ORO
 		case 1:
-			g.drawImage(A1, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 2:
-			g.drawImage(A2, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 3:
-			g.drawImage(A3, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 4:
-			g.drawImage(A4, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 5:
-			g.drawImage(A5, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 6:
-			g.drawImage(A6, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 7:
-			g.drawImage(A7, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 8:
-			g.drawImage(A8, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 9:
-			g.drawImage(A9, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 10:
-			g.drawImage(A10, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 11:
-			g.drawImage(A11, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 12:
-			g.drawImage(A12, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 
 			//BASTOS
 		case 13:
-			g.drawImage(B1, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 14:
-			g.drawImage(B2, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 15:
-			g.drawImage(B3, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 16:
-			g.drawImage(B4, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 17:
-			g.drawImage(B5, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 18:
-			g.drawImage(B6, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 19:
-			g.drawImage(B7, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 20:
-			g.drawImage(B8, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 21:
-			g.drawImage(B9, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 22:
-			g.drawImage(B10, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 23:
-			g.drawImage(B11, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 24:
-			g.drawImage(B12, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 
 			//COPAS
 		case 25:
-			g.drawImage(C1, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 26:
-			g.drawImage(C2, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 27:
-			g.drawImage(C3, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 28:
-			g.drawImage(C4, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 29:
-			g.drawImage(C5, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 30:
-			g.drawImage(C6, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 31:
-			g.drawImage(C7, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 32:
-			g.drawImage(C8, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 33:
-			g.drawImage(C9, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 34:
-			g.drawImage(C10, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 35:
-			g.drawImage(C11, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 36:
-			g.drawImage(C12, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 
 			//ESPADAS
 		case 37:
-			g.drawImage(D1, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 38:
-			g.drawImage(D2, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 39:
-			g.drawImage(D3, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 40:
-			g.drawImage(D4, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 41:
-			g.drawImage(D5, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 42:
-			g.drawImage(D6, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 43:
-			g.drawImage(D7, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 44:
-			g.drawImage(D8, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 45:
-			g.drawImage(D9, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 46:
-			g.drawImage(D10, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 47:
-			g.drawImage(D11, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		case 48:
-			g.drawImage(D12, 310, 250, this);
+			g.drawImage(reverso, 310, 250, this);
 			break;
 		}
 		
@@ -390,154 +542,154 @@ public class VistaJugando extends Frame
 		{
 		//ORO
 		case 1:
-			g.drawImage(A1, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 2:
-			g.drawImage(A2, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 3:
-			g.drawImage(A3, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 4:
-			g.drawImage(A4, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 5:
-			g.drawImage(A5, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 6:
-			g.drawImage(A6, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 7:
-			g.drawImage(A7, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 8:
-			g.drawImage(A8, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 9:
-			g.drawImage(A9, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 10:
-			g.drawImage(A10, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 11:
-			g.drawImage(A11, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 12:
-			g.drawImage(A12, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 
 			//BASTOS
 		case 13:
-			g.drawImage(B1, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 14:
-			g.drawImage(B2, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 15:
-			g.drawImage(B3, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 16:
-			g.drawImage(B4, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 17:
-			g.drawImage(B5, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 18:
-			g.drawImage(B6, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 19:
-			g.drawImage(B7, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 20:
-			g.drawImage(B8, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 21:
-			g.drawImage(B9, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 22:
-			g.drawImage(B10, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 23:
-			g.drawImage(B11, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 24:
-			g.drawImage(B12, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 
 			//COPAS
 		case 25:
-			g.drawImage(C1, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 26:
-			g.drawImage(C2, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 27:
-			g.drawImage(C3, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 28:
-			g.drawImage(C4, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 29:
-			g.drawImage(C5, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 30:
-			g.drawImage(C6, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 31:
-			g.drawImage(C7, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 32:
-			g.drawImage(C8, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 33:
-			g.drawImage(C9, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 34:
-			g.drawImage(C10, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 35:
-			g.drawImage(C11, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 36:
-			g.drawImage(C12, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 
 			//ESPADAS
 		case 37:
-			g.drawImage(D1, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 38:
-			g.drawImage(D2, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 39:
-			g.drawImage(D3, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 40:
-			g.drawImage(D4, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 41:
-			g.drawImage(D5, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 42:
-			g.drawImage(D6, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 43:
-			g.drawImage(D7, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 44:
-			g.drawImage(D8, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 45:
-			g.drawImage(D9, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 46:
-			g.drawImage(D10, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 47:
-			g.drawImage(D11, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		case 48:
-			g.drawImage(D12, 170, 180, this);
+			g.drawImage(reverso, 170, 180, this);
 			break;
 		}
 		
@@ -546,154 +698,154 @@ public class VistaJugando extends Frame
 		{
 		//ORO
 		case 1:
-			g.drawImage(A1, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 2:
-			g.drawImage(A2, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 3:
-			g.drawImage(A3, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 4:
-			g.drawImage(A4, 540, 180, this);
+			g.drawImage(reverso, 540, 180, this);
 			break;
 		case 5:
-			g.drawImage(A5, 540, 180, this);
+			g.drawImage(reverso, 540, 180, this);
 			break;
 		case 6:
-			g.drawImage(A6, 540, 180, this);
+			g.drawImage(reverso, 540, 180, this);
 			break;
 		case 7:
-			g.drawImage(A7, 540, 180, this);
+			g.drawImage(reverso, 540, 180, this);
 			break;
 		case 8:
-			g.drawImage(A8, 540, 180, this);
+			g.drawImage(reverso, 540, 180, this);
 			break;
 		case 9:
-			g.drawImage(A9, 540, 180, this);
+			g.drawImage(reverso, 540, 180, this);
 			break;
 		case 10:
-			g.drawImage(A10, 540, 180, this);
+			g.drawImage(reverso, 540, 180, this);
 			break;
 		case 11:
-			g.drawImage(A11, 540, 180, this);
+			g.drawImage(reverso, 540, 180, this);
 			break;
 		case 12:
-			g.drawImage(A12, 540, 180, this);
+			g.drawImage(reverso, 540, 180, this);
 			break;
 
 			//BASTOS
 		case 13:
-			g.drawImage(B1, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 14:
-			g.drawImage(B2, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 15:
-			g.drawImage(B3, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 16:
-			g.drawImage(B4, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 17:
-			g.drawImage(B5, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 18:
-			g.drawImage(B6, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 19:
-			g.drawImage(B7, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 20:
-			g.drawImage(B8, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 21:
-			g.drawImage(B9, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 22:
-			g.drawImage(B10, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 23:
-			g.drawImage(B11, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 24:
-			g.drawImage(B12, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 
 			//COPAS
 		case 25:
-			g.drawImage(C1, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 26:
-			g.drawImage(C2, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 27:
-			g.drawImage(C3, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 28:
-			g.drawImage(C4, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 29:
-			g.drawImage(C5, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 30:
-			g.drawImage(C6, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 31:
-			g.drawImage(C7, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 32:
-			g.drawImage(C8, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 33:
-			g.drawImage(C9, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 34:
-			g.drawImage(C10, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 35:
-			g.drawImage(C11, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 36:
-			g.drawImage(C12, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 
 			//ESPADAS
 		case 37:
-			g.drawImage(D1, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 38:
-			g.drawImage(D2, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 39:
-			g.drawImage(D3, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 40:
-			g.drawImage(D4, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 41:
-			g.drawImage(D5, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 42:
-			g.drawImage(D6, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 43:
-			g.drawImage(D7, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 44:
-			g.drawImage(D8, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 45:
-			g.drawImage(D9, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 46:
-			g.drawImage(D10, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 47:
-			g.drawImage(D11, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		case 48:
-			g.drawImage(D12, 540, 160, this);
+			g.drawImage(reverso, 540, 160, this);
 			break;
 		}
 	}

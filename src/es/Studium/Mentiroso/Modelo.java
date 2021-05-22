@@ -20,7 +20,7 @@ public class Modelo
 		int contador1=0, contador2=0, contador3=0, contador4=0;
 		for(int i = 0; i < 48; i++)
 		{
-			jugador = rnd.nextInt(2);
+			jugador = rnd.nextInt(4);
 			if((jugador==0)&&(contador1<12))
 			{
 				uno[contador1] = numeroArepartir;
@@ -43,7 +43,7 @@ public class Modelo
 				cuatro[contador4] = numeroArepartir;
 				contador4++;
 			}
-			if(numeroArepartir%11==0)
+			if(numeroArepartir%12==0)
 			{
 				numeroArepartir=1;
 			}
@@ -59,12 +59,28 @@ public class Modelo
 		int aleatorio, auxiliar;
 		for(int i=0; i<12; i++)
 		{
-			aleatorio = rnd.nextInt(11)+1;
+			aleatorio = rnd.nextInt(12)+1;
 			auxiliar = t[i];
 			t[i] = t[aleatorio];
 			t[aleatorio] = auxiliar;
 		}
 	}
+	
+	public int numeroInicialSeleccionado(int numero[])
+	{
+		Math.random();
+		int numeroAleatorio = (int) (Math.random()*12+1);
+		System.out.println("EL NUMERO INICIAL A LANZAR ES UN: " + numeroAleatorio + " BUENA SUERTE, MENTIROSOS");
+		return numeroAleatorio;
+	}
+	
+	public void nuevoNumeroSeleccionado(int numero[])
+	{
+		Math.random();
+		int numeroAleatorio = (int) (Math.random()*12+1);
+		System.out.println(numeroAleatorio);
+	}
+
 
 	//METODO CONECTAR
 	public Connection conectar()
@@ -142,31 +158,10 @@ public class Modelo
 		
 	}
 	
-//	public String crearPartidaNueva(Connection conexion) 
-//	{
-//		String datos ="";
-//		Statement statement = null;
-//		ResultSet rs = null;
-//		String sentencia = "INSERT INTO partidas VALUES ('null','','');";
-//
-//		try
-//		{
-//			statement = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-//					ResultSet.CONCUR_READ_ONLY);
-//			rs = statement.executeUpdate(sentencia);
-//			while(rs.next())
-//			{
-//				datos = datos + rs.getInt("idPartida");
-//				datos = datos + rs.getString("nombrePartida");
-//				datos = datos + rs.getInt("idJugadorFK");
-//			}
-//		}
-//		catch (SQLException e)
-//		{
-//			e.printStackTrace();
-//		}
-//		return(datos);
-//	}
+	public String crearPartidaNueva(Connection conexion) 
+	{
+		return null;
+	}
 
 	
 	public void ayuda() 
