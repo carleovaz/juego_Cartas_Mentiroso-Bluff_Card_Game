@@ -10,6 +10,8 @@ import java.awt.Image;
 import java.awt.Label;
 import java.awt.Toolkit;
 
+import Musica.Sonido2;
+
 public class VistaJugando extends Frame
 {
 	private static final long serialVersionUID = 1L;
@@ -964,6 +966,10 @@ public class VistaJugando extends Frame
 		puntosJugador4 = 0;
 		repaint();
 	}
-
+	
+	public void musica()
+	{
+		new Sonido2();
+	}
 
 }

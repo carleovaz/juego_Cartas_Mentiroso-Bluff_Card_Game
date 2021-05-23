@@ -12,6 +12,8 @@ import java.util.Random;
 public class Modelo
 {
 	Random rnd = new Random();
+	private Object textoNombrePartida;
+	private Object textoCodigoJugadorPartida;
 
 	public void barajar(int uno[], int dos[], int tres[], int[] cuatro)
 	{		
@@ -31,13 +33,13 @@ public class Modelo
 				dos[contador2] = numeroArepartir;
 				contador2++;
 			}
-			
+
 			else if (contador3<12)
 			{
 				tres[contador3] = numeroArepartir;
 				contador3++;
 			}
-			
+
 			else if (contador4<12)
 			{
 				cuatro[contador4] = numeroArepartir;
@@ -65,7 +67,7 @@ public class Modelo
 			t[aleatorio] = auxiliar;
 		}
 	}
-	
+
 	public int numeroInicialSeleccionado(int numero[])
 	{
 		Math.random();
@@ -73,7 +75,7 @@ public class Modelo
 		System.out.println("EL NUMERO INICIAL A LANZAR ES UN: " + numeroAleatorio + " BUENA SUERTE, MENTIROSOS");
 		return numeroAleatorio;
 	}
-	
+
 	public void nuevoNumeroSeleccionado(int numero[])
 	{
 		Math.random();
@@ -155,27 +157,55 @@ public class Modelo
 	public String crearJugadorNuevo(Connection conexion) 
 	{
 		return null;
-		
+
 	}
-	
+
 	public String crearPartidaNueva(Connection conexion) 
 	{
 		return null;
 	}
 
-	
-	public void ayuda() 
+	private String crearPartida(Connection connection) 
 	{
-		try 
-		{ 
-			//EJECUTA EL ARCHIVO DE AYUDA
-			Runtime.getRuntime().exec("hh.exe ayuda.chm"); 
-		} 
-		catch (IOException e) 
-		{ 
-			e.printStackTrace(); 
-		} 
+		String datos ="";
+		Statement statement = null;
+		String sentencia="INSERT INTO partidas VALUES (null, '" + 
+				textoNombrePartida + "','" + 
+				textoCodigoJugadorPartida + "')";
+		try
+		{
+			//CREAMOS LA SENTENCIA
+			statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY);
+			//TOMAMOS EL TEXTO
+			statement.executeUpdate(sentencia);
+			System.out.println(sentencia);
+		}
+		
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return(datos);
 	}
+
+
+
+public void ayuda() 
+{
+	try 
+	{ 
+		//EJECUTA EL ARCHIVO DE AYUDA
+		Runtime.getRuntime().exec("hh.exe ayuda.chm"); 
+	} 
+	catch (IOException e) 
+	{ 
+		e.printStackTrace(); 
+	} 
+}
+
+
 
 }
 

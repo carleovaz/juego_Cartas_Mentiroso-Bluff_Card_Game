@@ -71,7 +71,7 @@ public class VistaCrearPartida extends Frame implements WindowListener, ActionLi
 	@Override
 	public void windowClosing(WindowEvent arg0) 
 	{
-		System.exit(0);
+		
 		
 	}
 

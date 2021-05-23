@@ -13,12 +13,12 @@ public class El_Mentiroso
 	public static void main (String[]args)
 	{
 		Modelo modelo = new Modelo();
-		VistaMejoresJ vista = new VistaMejoresJ();
+		VistaMejoresJ vistaMejoresJ = new VistaMejoresJ();
 		VistaMenuPrincipal vistaMenu = new VistaMenuPrincipal();
 		VistaCrearJugador vistaCrearJ = new VistaCrearJugador();
 		VistaCrearPartida vistaCrearP = new VistaCrearPartida();
 		VistaJugando vistaJugando = new VistaJugando();
-		new Controlador (vista, vistaMenu,vistaCrearJ,vistaCrearP, vistaJugando, modelo); 
+		new Controlador (vistaMejoresJ, vistaMenu,vistaCrearJ,vistaCrearP, vistaJugando, modelo); 
 		Sonido sonido = new Sonido();
 	}
 	
