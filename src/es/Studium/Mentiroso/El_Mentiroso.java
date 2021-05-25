@@ -19,7 +19,7 @@ public class El_Mentiroso
 		VistaCrearPartida vistaCrearP = new VistaCrearPartida();
 		VistaJugando vistaJugando = new VistaJugando();
 		new Controlador (vistaMejoresJ, vistaMenu,vistaCrearJ,vistaCrearP, vistaJugando, modelo); 
-		Sonido sonido = new Sonido();
+//		Sonido sonido = new Sonido();
 	}
 	
 

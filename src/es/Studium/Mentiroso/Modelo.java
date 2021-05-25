@@ -67,6 +67,11 @@ public class Modelo
 			t[aleatorio] = auxiliar;
 		}
 	}
+	
+	public void descartar()
+	{
+		
+	}
 
 	public int numeroInicialSeleccionado(int numero[])
 	{
