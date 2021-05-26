@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.util.Arrays;
 import java.util.Objects;
 
+import Musica.Sonido2;
 import es.Studium.Vistas.VistaCrearJugador;
 import es.Studium.Vistas.VistaCrearPartida;
 import es.Studium.Vistas.VistaJugando;
@@ -89,8 +90,11 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		objvistaJug.ventanaJuego.addWindowListener(this);
 		objvistaJug.ventanaJuego.addMouseListener(this);
 		objvistaJug.dlgMensaje.addWindowListener(this);
+		objvistaJug.dialogoAcusacion1.addWindowListener(this);
+		objvistaJug.dialogoAcusacion2.addWindowListener(this);
 
-		//ELEMENTOS VISTA GENERAL
+		
+		//ELEMENTOS VISTA MEJORES JUGADORES
 		objvistaMej.ventanaMejoresJugadores.addWindowListener(this);
 		objvistaMej.cerrar.addActionListener(this);
 		objvistaMej.addWindowListener(this);
@@ -120,7 +124,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			this.vistaJugando.setVisible(true);
 			this.modelo.barajar(mazoJugador1, mazoJugador2, mazoJugador3, mazoJugador4);
 			numeroInicial= this.modelo.numeroInicialSeleccionado(null);
-
+			
 			System.out.println("LAS CARTAS HAN SIDO REPARTIDAS:");
 			for(int i= 0; i < 12; i++)
 			{
@@ -137,7 +141,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			new VistaCrearJugador();
 
 		}
-
+		//BOTON AL DARLE CREAR EL JUGADOR PARA GUARDAR EN BASE DE DATOS
 		else if(vistaCrearJ.crearJugador.equals(evento.getSource()))
 		{
 
@@ -209,6 +213,17 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		{
 			this.vistaMejoresJ.ventanaMejoresJugadores.setVisible(false);
 		}
+		//DIALOGOS
+		else if(vistaJugando.dialogoAcusacion1.isActive())
+		{
+			vistaJugando.dialogoAcusacion1.setVisible(false);
+		}
+		
+		else if(vistaJugando.dialogoAcusacion2.isActive())
+		{
+			vistaJugando.dialogoAcusacion2.setVisible(false);
+		}
+		
 	}
 
 
@@ -222,7 +237,6 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		if((x>=340)&&(x<=449)&&(y>=65)&&(y<=215)&&(turno==0))//JUGADOR 1 LANZA CARTA
 		{	
 			this.vistaJugando.mostrarCartaMazo1(mazoJugador1[cartaActualJugador1]);
-			cartaActualJugador1++;
 			turno = 1;
 			System.out.println("JUGADOR 1 HA LANZADO CARTA, TURNO DEL JUGADOR 2.");
 			System.out.println("JUGADOR 2 ¿LANZAS O LEVANTAS?");
@@ -231,14 +245,17 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==0))//JUGADOR 1 LEVANTA LA CARTA DEL JUGADOR 4
 		{
 			System.out.println("JUGADOR 1 LLAMA MENTIROSO AL JUGADOR 4. LEVANTA SUS CARTAS.");
-			if(numeroInicial==mazoJugador4[cartaActualJugador4 - 1])
+			if(numeroInicial==mazoJugador4[cartaActualJugador4])
 			{
-				
-				System.out.println("El jugador 4 no ha mentido, su carta era un:" + mazoJugador4[cartaActualJugador4-1] + "y el numero inicial era un " + numeroInicial);
+				cartaActualJugador1++;
+				this.vistaJugando.dialogoAcusacion1.setVisible(true);
+				this.vistaJugando.lblNoMintio.setText("El Jugador no ha mentido");
 			}
-			else if(numeroInicial!=mazoJugador4[cartaActualJugador4 - 1])
+			else if(numeroInicial!=mazoJugador4[cartaActualJugador4])
 			{
-				System.out.println("El jugador 4 ha mentido, su carta era un:" + mazoJugador4[cartaActualJugador4-1] + "y el numero inicial era un " + numeroInicial);
+				cartaActualJugador1++;
+				this.vistaJugando.dialogoAcusacion2.setVisible(true);
+				this.vistaJugando.lblNoMintio.setText("El Jugador ha mentido");
 			}
 			System.out.println("EL JUGADOR 1, SELECCIONA UN NUEVO NUMERO EL:");
 			this.modelo.nuevoNumeroSeleccionado(null);
@@ -249,7 +266,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		else if ((x>=340)&&(x<=449)&&(y>=295)&&(y<=445)&&(turno==1))//jUGADOR 2 LANZA CARTA
 		{
 			this.vistaJugando.mostrarCartaMazo2(mazoJugador2[cartaActualJugador2]);
-			cartaActualJugador2++;
+			
 			turno = 2;
 			System.out.println("JUGADOR 2 HA LANZADO CARTA, TURNO DEL JUGADOR 3.");
 			System.out.println("JUGADOR 3 ¿LANZAS O LEVANTAS?");
@@ -258,13 +275,15 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==1))//JUGADOR 2 LEVANTA CARTA JUGADOR 1
 		{
 			System.out.println("JUGADOR 2 LLAMA MENTIROSO AL JUGADOR 1. LEVANTA SUS CARTAS.");
-			if(numeroInicial==mazoJugador1[cartaActualJugador1 - 1])
+			if(numeroInicial==mazoJugador1[cartaActualJugador1])
 			{
-				System.out.println("El jugador 1 no ha mentido, su carta era un:" + mazoJugador1[cartaActualJugador1-1] + "y el numero inicial era un " + numeroInicial);
+				cartaActualJugador2++;
+				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
-			else if(numeroInicial!=mazoJugador1[cartaActualJugador1 - 1])
+			else if(numeroInicial!=mazoJugador1[cartaActualJugador1])
 			{
-				System.out.println("El jugador 1 ha mentido, su carta era un:" + mazoJugador1[cartaActualJugador1-1] + "y el numero inicial era un " + numeroInicial);
+				cartaActualJugador2++;
+				this.vistaJugando.dialogoAcusacion2.setVisible(true);
 			}
 			System.out.println("EL JUGADOR 2, SELECCIONA UN NUEVO NUMERO EL:");
 			this.modelo.nuevoNumeroSeleccionado(null);
@@ -275,7 +294,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		else if((x>=60)&&(x<=169)&&(y>=180)&&(y<=330)&&(turno==2))//JUGADOR 3 LANZA CARTA
 		{
 			this.vistaJugando.mostrarCartaMazo3(mazoJugador3[cartaActualJugador3]);
-			cartaActualJugador3++;
+			
 			turno = 3;
 			System.out.println("JUGADOR 3 HA LANZADO CARTA, TURNO DEL JUGADOR 4.");
 			System.out.println("JUGADOR 4 ¿LANZAS O LEVANTAS?");
@@ -285,13 +304,15 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		if((x>=340)&&(x<=419)&&(y>=165)&&(y<=315)&&(turno==2))
 		{
 			System.out.println("JUGADOR 3 LLAMA MENTIROSO AL JUGADOR 2. LEVANTA SUS CARTAS.");
-			if(numeroInicial==mazoJugador2[cartaActualJugador2 - 1])
+			if(numeroInicial==mazoJugador2[cartaActualJugador2])
 			{
-				System.out.println("El jugador 2 no ha mentido, su carta era un:" + mazoJugador2[cartaActualJugador2-1] + "y el numero inicial era un " + numeroInicial);
+				cartaActualJugador3++;
+				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
-			else if(numeroInicial!=mazoJugador2[cartaActualJugador2 - 1])
+			else if(numeroInicial!=mazoJugador2[cartaActualJugador2])
 			{
-				System.out.println("El jugador 2 ha mentido, su carta era un:" + mazoJugador2[cartaActualJugador2-1] + "y el numero inicial era un " + numeroInicial);
+				cartaActualJugador3++;
+				this.vistaJugando.dialogoAcusacion2.setVisible(true);
 			}
 			System.out.println("EL JUGADOR 3, SELECCIONA UN NUEVO NUMERO EL:");
 			this.modelo.nuevoNumeroSeleccionado(null);
@@ -301,7 +322,6 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		else if((x>=650)&&(x<=759)&&(y>=180)&&(y<=330)&&(turno==3))
 		{
 			this.vistaJugando.mostrarCartaMazo4(mazoJugador4[cartaActualJugador4]);//MOSTRAR LA CARTA DEL MAZO 4
-			cartaActualJugador4++;
 			turno =0;
 			System.out.println("JUGADOR 4 HA LANZADO CARTA, TURNO DEL JUGADOR 1.");
 			System.out.println("JUGADOR 1 ¿LANZAS O LEVANTAS?");
@@ -311,16 +331,36 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==3))
 		{
 			System.out.println("JUGADOR 4 LLAMA MENTIROSO AL JUGADOR 3. LEVANTA SUS CARTAS.");
-			if(numeroInicial==mazoJugador3[cartaActualJugador3 - 1])
+			if(numeroInicial==mazoJugador3[cartaActualJugador3])
 			{
-				System.out.println("El jugador 3 no ha mentido, su carta era un:" + mazoJugador3[cartaActualJugador3-1] + "y el numero inicial era un " + numeroInicial);
+				cartaActualJugador4++;
+				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
-			else if(numeroInicial!=mazoJugador3[cartaActualJugador3 - 1])
+			else if(numeroInicial!=mazoJugador3[cartaActualJugador3])
 			{
-				System.out.println("El jugador 3 ha mentido, su carta era un:" + mazoJugador3[cartaActualJugador3-1] + "y el numero inicial era un " + numeroInicial);
+				cartaActualJugador4++;
+				this.vistaJugando.dialogoAcusacion2.setVisible(true);
 			}
 			System.out.println("EL JUGADOR 4, SELECCIONA UN NUEVO NUMERO EL:");
 			this.modelo.nuevoNumeroSeleccionado(null);
+		}
+		
+		//GANADORES
+		if(mazoJugador1.length==0)
+		{
+			System.out.println("HA GANADO EL JUGADOR 1");
+		}
+		if(mazoJugador2.length==0)
+		{
+			System.out.println("HA GANADO EL JUGADOR 2");
+		}
+		if(mazoJugador3.length==0)
+		{
+			System.out.println("HA GANADO EL JUGADOR 3");
+		}
+		if(mazoJugador4.length==0)
+		{
+			System.out.println("HA GANADO EL JUGADOR 4");
 		}
 
 

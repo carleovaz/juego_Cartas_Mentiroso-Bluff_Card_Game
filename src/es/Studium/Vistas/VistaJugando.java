@@ -37,16 +37,11 @@ public class VistaJugando extends Frame
 
 	public Frame ventanaJuego = new Frame ("Jugando");
 	public Dialog dlgMensaje = new Dialog(this, "Fin", true);
-	public Dialog dialogoHaMentido1 = new Dialog(this,"El Jugador 4  ha mentido");
-	public Dialog dialogoNoHaMentido1 = new Dialog (this,"El Jugador 4 no ha mentido");
-	public Dialog dialogoHaMentido2 = new Dialog(this,"El Jugador 1 ha mentido");
-	public Dialog dialogoNoHaMentido2 = new Dialog (this,"El Jugador 1 no ha mentido");
-	public Dialog dialogoHaMentido3 = new Dialog(this,"El Jugador 2 ha mentido");
-	public Dialog dialogoNoHaMentido3 = new Dialog (this,"El Jugador 2 no ha mentido");
-	public Dialog dialogoHaMentido4 = new Dialog(this,"El Jugador 3 ha mentido");
-	public Dialog dialogoNoHaMentido4 = new Dialog (this,"El Jugador 3 no ha mentido");
-	public Label lblMensaje = new Label("Gana Jugador 1");
-
+	public Dialog dialogoAcusacion1 = new Dialog(this,"ACUSACIÓN");
+	public Dialog dialogoAcusacion2 = new Dialog(this,"ACUSACIÓN");
+	public Label lblNoMintio = new Label("El Jugador no ha mentido");
+	public Label lblMentido = new Label("El jugador ha mentido");
+	
 	public VistaJugando()
 	{
 		herramientas = getToolkit();
@@ -59,12 +54,18 @@ public class VistaJugando extends Frame
 		this.setResizable(false);
 		this.setVisible(false);
 
-		dlgMensaje.setLayout(new FlowLayout());
-		dlgMensaje.setSize(100,100);
-		dlgMensaje.setLocationRelativeTo(null);
-		dlgMensaje.setResizable(false);
-		dlgMensaje.add(lblMensaje);
-
+		dialogoAcusacion1.setLayout(new FlowLayout());
+		dialogoAcusacion1.setSize(200,100);
+		dialogoAcusacion1.setLocationRelativeTo(null);
+		dialogoAcusacion1.setResizable(false);
+		dialogoAcusacion1.add(lblNoMintio);
+		
+		dialogoAcusacion2.setLayout(new FlowLayout());
+		dialogoAcusacion2.setSize(200,100);
+		dialogoAcusacion2.setLocationRelativeTo(null);
+		dialogoAcusacion2.setResizable(false);
+		dialogoAcusacion2.add(lblMentido);
+		
 
 	}
 
