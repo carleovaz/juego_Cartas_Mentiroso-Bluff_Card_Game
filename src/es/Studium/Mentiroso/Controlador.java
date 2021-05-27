@@ -263,18 +263,21 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		int y = evento.getY();
 
 		//TURNOS
-		//TURNO JUGADOR 1
-		
+		//TURNO JUGADOR 1		
 		/*
 		 * SI EL JUGADOR PINCHA EN ESAS COORDENADAS
 		 */
-		if((x>=340)&&(x<=449)&&(y>=65)&&(y<=215)&&(turno==0))//JUGADOR 1 LANZA CARTA
+		if((x>=340)&&(x<=449)&&(y>=65)&&(y<=215)&&(turno==0))//JUGADOR 1 LANZA CARTA //EL TURNO ESTA ASIGNADO A 0, PORQUE EL 1 ES 0, 0,1,2,3 = 
+			//JUGADOR 1==0
+			//JUGADOR 2==1
+			//JUGADOR 3==2
+			//JUGADOR 4==3
 		{   
-			cartasLanzadas = this.modelo.accionJugador(mazoJugador1);//MAZO ACTUALIZADO	
-			mazoJugador1 =this.modelo.lanzamientos(mazoJugador1, cartasLanzadas);	
-			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);
-			this.vistaJugando.reversoCarta();
-			turno = 1;
+			cartasLanzadas = this.modelo.accionJugador(mazoJugador1);//EL JUGADOR 1 EJECUTA UNA ACCION
+			mazoJugador1 =this.modelo.lanzamientos(mazoJugador1, cartasLanzadas); //JUGADOR 1 LANZA CARTAS	
+			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);//LAS CARTAS DEL JUGADOR 1 PASAN AL MAZO CENTRAL
+			this.vistaJugando.reversoCarta();//MUESTRA EL DIBUJO DEL REVERSO DE LA CARTA
+			turno = 1;//ES SU TURNO
 			System.out.println("JUGADOR 1 HA LANZADO CARTA, TURNO DEL JUGADOR 2.");
 			System.out.println("JUGADOR 2 ¿LANZAS O LEVANTAS?");
 
@@ -290,7 +293,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 4 NO MINTIO");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
-			
+
 			//ERROR QUE DEBO CORREGIR
 			else if(numeroInicial!=mazoJugador4[cartaActualJugador4-1])
 			{
