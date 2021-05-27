@@ -307,7 +307,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 
 
 		//TURNO JUGADOR 2
-		else if ((x>=340)&&(x<=449)&&(y>=295)&&(y<=445)&&(turno==1))//jUGADOR 2 LANZA CARTA
+		else if ((x>=340)&&(x<=449)&&(y>=295)&&(y<=445)&&(turno==1))//jUGADOR 2 LANZA CARTA 
 		{
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador2);//MAZO ACTUALIZADO	
 			mazoJugador2 =this.modelo.lanzamientos(mazoJugador2, cartasLanzadas);	
