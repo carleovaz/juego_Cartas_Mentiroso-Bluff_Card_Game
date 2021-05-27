@@ -13,9 +13,8 @@ import java.util.Random;
 public class Modelo
 {
 	Random rnd = new Random();
-//	private Object textoNombrePartida;
-//	private Object textoCodigoJugadorPartida;
 
+	//BARAJAMOS LA CARTA DE LOS JUGADORES Y LOS METEMOS EN SUS ARRAYLIST CORRESPONDIENTES
 	public void barajar(ArrayList<Integer> uno,ArrayList<Integer>dos, ArrayList<Integer> tres, ArrayList<Integer> cuatro)
 	{		
 		int jugador = 0;
@@ -57,18 +56,7 @@ public class Modelo
 		}
 	}
 
-	public void rebarajar(int t[])
-	{
-		int aleatorio, auxiliar;
-		for(int i=0; i<12; i++)
-		{
-			aleatorio = rnd.nextInt(12)+1;
-			auxiliar = t[i];
-			t[i] = t[aleatorio];
-			t[aleatorio] = auxiliar;
-		}
-	}
-	
+
 	//LANZAMIENTO DE CARTAS Y ELIMINACIÓN DE LAS CARTAS LANZADAS DEL MAZO DEL JUGADOR
 	public ArrayList<Integer>lanzamientos(ArrayList<Integer>Mazo ,ArrayList<Integer>CartasLanzadas)
 	{
@@ -82,10 +70,14 @@ public class Modelo
 				}
 			}
 		}
-		
+
 		return Mazo;
 	}
-	
+
+	/*METODO POR EL CUAL SELECCIONAMOS CUANTAS CARTAS VA A LANZAR EL JUGADOR CON UN RANDOM, SI 1 O 4
+	 * CON EL OTRO RANDOM, POSICIONCARTA, LO QUE HACEMOS ES QUE ESCOJA LAS CARTAS SEGÚN SU POSICION, ES
+	 * DECIR ENTRE LA POSICION UNA A 12.
+	 */
 	public ArrayList<Integer>accionJugador(ArrayList<Integer>mazoJugador) 
 	{
 		Random cantidadCarta = new Random(4);
@@ -95,22 +87,23 @@ public class Modelo
 			Random posicionCarta = new Random(12);
 			cartasLanzadas.add(mazoJugador.get(posicionCarta.nextInt()));				
 		}
-		
+
 		return cartasLanzadas;
 	}
 	
+	//METODO POR EL CUAL AÑADIMOS LAS CARTAS LANZADAS AL MAZO CENTRAL
 	public ArrayList<Integer>mazoCartaCentral(ArrayList<Integer>mazoCentral, ArrayList<Integer>CartasLanzadas)
 	{
 		for(int i=0; i<CartasLanzadas.size();i++)
 		{
 			mazoCentral.add(CartasLanzadas.get(i));
 		}
-		
+
 		return mazoCentral;
 	}
-	
-	
 
+
+	//ESCOGEMOS UN NUMERO INICIAL UNA VEZ INICIADA LA PARTIDA, PARA QUE SEA ESE NUMERO EL QUE TENGA QUE LANZAR LOS JUGADORES
 	public int numeroInicialSeleccionado(int numero[])
 	{
 		Math.random();
@@ -119,6 +112,7 @@ public class Modelo
 		return numeroAleatorio;
 	}
 
+	//SI UN JUGADOR LEVANTA A OTRO JUGADOR, SE DEBERA ESCOGER OTRO NUMERO A LANZAR
 	public int nuevoNumeroSeleccionado(int numero[])
 	{
 		Math.random();
@@ -128,7 +122,7 @@ public class Modelo
 	}
 
 
-	//METODO CONECTAR
+	//METODO CONECTAR BASE DE DATOS
 	public Connection conectar()
 	{
 		Connection c = null;
@@ -154,6 +148,7 @@ public class Modelo
 		return (c);
 	}
 
+	//METODO CERRAR LA CONEXIÓN DE LA BASE DE DATOS
 	public void cerrar(Connection conexion) 
 	{
 		try
@@ -169,7 +164,7 @@ public class Modelo
 		}
 
 	}
-
+	//METODO QUE ME MUESTRA CUALES SON LOS MEJORES JUGADORES SEGUN SUS PUNTOS
 	public String mejoresJugadores(Connection conexion) 
 	{
 		String datos ="";
@@ -197,13 +192,13 @@ public class Modelo
 	}
 
 
-
+	//METODO PARA CREAR UN JUGADOR NUEVO
 	public String crearJugadorNuevo(Connection conexion) 
 	{
 		return null;
 
 	}
-
+	//METODO PARA CREAR UNA PARTIDA Y QUE A SU VEZ SE LE ASIGNE ESA PARTIDA AL JUGADOR QUE LA HA CREADO
 	public void crearPartidaNueva(Connection conexion,String codigo, String nombre) 
 	{
 		Statement statement = null;
@@ -220,27 +215,27 @@ public class Modelo
 			statement.executeUpdate(sentencia);
 			System.out.println(sentencia);
 		}
-		
+
 		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
-		
-	
-	}
 
-public void ayuda() 
-{
-	try 
-	{ 
-		//EJECUTA EL ARCHIVO DE AYUDA
-		Runtime.getRuntime().exec("hh.exe ayuda.chm"); 
-	} 
-	catch (IOException e) 
-	{ 
-		e.printStackTrace(); 
-	} 
-}
+
+	}
+	//METODO POR EL CUAL SE ABRE EL "MENU" AYUDA
+	public void ayuda() 
+	{
+		try 
+		{ 
+			//EJECUTA EL ARCHIVO DE AYUDA
+			Runtime.getRuntime().exec("hh.exe ayuda.chm"); 
+		} 
+		catch (IOException e) 
+		{ 
+			e.printStackTrace(); 
+		} 
+	}
 
 
 

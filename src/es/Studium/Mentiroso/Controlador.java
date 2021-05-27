@@ -19,6 +19,7 @@ import es.Studium.Vistas.VistaMenuPrincipal;
 
 public class Controlador implements ActionListener, WindowListener, MouseListener
 {
+	//HACEMOS UN IMPORT DE LAS CLASES VISTAS Y EL MODELO
 	VistaMenuPrincipal vistaMenu;
 	VistaCrearJugador vistaCrearJ;
 	VistaCrearPartida vistaCrearP;
@@ -29,6 +30,9 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	String informacion ="";
 
 	//MAZOS DE LOS JUGADORES
+	/*	HACEMOS UN ARRAYLIST PARA LOS MAZOS DE LOS JUGADORES, PUES INTERESAN ARRAYS DINAMICOS
+	 * 	QUE PUEDAN IR CAMBIANDO SUS VALORES Y NO ARRAYS ESTATICOS
+	 */
 	ArrayList<Integer>mazoJugador1 = new ArrayList<Integer>();
 	ArrayList<Integer>mazoJugador2 = new ArrayList<Integer>();
 	ArrayList<Integer>mazoJugador3 = new ArrayList<Integer>();
@@ -36,6 +40,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	ArrayList<Integer>mazoCentral = new ArrayList<Integer>();
 	ArrayList<Integer>cartasLanzadas = new ArrayList<Integer>();
 
+	//ESTABLECEMOS VALORES POR DEFECTO A LOS VALORES
 	int numeroInicial = 0;
 	int cartaActual =0;
 	int cartaActualJugador1 = 0;
@@ -45,16 +50,17 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	int turno = 0;
 	int uno,dos,tres,cuatro;
 
-
+	//COLOCAMOS LOS PARAMETROS EN EL CONTROLADOR
 	public Controlador(VistaMejoresJ objvistaMej, VistaMenuPrincipal objvistaM, VistaCrearJugador objvistaJ, VistaCrearPartida objvistaP, VistaJugando objvistaJug, Modelo objmodelo)
 	{
-
+		//HACEMOS LAS LLAMADAS CORRESPONDIENTES
 		this.vistaMejoresJ = objvistaMej;
 		this.vistaMenu = objvistaM;
 		this.vistaCrearJ = objvistaJ;
 		this.vistaCrearP = objvistaP;
 		this.vistaJugando = objvistaJug;
 		this.modelo = objmodelo;
+		//AGREGAMOS LOS LISTENER
 		this.vistaMejoresJ.addWindowListener(this);
 		this.vistaCrearP.addWindowListener(this);
 		this.vistaMenu.addWindowListener(this);
@@ -112,7 +118,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			new VistaCrearPartida();
 
 		}
-		//INICIO DE LA PARTIDA
+		//INICIO DE LA PARTIDA Y AGREGAR PARTIDA A LA BASE DE DATOS
 		if(vistaCrearP.buttonIniciarPartida.equals(evento.getSource()))
 		{	
 			//CONECTAMOS A LA BASE DE DATOS
@@ -121,16 +127,22 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			this.modelo.crearPartidaNueva(conexion,this.vistaCrearP.textoNombrePartida.getText(),this.vistaCrearP.textoCodigoJugadorPartida.getText());
 			//CERRAMOS CONEXION
 			this.modelo.cerrar(conexion);
-
-			new VistaJugando();	//ABRE EL JUEGO
+			//MOSTRAMOS LA VISTA DEL JUEGO, EL TAPETE CON SUS CARTAS
+			new VistaJugando();	
 			this.vistaJugando.setVisible(true);
-			this.modelo.barajar(mazoJugador1, mazoJugador2, mazoJugador3, mazoJugador4); //BARAJA LAS CARTAS
-			numeroInicial= this.modelo.numeroInicialSeleccionado(null); //SELECCIONAMOS UN NUMERO INICIAL PARA LANZAR
+			//BARAJAMOS LAS CARTAS CON EL METODO DEL MODELO
+			this.modelo.barajar(mazoJugador1, mazoJugador2, mazoJugador3, mazoJugador4); 
+			//SELECCIONAMOS UN NUMERO INICIAL PARA LANZAR CON EL METODO DEL MODELO
+			numeroInicial= this.modelo.numeroInicialSeleccionado(null); 
 			this.vistaJugando.lblComienzo.setText("CARTAS REPARTIDAS:");
 			this.vistaJugando.dialogoComienzo.setVisible(true);
+			//DEL 0 AL 12 ASIGNAMOS LAS CARTAS A LOS JUGADORES
 			for(int i= 0; i < 12; i++)
 			{
-				System.out.println("Carta jugador1: " + mazoJugador1[i]+"   --    >"+"Carta jugador2: " +mazoJugador2[i]+"   --    >"+"Carta jugador3: " +mazoJugador3[i]+"   --    >"+"Carta jugador4: " +mazoJugador4[i]);
+				System.out.println("Carta jugador1: " + mazoJugador1+"   --    >"
+						+ ""+"Carta jugador2: " +mazoJugador2+"   --    >"
+						+ ""+"Carta jugador3: " +mazoJugador3+"   --    >"
+						+ ""+"Carta jugador4: " +mazoJugador4);
 
 			}	
 
@@ -143,7 +155,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			new VistaCrearJugador();
 
 		}
-		//BOTON AL DARLE CREAR EL JUGADOR PARA GUARDAR EN BASE DE DATOS
+		//AGREGAR JUGADOR A LA BASE DE DATOS
 		else if(vistaCrearJ.crearJugador.equals(evento.getSource()))
 		{
 
@@ -252,6 +264,10 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 
 		//TURNOS
 		//TURNO JUGADOR 1
+		
+		/*
+		 * SI EL JUGADOR PINCHA EN ESAS COORDENADAS
+		 */
 		if((x>=340)&&(x<=449)&&(y>=65)&&(y<=215)&&(turno==0))//JUGADOR 1 LANZA CARTA
 		{   
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador1);//MAZO ACTUALIZADO	
@@ -268,14 +284,14 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		{
 			System.out.println("JUGADOR 1 LLAMA MENTIROSO AL JUGADOR 4. LEVANTA SUS CARTAS.");
 
-
+			//ERROR QUE DEBO CORREGIR
 			if(numeroInicial==mazoJugador4[cartaActualJugador4-1])
 			{
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 4 NO MINTIO");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
-
-
 			}
+			
+			//ERROR QUE DEBO CORREGIR
 			else if(numeroInicial!=mazoJugador4[cartaActualJugador4-1])
 			{
 				this.vistaJugando.lblMentido.setText("EL JUGADOR 4 MINTIO");
@@ -301,12 +317,14 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 
 		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==1))//JUGADOR 2 LEVANTA CARTA JUGADOR 1
 		{
+			//ERROR QUE DEBO CORREGIR
 			System.out.println("JUGADOR 2 LLAMA MENTIROSO AL JUGADOR 1. LEVANTA SUS CARTAS.");
 			if(numeroInicial==mazoJugador1[cartaActualJugador1-1])
 			{
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 1 NO MINTIÓ");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
+			//ERROR QUE DEBO CORREGIR
 			else if(numeroInicial!=mazoJugador1[cartaActualJugador1-1])
 			{
 				this.vistaJugando.lblMentido.setText("EL JUGADOR 1 MINTIÓ");
@@ -333,11 +351,13 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		if((x>=340)&&(x<=419)&&(y>=165)&&(y<=315)&&(turno==2))
 		{
 			System.out.println("JUGADOR 3 LLAMA MENTIROSO AL JUGADOR 2. LEVANTA SUS CARTAS.");
+			//ERROR QUE DEBO CORREGIR
 			if(numeroInicial==mazoJugador2[cartaActualJugador2-1])
 			{
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 2 NO MINTIÓ");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
+			//ERROR QUE DEBO CORREGIR
 			else if(numeroInicial!=mazoJugador2[cartaActualJugador2-1])
 			{
 				this.vistaJugando.lblMentido.setText("EL JUGADOR 2 MINTIÓ");
@@ -363,11 +383,13 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==3))
 		{
 			System.out.println("JUGADOR 4 LLAMA MENTIROSO AL JUGADOR 3. LEVANTA SUS CARTAS.");
+			//ERROR QUE DEBO CORREGIR
 			if(numeroInicial==mazoJugador3[cartaActualJugador3-1])
 			{
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 3 NO MINTIÓ");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
+			//ERROR QUE DEBO CORREGIR
 			else if(numeroInicial!=mazoJugador3[cartaActualJugador3-1])
 			{
 				this.vistaJugando.lblMentido.setText("EL JUGADOR 3 MINTIÓ");
@@ -377,39 +399,39 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			numeroInicial=this.modelo.nuevoNumeroSeleccionado(null);
 		}
 
-		//GANADORES
-	
+		//DEBO AÑADIR UN METODO POR EL CUAL CUANDO UN JUGADOR SE QUEDE SIN CARTAS, GANE
+
 
 	}
 
-public void mouseEntered(MouseEvent arg0) {
+	public void mouseEntered(MouseEvent arg0) {
 
-}
-public void mouseExited(MouseEvent arg0) {
+	}
+	public void mouseExited(MouseEvent arg0) {
 
-}
-public void mousePressed(MouseEvent arg0) {
+	}
+	public void mousePressed(MouseEvent arg0) {
 
-}
-public void mouseReleased(MouseEvent arg0) {
+	}
+	public void mouseReleased(MouseEvent arg0) {
 
-}
-public void windowActivated(WindowEvent arg0) {
-}
-@Override
-public void windowClosed(WindowEvent arg0) {
-}
-@Override
-public void windowDeactivated(WindowEvent arg0) {
-}
-@Override
-public void windowDeiconified(WindowEvent arg0) {
-}
-@Override
-public void windowIconified(WindowEvent arg0) {
-}
-@Override
-public void windowOpened(WindowEvent arg0) {
-}
+	}
+	public void windowActivated(WindowEvent arg0) {
+	}
+	@Override
+	public void windowClosed(WindowEvent arg0) {
+	}
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {
+	}
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {
+	}
+	@Override
+	public void windowIconified(WindowEvent arg0) {
+	}
+	@Override
+	public void windowOpened(WindowEvent arg0) {
+	}
 
 }
