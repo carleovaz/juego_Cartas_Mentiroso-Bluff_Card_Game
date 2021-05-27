@@ -7,15 +7,16 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Modelo
 {
 	Random rnd = new Random();
-	private Object textoNombrePartida;
-	private Object textoCodigoJugadorPartida;
+//	private Object textoNombrePartida;
+//	private Object textoCodigoJugadorPartida;
 
-	public void barajar(int uno[], int dos[], int tres[], int[] cuatro)
+	public void barajar(ArrayList<Integer> uno,ArrayList<Integer>dos, ArrayList<Integer> tres, ArrayList<Integer> cuatro)
 	{		
 		int jugador = 0;
 		int numeroArepartir = 1;
@@ -25,25 +26,25 @@ public class Modelo
 			jugador = rnd.nextInt(4);
 			if((jugador==0)&&(contador1<12))
 			{
-				uno[contador1] = numeroArepartir;
+				uno.add(numeroArepartir);
 				contador1++;
 			}
 			else if (contador2<12)
 			{
-				dos[contador2] = numeroArepartir;
+				dos.add(numeroArepartir);
 				contador2++;
 			}
 
 			else if (contador3<12)
 			{
-				tres[contador3] = numeroArepartir;
-				contador3++;
+				tres.add(numeroArepartir);
+				contador2++;
 			}
 
 			else if (contador4<12)
 			{
-				cuatro[contador4] = numeroArepartir;
-				contador4++;
+				cuatro.add(numeroArepartir);
+				contador2++;
 			}
 			if(numeroArepartir%12==0)
 			{
@@ -68,10 +69,47 @@ public class Modelo
 		}
 	}
 	
-	public void descartar()
+	//LANZAMIENTO DE CARTAS Y ELIMINACIÓN DE LAS CARTAS LANZADAS DEL MAZO DEL JUGADOR
+	public ArrayList<Integer>lanzamientos(ArrayList<Integer>Mazo ,ArrayList<Integer>CartasLanzadas)
 	{
+		for(int i=0; i<CartasLanzadas.size();i++)
+		{
+			for(int j=0;j<Mazo.size();j++)
+			{
+				if(CartasLanzadas.get(i)==Mazo.get(j))
+				{
+					Mazo.remove(j);
+				}
+			}
+		}
 		
+		return Mazo;
 	}
+	
+	public ArrayList<Integer>accionJugador(ArrayList<Integer>mazoJugador) 
+	{
+		Random cantidadCarta = new Random(4);
+		ArrayList<Integer>cartasLanzadas = new ArrayList<Integer>();
+		for(int i=0; i<cantidadCarta.nextInt();i++)
+		{
+			Random posicionCarta = new Random(12);
+			cartasLanzadas.add(mazoJugador.get(posicionCarta.nextInt()));				
+		}
+		
+		return cartasLanzadas;
+	}
+	
+	public ArrayList<Integer>mazoCartaCentral(ArrayList<Integer>mazoCentral, ArrayList<Integer>CartasLanzadas)
+	{
+		for(int i=0; i<CartasLanzadas.size();i++)
+		{
+			mazoCentral.add(CartasLanzadas.get(i));
+		}
+		
+		return mazoCentral;
+	}
+	
+	
 
 	public int numeroInicialSeleccionado(int numero[])
 	{
@@ -190,8 +228,6 @@ public class Modelo
 		
 	
 	}
-
-
 
 public void ayuda() 
 {
