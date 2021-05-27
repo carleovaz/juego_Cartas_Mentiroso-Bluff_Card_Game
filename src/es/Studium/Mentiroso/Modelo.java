@@ -81,11 +81,12 @@ public class Modelo
 		return numeroAleatorio;
 	}
 
-	public void nuevoNumeroSeleccionado(int numero[])
+	public int nuevoNumeroSeleccionado(int numero[])
 	{
 		Math.random();
 		int numeroAleatorio = (int) (Math.random()*12+1);
 		System.out.println(numeroAleatorio);
+		return numeroAleatorio;
 	}
 
 
@@ -165,22 +166,17 @@ public class Modelo
 
 	}
 
-	public String crearPartidaNueva(Connection conexion) 
+	public void crearPartidaNueva(Connection conexion,String codigo, String nombre) 
 	{
-		return null;
-	}
-
-	private String crearPartida(Connection connection) 
-	{
-		String datos ="";
 		Statement statement = null;
 		String sentencia="INSERT INTO partidas VALUES (null, '" + 
-				textoNombrePartida + "','" + 
-				textoCodigoJugadorPartida + "')";
+				codigo + "','" + 
+				nombre + "')";
+		System.out.println(sentencia);
 		try
 		{
 			//CREAMOS LA SENTENCIA
-			statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+			statement = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
 			//TOMAMOS EL TEXTO
 			statement.executeUpdate(sentencia);
@@ -192,7 +188,7 @@ public class Modelo
 			e.printStackTrace();
 		}
 		
-		return(datos);
+	
 	}
 
 

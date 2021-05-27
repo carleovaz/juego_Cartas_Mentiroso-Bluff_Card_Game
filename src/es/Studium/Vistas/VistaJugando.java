@@ -39,8 +39,12 @@ public class VistaJugando extends Frame
 	public Dialog dlgMensaje = new Dialog(this, "Fin", true);
 	public Dialog dialogoAcusacion1 = new Dialog(this,"ACUSACIÓN");
 	public Dialog dialogoAcusacion2 = new Dialog(this,"ACUSACIÓN");
-	public Label lblNoMintio = new Label("El Jugador no ha mentido");
-	public Label lblMentido = new Label("El jugador ha mentido");
+	public Dialog dialogoVictoria = new Dialog(this,"GANADOR");
+	public Dialog dialogoComienzo = new Dialog(this,"INICIO");
+	public Label lblComienzo = new Label();
+	public Label lblVictoria = new Label();
+	public Label lblNoMintio = new Label();
+	public Label lblMentido = new Label();
 	
 	public VistaJugando()
 	{
@@ -53,6 +57,18 @@ public class VistaJugando extends Frame
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setVisible(false);
+		
+		dialogoComienzo.setLayout(new FlowLayout());
+		dialogoComienzo.setSize(200,100);
+		dialogoComienzo.setLocationRelativeTo(null);
+		dialogoComienzo.setResizable(false);
+		dialogoComienzo.add(lblComienzo);
+		
+		dialogoVictoria.setLayout(new FlowLayout());
+		dialogoVictoria.setSize(200,100);
+		dialogoVictoria.setLocationRelativeTo(null);
+		dialogoVictoria.setResizable(false);
+		dialogoVictoria.add(lblVictoria);
 
 		dialogoAcusacion1.setLayout(new FlowLayout());
 		dialogoAcusacion1.setSize(200,100);
@@ -64,8 +80,7 @@ public class VistaJugando extends Frame
 		dialogoAcusacion2.setSize(200,100);
 		dialogoAcusacion2.setLocationRelativeTo(null);
 		dialogoAcusacion2.setResizable(false);
-		dialogoAcusacion2.add(lblMentido);
-		
+		dialogoAcusacion2.add(lblMentido);		
 
 	}
 
@@ -949,9 +964,9 @@ public class VistaJugando extends Frame
 		repaint();
 	}
 	
-	public void cartaSeleccionada(Object object)
+	public void cartaSeleccionada(int carta)
 	{
-		imagenAmostrar5= (int) object;
+		imagenAmostrar5= carta;
 		repaint();
 	}
 
@@ -991,6 +1006,7 @@ public class VistaJugando extends Frame
 	{
 		new Sonido2();
 	}
+
 
 
 }
