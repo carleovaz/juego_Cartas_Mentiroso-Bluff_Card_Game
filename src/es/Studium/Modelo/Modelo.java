@@ -1,4 +1,4 @@
-package es.Studium.Mentiroso;
+package es.Studium.Modelo;
 
 
 import java.io.IOException;
@@ -37,13 +37,13 @@ public class Modelo
 			else if (contador3<12)
 			{
 				tres.add(numeroArepartir);
-				contador2++;
+				contador3++;
 			}
 
 			else if (contador4<12)
 			{
 				cuatro.add(numeroArepartir);
-				contador2++;
+				contador4++;
 			}
 			if(numeroArepartir%12==0)
 			{

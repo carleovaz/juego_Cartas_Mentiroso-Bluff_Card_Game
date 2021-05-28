@@ -1,13 +1,15 @@
-package es.Studium.Mentiroso; 
+package es.Studium.Main; 
 
-import Musica.Sonido;
+import es.Studium.Controlador.Controlador;
+import es.Studium.Modelo.Modelo;
+import es.Studium.Musica.Sonido;
 import es.Studium.Vistas.VistaCrearJugador;
 import es.Studium.Vistas.VistaCrearPartida;
 import es.Studium.Vistas.VistaJugando;
 import es.Studium.Vistas.VistaMejoresJ;
 import es.Studium.Vistas.VistaMenuPrincipal;
 
-public class El_Mentiroso
+public class Main
 {
 
 	public static void main (String[]args)

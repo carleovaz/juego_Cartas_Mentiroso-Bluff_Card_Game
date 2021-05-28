@@ -10,7 +10,7 @@ import java.awt.Image;
 import java.awt.Label;
 import java.awt.Toolkit;
 
-import Musica.Sonido2;
+import es.Studium.Musica.Sonido2;
 
 public class VistaJugando extends Frame
 {
@@ -25,7 +25,7 @@ public class VistaJugando extends Frame
 	Image B1, B2, B3, B4, B5, B6, B7, B8, B9, B10, B11, B12, B13;
 	Image C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13;
 	Image D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13;
-	int imagenAmostrar1 = 0;
+	int cartaReverso = 0;
 	int imagenAmostrar2 = 0;
 	int imagenAmostrar3 = 0;
 	int imagenAmostrar4 = 0;
@@ -108,7 +108,7 @@ public class VistaJugando extends Frame
 
 		//JUGADOR1
 		//POSICION DE LAS CARTAS
-		switch(imagenAmostrar1)
+		switch(cartaReverso)
 		{
 		//ORO
 		case 1:
@@ -949,6 +949,7 @@ public class VistaJugando extends Frame
 
 	public void reversoCarta()
 	{
+		cartaReverso++;
 		repaint();
 	}
 

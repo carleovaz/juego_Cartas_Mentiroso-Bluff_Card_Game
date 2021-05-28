@@ -1,4 +1,4 @@
-package es.Studium.Mentiroso; 
+package es.Studium.Controlador; 
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import es.Studium.Modelo.Modelo;
 import es.Studium.Vistas.VistaCrearJugador;
 import es.Studium.Vistas.VistaCrearPartida;
 import es.Studium.Vistas.VistaJugando;
@@ -136,15 +137,11 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			numeroInicial= this.modelo.numeroInicialSeleccionado(null); 
 			this.vistaJugando.lblComienzo.setText("CARTAS REPARTIDAS:");
 			this.vistaJugando.dialogoComienzo.setVisible(true);
-			//DEL 0 AL 12 ASIGNAMOS LAS CARTAS A LOS JUGADORES
-			for(int i= 0; i < 12; i++)
-			{
-				System.out.println("Carta jugador1: " + mazoJugador1+"   --    >"
-						+ ""+"Carta jugador2: " +mazoJugador2+"   --    >"
-						+ ""+"Carta jugador3: " +mazoJugador3+"   --    >"
-						+ ""+"Carta jugador4: " +mazoJugador4);
-
-			}	
+			//DEL 0 AL 12 ASIGNAMOS LAS CARTAS A LOS JUGADORES	
+			System.out.println("MAZO JUGADOR 1: " + mazoJugador1+"   --    >"
+					+ ""+"MAZO JUGADOR 2: " +mazoJugador2+"   --    >"
+					+ ""+"MAZO JUGADOR 3: " +mazoJugador3+"   --    >"
+					+ ""+"MAZO JUGADOR 4: " +mazoJugador4);
 
 		}
 
@@ -288,14 +285,16 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			System.out.println("JUGADOR 1 LLAMA MENTIROSO AL JUGADOR 4. LEVANTA SUS CARTAS.");
 
 			//ERROR QUE DEBO CORREGIR
-			if(numeroInicial==mazoJugador4[cartaActualJugador4-1])
+			//if(numeroInicial==mazoJugador4[cartaActualJugador4-1])
+			if(numeroInicial==cartaActualJugador4)
 			{
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 4 NO MINTIO");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
 
 			//ERROR QUE DEBO CORREGIR
-			else if(numeroInicial!=mazoJugador4[cartaActualJugador4-1])
+			//else if(numeroInicial!=mazoJugador4[cartaActualJugador4-1])
+			else if(numeroInicial!=cartaActualJugador4)
 			{
 				this.vistaJugando.lblMentido.setText("EL JUGADOR 4 MINTIO");
 				this.vistaJugando.dialogoAcusacion2.setVisible(true);
@@ -322,13 +321,13 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		{
 			//ERROR QUE DEBO CORREGIR
 			System.out.println("JUGADOR 2 LLAMA MENTIROSO AL JUGADOR 1. LEVANTA SUS CARTAS.");
-			if(numeroInicial==mazoJugador1[cartaActualJugador1-1])
+			if(numeroInicial==cartaActualJugador1)
 			{
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 1 NO MINTIÓ");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
 			//ERROR QUE DEBO CORREGIR
-			else if(numeroInicial!=mazoJugador1[cartaActualJugador1-1])
+			else if(numeroInicial!=cartaActualJugador1)
 			{
 				this.vistaJugando.lblMentido.setText("EL JUGADOR 1 MINTIÓ");
 				this.vistaJugando.dialogoAcusacion2.setVisible(true);
@@ -355,13 +354,13 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		{
 			System.out.println("JUGADOR 3 LLAMA MENTIROSO AL JUGADOR 2. LEVANTA SUS CARTAS.");
 			//ERROR QUE DEBO CORREGIR
-			if(numeroInicial==mazoJugador2[cartaActualJugador2-1])
+			if(numeroInicial==cartaActualJugador2)
 			{
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 2 NO MINTIÓ");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
 			//ERROR QUE DEBO CORREGIR
-			else if(numeroInicial!=mazoJugador2[cartaActualJugador2-1])
+			else if(numeroInicial!=cartaActualJugador2)
 			{
 				this.vistaJugando.lblMentido.setText("EL JUGADOR 2 MINTIÓ");
 				this.vistaJugando.dialogoAcusacion2.setVisible(true);
@@ -387,13 +386,13 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		{
 			System.out.println("JUGADOR 4 LLAMA MENTIROSO AL JUGADOR 3. LEVANTA SUS CARTAS.");
 			//ERROR QUE DEBO CORREGIR
-			if(numeroInicial==mazoJugador3[cartaActualJugador3-1])
+			if(numeroInicial==cartaActualJugador3)
 			{
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 3 NO MINTIÓ");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
 			//ERROR QUE DEBO CORREGIR
-			else if(numeroInicial!=mazoJugador3[cartaActualJugador3-1])
+			else if(numeroInicial!=cartaActualJugador3)
 			{
 				this.vistaJugando.lblMentido.setText("EL JUGADOR 3 MINTIÓ");
 				this.vistaJugando.dialogoAcusacion2.setVisible(true);
@@ -402,7 +401,27 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			numeroInicial=this.modelo.nuevoNumeroSeleccionado(null);
 		}
 
-		//DEBO AÑADIR UN METODO POR EL CUAL CUANDO UN JUGADOR SE QUEDE SIN CARTAS, GANE
+		//JUGADOR GANADOR
+		if (mazoJugador1.isEmpty())
+		{
+			System.out.println("EL JUGADOR 1 HA GANADO");
+		} 
+		else if (mazoJugador2.isEmpty())
+		{
+			System.out.println("EL JUGADOR 2 HA GANADO");
+		}
+		else if (mazoJugador3.isEmpty())
+		{
+			System.out.println("EL JUGADOR 3 HA GANADO");
+		}
+		else if (mazoJugador4.isEmpty())
+		{
+			System.out.println("EL JUGADOR 4 HA GANADO");
+		}
+		else{
+			//todavia no hay ganadores
+		}
+
 
 
 	}

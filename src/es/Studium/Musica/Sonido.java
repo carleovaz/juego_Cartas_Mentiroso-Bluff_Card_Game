@@ -1,4 +1,4 @@
-package Musica;
+package es.Studium.Musica;
 
 import java.awt.Frame;
 import java.io.File;

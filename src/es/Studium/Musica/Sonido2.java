@@ -1,4 +1,4 @@
-package Musica;
+package es.Studium.Musica;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Sonido2 
 {
-	private static final long serialVersionUID = 1L;
 	public Sonido2()
 	{
 		File sf = new File("Pink_Panther.wav");
