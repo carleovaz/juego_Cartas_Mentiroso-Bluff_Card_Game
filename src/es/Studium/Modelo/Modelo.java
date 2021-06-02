@@ -61,16 +61,19 @@ public class Modelo
 	public ArrayList<Integer>lanzamientos(ArrayList<Integer>Mazo ,ArrayList<Integer>CartasLanzadas)
 	{
 		for(int i=0; i<CartasLanzadas.size();i++)
-		{
+		{	
+			//CON EL BOOLEAN CONTROLAMOS QUE NO SE ELIMINEN NUMEROS DUPLICADOS DEL MAZO POR ERROR
+			boolean noRepetir = false;
 			for(int j=0;j<Mazo.size();j++)
 			{
-				if(CartasLanzadas.get(i)==Mazo.get(j))
+				//si la carta
+				if(CartasLanzadas.get(i)==Mazo.get(j) && (noRepetir==false)) 
 				{
 					Mazo.remove(j);
+					noRepetir=true;
 				}
 			}
-		}
-
+		}		
 		return Mazo;
 	}
 
@@ -80,17 +83,67 @@ public class Modelo
 	 */
 	public ArrayList<Integer>accionJugador(ArrayList<Integer>mazoJugador) 
 	{
-		Random cantidadCarta = new Random(4);
+		Random cantidadCarta = new Random();
 		ArrayList<Integer>cartasLanzadas = new ArrayList<Integer>();
-		for(int i=0; i<cantidadCarta.nextInt();i++)
+		Integer cantidadCartaUsada = cantidadCarta.nextInt(5);
+		ArrayList<Integer>cartasLanzadasPosicion = new ArrayList<Integer>();
+
+		//EVITAR QUE EL JUGADOR SELECCIONE LA MISMA CARTA DE LA POSICIÓN
+		//SI EL RANDOM SALE 0
+		if(mazoJugador.size()<5)
 		{
-			Random posicionCarta = new Random(12);
-			cartasLanzadas.add(mazoJugador.get(posicionCarta.nextInt()));				
+
+			cantidadCartaUsada = cantidadCarta.nextInt(mazoJugador.size());
+		}
+		else
+		{
+			while(cantidadCartaUsada==0)
+			{
+				cantidadCartaUsada = cantidadCarta.nextInt(5);
+			}
 		}
 
+		//RECORRE EL ARRAY PARA ESCOGER LAS CARTAS
+		for(int i=0; i<cantidadCartaUsada;i++)
+		{
+			//CONTROLA QUE NO SE REPTITA LA POSICION DE UNA CARTA ELEGIDA
+			boolean bandera1 = false;
+			while(bandera1==false)
+			{ 
+				//GENERAMOS EL RANDOM
+				Integer posicionCartaElegida = cantidadCarta.nextInt(mazoJugador.size()-1);
+				//SI EL ARRAY DE POSICIONES ES VACIO
+				if(cartasLanzadasPosicion.size()==0)
+				{
+					bandera1=true;
+					cartasLanzadasPosicion.add(posicionCartaElegida);
+					cartasLanzadas.add(mazoJugador.get(posicionCartaElegida));
+				}
+				//CUANDO YA EXISTE UNA POSICION DENTRO DEL ARRAYLIST
+				else
+				{
+					boolean bandera2=false;
+					for(int j=0; j<cartasLanzadasPosicion.size();j++)
+					{
+						if(cartasLanzadasPosicion.get(j)==posicionCartaElegida)
+						{
+							bandera2=true;
+						}
+					}
+					//SI NO COINCIDE LA POSICION
+					if(bandera2==false)
+					{
+						bandera1=true;
+						cartasLanzadasPosicion.add(posicionCartaElegida);
+						cartasLanzadas.add(mazoJugador.get(posicionCartaElegida));
+					}
+				}
+
+			}
+		}
 		return cartasLanzadas;
 	}
-	
+
 	//METODO POR EL CUAL AÑADIMOS LAS CARTAS LANZADAS AL MAZO CENTRAL
 	public ArrayList<Integer>mazoCartaCentral(ArrayList<Integer>mazoCentral, ArrayList<Integer>CartasLanzadas)
 	{
@@ -101,6 +154,17 @@ public class Modelo
 
 		return mazoCentral;
 	}
+
+	public ArrayList<Integer>devolverCartasAJugadores(ArrayList<Integer>mazoJugador, ArrayList<Integer>mazoCentral)
+	{
+		for(int i=0; i<mazoCentral.size();i++)
+		{
+			mazoJugador.add(mazoCentral.get(i));
+		}
+		return mazoJugador;
+	}
+
+
 
 
 	//ESCOGEMOS UN NUMERO INICIAL UNA VEZ INICIADA LA PARTIDA, PARA QUE SEA ESE NUMERO EL QUE TENGA QUE LANZAR LOS JUGADORES
@@ -191,38 +255,27 @@ public class Modelo
 		return(datos);
 	}
 
-
-	//METODO PARA CREAR UN JUGADOR NUEVO
-	public String crearJugadorNuevo(Connection conexion) 
-	{
-		return null;
-
-	}
 	//METODO PARA CREAR UNA PARTIDA Y QUE A SU VEZ SE LE ASIGNE ESA PARTIDA AL JUGADOR QUE LA HA CREADO
-	public void crearPartidaNueva(Connection conexion,String codigo, String nombre) 
+	public void crearPartidaNueva(Connection conexion,String nombre, int puntuacionJugador) 
 	{
+
 		Statement statement = null;
-		String sentencia="INSERT INTO partidas VALUES (null, '" + 
-				codigo + "','" + 
-				nombre + "')";
-		System.out.println(sentencia);
+		String sentencia="INSERT INTO jugadores VALUES (null, '" + nombre + "','" + puntuacionJugador + "')";
 		try
 		{
 			//CREAMOS LA SENTENCIA
 			statement = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
-			//TOMAMOS EL TEXTO
 			statement.executeUpdate(sentencia);
 			System.out.println(sentencia);
 		}
-
 		catch (SQLException e)
 		{
-			e.printStackTrace();
+			System.out.println("Error al introducir datos."+e.getMessage());
 		}
 
-
 	}
+
 	//METODO POR EL CUAL SE ABRE EL "MENU" AYUDA
 	public void ayuda() 
 	{

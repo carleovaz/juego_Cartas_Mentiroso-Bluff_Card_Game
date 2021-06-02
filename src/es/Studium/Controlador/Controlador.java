@@ -8,11 +8,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 
 import es.Studium.Modelo.Modelo;
-import es.Studium.Vistas.VistaCrearJugador;
 import es.Studium.Vistas.VistaCrearPartida;
 import es.Studium.Vistas.VistaJugando;
 import es.Studium.Vistas.VistaMejoresJ;
@@ -22,7 +19,6 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 {
 	//HACEMOS UN IMPORT DE LAS CLASES VISTAS Y EL MODELO
 	VistaMenuPrincipal vistaMenu;
-	VistaCrearJugador vistaCrearJ;
 	VistaCrearPartida vistaCrearP;
 	VistaJugando vistaJugando;
 	VistaMejoresJ vistaMejoresJ;
@@ -41,6 +37,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	ArrayList<Integer>mazoCentral = new ArrayList<Integer>();
 	ArrayList<Integer>cartasLanzadas = new ArrayList<Integer>();
 
+
 	//ESTABLECEMOS VALORES POR DEFECTO A LOS VALORES
 	int numeroInicial = 0;
 	int cartaActual =0;
@@ -48,19 +45,23 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	int cartaActualJugador2 = 0;
 	int cartaActualJugador3 = 0;
 	int cartaActualJugador4 = 0;
-	int turno = 0;
+	int turno = 1;
+	int puntuacionJugador1=0;
+	int puntuacionJugador2=0;
+	int puntuacionJugador3=0;
+	int puntuacionJugador4=0;
 	int uno,dos,tres,cuatro;
 
 	//COLOCAMOS LOS PARAMETROS EN EL CONTROLADOR
-	public Controlador(VistaMejoresJ objvistaMej, VistaMenuPrincipal objvistaM, VistaCrearJugador objvistaJ, VistaCrearPartida objvistaP, VistaJugando objvistaJug, Modelo objmodelo)
+	public Controlador(VistaMejoresJ objvistaMej, VistaMenuPrincipal objvistaM, VistaCrearPartida objvistaP, VistaJugando objvistaJug, Modelo objmodelo)
 	{
 		//HACEMOS LAS LLAMADAS CORRESPONDIENTES
 		this.vistaMejoresJ = objvistaMej;
 		this.vistaMenu = objvistaM;
-		this.vistaCrearJ = objvistaJ;
 		this.vistaCrearP = objvistaP;
 		this.vistaJugando = objvistaJug;
 		this.modelo = objmodelo;
+
 		//AGREGAMOS LOS LISTENER
 		this.vistaMejoresJ.addWindowListener(this);
 		this.vistaCrearP.addWindowListener(this);
@@ -68,25 +69,17 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		this.vistaJugando.addWindowListener(this);
 		this.vistaJugando.addMouseListener(this);
 
-
-		//ELEMENTOS VISTA JUGADOR
-		objvistaJ.addWindowListener(this);
-		objvistaJ.ventanaCrearJugador.addWindowListener(this);
-		objvistaJ.dialogoMensajeJugadorCreado.addWindowListener(this);
-		objvistaJ.crearJugador.addActionListener(this);
-		objvistaJ.cerrarJugador.addActionListener(this);
-
 		//ELEMENTOS VISTA PARTIDA
 		objvistaP.addWindowListener(this);
 		objvistaP.ventanaCrearPartida.addWindowListener(this);
 		objvistaP.dialogoMensajePartidaCreada.addWindowListener(this);
 		objvistaP.buttonIniciarPartida.addActionListener(this);
 		objvistaP.cerrarPartida.addActionListener(this);
+		objvistaP.dialogoMensajePartidaCreada.addWindowListener(this);
 
 		//ELEMENTOS VISTA MENU
 		objvistaM.ventanaMenu.addWindowListener(this);
 		objvistaM.buttonCrearPartida.addActionListener(this);
-		objvistaM.buttonMenuCrearJugador.addActionListener(this);
 		objvistaM.buttoncomoSeJuega.addActionListener(this);
 		objvistaM.buttonMejoresJugadores.addActionListener(this);
 		objvistaM.buttonSalirMenu.addActionListener(this);
@@ -112,6 +105,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	public void actionPerformed(ActionEvent evento) 
 	{
 
+
 		//CREAR PARTIDA
 		if(vistaMenu.buttonCrearPartida.equals(evento.getSource()))
 		{	
@@ -122,44 +116,60 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		//INICIO DE LA PARTIDA Y AGREGAR PARTIDA A LA BASE DE DATOS
 		if(vistaCrearP.buttonIniciarPartida.equals(evento.getSource()))
 		{	
-			//CONECTAMOS A LA BASE DE DATOS
-			conexion = this.modelo.conectar();
-			//INSERTAR INFORMACIÓN
-			this.modelo.crearPartidaNueva(conexion,this.vistaCrearP.textoNombrePartida.getText(),this.vistaCrearP.textoCodigoJugadorPartida.getText());
-			//CERRAMOS CONEXION
-			this.modelo.cerrar(conexion);
-			//MOSTRAMOS LA VISTA DEL JUEGO, EL TAPETE CON SUS CARTAS
-			new VistaJugando();	
-			this.vistaJugando.setVisible(true);
-			//BARAJAMOS LAS CARTAS CON EL METODO DEL MODELO
-			this.modelo.barajar(mazoJugador1, mazoJugador2, mazoJugador3, mazoJugador4); 
-			//SELECCIONAMOS UN NUMERO INICIAL PARA LANZAR CON EL METODO DEL MODELO
-			numeroInicial= this.modelo.numeroInicialSeleccionado(null); 
-			this.vistaJugando.lblComienzo.setText("CARTAS REPARTIDAS:");
-			this.vistaJugando.dialogoComienzo.setVisible(true);
-			//DEL 0 AL 12 ASIGNAMOS LAS CARTAS A LOS JUGADORES	
-			System.out.println("MAZO JUGADOR 1: " + mazoJugador1+"   --    >"
-					+ ""+"MAZO JUGADOR 2: " +mazoJugador2+"   --    >"
-					+ ""+"MAZO JUGADOR 3: " +mazoJugador3+"   --    >"
-					+ ""+"MAZO JUGADOR 4: " +mazoJugador4);
+			if(this.vistaCrearP.buttonIniciarPartida.equals(evento.getSource()))
+			{
+				String texto1=this.vistaCrearP.textoNombreJugador1.getText();
+				String texto2=this.vistaCrearP.textoNombreJugador2.getText();
+				String texto3=this.vistaCrearP.textoNombreJugador3.getText();
+				String texto4=this.vistaCrearP.textoNombreJugador4.getText();
+				texto1=texto1.replaceAll(" ", "");
+				texto2=texto2.replaceAll(" ", "");
+				texto3=texto3.replaceAll(" ", "");
+				texto4=texto4.replaceAll(" ", "");
+				if(texto2.length()==0 && texto2.length()==0 && (texto3.length()==0) && (texto4.length()==0))
+				{
+					this.vistaCrearP.partidaCreada.setText("ERROR: FALTAN DATOS.");
+					this.vistaCrearP.dialogoMensajePartidaCreada.setVisible(true);  
+				}
+				else if(texto2.length()==0)
+				{
+					this.vistaCrearP.partidaCreada.setText("ERROR: FALTAN DATOS.");
+					this.vistaCrearP.dialogoMensajePartidaCreada.setVisible(true);  
+				}
+				else if(texto3.length()==0)
+				{
+					this.vistaCrearP.partidaCreada.setText("ERROR: FALTAN DATOS.");
+					this.vistaCrearP.dialogoMensajePartidaCreada.setVisible(true);  
+				}
+				else if(texto4.length()==0)
+				{
+					this.vistaCrearP.partidaCreada.setText("ERROR: FALTAN DATOS.");
+					this.vistaCrearP.dialogoMensajePartidaCreada.setVisible(true);  
+				}
+				this.vistaJugando.setVisible(false);
+			}
 
-		}
-
-		//CREAR JUGADOR
-		else if(vistaMenu.buttonMenuCrearJugador.equals(evento.getSource()))
-		{
-			this.vistaCrearJ.setVisible(true);
-			new VistaCrearJugador();
-
-		}
-		//AGREGAR JUGADOR A LA BASE DE DATOS
-		else if(vistaCrearJ.crearJugador.equals(evento.getSource()))
-		{
-
+			if(this.vistaCrearP.buttonIniciarPartida.equals(evento.getSource()))
+			{
+				//MOSTRAMOS LA VISTA DEL JUEGO, EL TAPETE CON SUS CARTAS
+				new VistaJugando();	
+				this.vistaJugando.setVisible(true);
+				//BARAJAMOS LAS CARTAS CON EL METODO DEL MODELO
+				this.modelo.barajar(mazoJugador1, mazoJugador2, mazoJugador3, mazoJugador4); 
+				//SELECCIONAMOS UN NUMERO INICIAL PARA LANZAR CON EL METODO DEL MODELO
+				numeroInicial= this.modelo.numeroInicialSeleccionado(null); 
+				this.vistaJugando.lblComienzo.setText("CARTAS REPARTIDAS:");
+				this.vistaJugando.dialogoComienzo.setVisible(true);
+				//DEL 0 AL 12 ASIGNAMOS LAS CARTAS A LOS JUGADORES	
+				System.out.println("MAZO JUGADOR 1: " + mazoJugador1+""
+						+ ""+"\nMAZO JUGADOR 2: " +mazoJugador2+""
+						+ ""+"\nMAZO JUGADOR 3: " +mazoJugador3+""
+						+ ""+"\nMAZO JUGADOR 4: " +mazoJugador4);
+			}
 		}
 
 		//COMO SE JUEGA
-		else if(vistaMenu.buttoncomoSeJuega.equals(evento.getSource()))
+		if(vistaMenu.buttoncomoSeJuega.equals(evento.getSource()))
 		{
 			this.modelo.ayuda();
 		}
@@ -184,11 +194,6 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			System.exit(0);
 		}
 
-		else if(vistaCrearJ.cerrarJugador.equals(evento.getSource()))
-		{
-
-			this.vistaCrearJ.setVisible(false);
-		}
 
 		else if(vistaCrearP.cerrarPartida.equals(evento.getSource()))
 		{
@@ -200,8 +205,10 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		{
 			this.vistaMejoresJ.ventanaMejoresJugadores.setVisible(false);
 		}
-
 	}
+
+
+
 	//FUNCIONALIDAD DEL CLOSING
 	public void windowClosing(WindowEvent evento) 
 	{       
@@ -213,11 +220,6 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		if(vistaCrearP.isActive())
 		{
 			this.vistaCrearP.setVisible(false);
-		}
-
-		else if(vistaCrearJ.isActive())
-		{
-			this.vistaCrearJ.setVisible(false);
 		}
 
 		else if(vistaJugando.isActive())
@@ -251,6 +253,11 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		{
 			vistaJugando.dialogoVictoria.setVisible(false);
 		}
+
+		else if(vistaCrearP.dialogoMensajePartidaCreada.isActive())
+		{
+			vistaCrearP.dialogoMensajePartidaCreada.setVisible(false);
+		}
 	}
 
 	//FUNCIONALIDAD DEL JUEGO
@@ -264,166 +271,219 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		/*
 		 * SI EL JUGADOR PINCHA EN ESAS COORDENADAS
 		 */
-		if((x>=340)&&(x<=449)&&(y>=65)&&(y<=215)&&(turno==0))//JUGADOR 1 LANZA CARTA //EL TURNO ESTA ASIGNADO A 0, PORQUE EL 1 ES 0, 0,1,2,3 = 
-			//JUGADOR 1==0
-			//JUGADOR 2==1
-			//JUGADOR 3==2
-			//JUGADOR 4==3
+		if((x>=340)&&(x<=449)&&(y>=65)&&(y<=215)&&(turno==1))//JUGADOR 1 LANZA CARTA //EL TURNO ESTA ASIGNADO A 1
+			//JUGADOR 1==1
+			//JUGADOR 2==2
+			//JUGADOR 3==3
+			//JUGADOR 4==4
 		{   
+			System.out.println("ENTRA JUGADOR 1");
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador1);//EL JUGADOR 1 EJECUTA UNA ACCION
+			System.out.println("LANZA CARTAS EL JUGADOR 1 " + cartasLanzadas);
 			mazoJugador1 =this.modelo.lanzamientos(mazoJugador1, cartasLanzadas); //JUGADOR 1 LANZA CARTAS	
+			System.out.println("LE QUEDAN AL JUGADOR 1: " +mazoJugador1);
 			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);//LAS CARTAS DEL JUGADOR 1 PASAN AL MAZO CENTRAL
+			System.out.println("MAZO Central> " +mazoCentral);
 			this.vistaJugando.reversoCarta();//MUESTRA EL DIBUJO DEL REVERSO DE LA CARTA
-			turno = 1;//ES SU TURNO
+			turno = 2;//PASA EL TURNO AL JUGADOR 2
 			System.out.println("JUGADOR 1 HA LANZADO CARTA, TURNO DEL JUGADOR 2.");
 			System.out.println("JUGADOR 2 ¿LANZAS O LEVANTAS?");
 
 		}
 
-		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==0))//JUGADOR 1 LEVANTA LA CARTA DEL JUGADOR 4
+		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==1))//JUGADOR 1 LEVANTA LA CARTA DEL JUGADOR 4
 		{
+			
 			System.out.println("JUGADOR 1 LLAMA MENTIROSO AL JUGADOR 4. LEVANTA SUS CARTAS.");
-
-			//ERROR QUE DEBO CORREGIR
-			//if(numeroInicial==mazoJugador4[cartaActualJugador4-1])
-			if(numeroInicial==cartaActualJugador4)
+			
+			if(numeroInicial==cartasLanzadas.get(1))
 			{
+				mazoJugador1 = this.modelo.devolverCartasAJugadores(mazoJugador1, mazoCentral);
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 4 NO MINTIO");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
 
-			//ERROR QUE DEBO CORREGIR
-			//else if(numeroInicial!=mazoJugador4[cartaActualJugador4-1])
-			else if(numeroInicial!=cartaActualJugador4)
+			else if(numeroInicial!=cartasLanzadas.get(1))
 			{
+				mazoJugador4 = this.modelo.devolverCartasAJugadores(mazoJugador4, mazoCentral);
 				this.vistaJugando.lblMentido.setText("EL JUGADOR 4 MINTIO");
 				this.vistaJugando.dialogoAcusacion2.setVisible(true);
 
 			}
+			mazoCentral = new ArrayList<Integer>();
 			System.out.println("EL JUGADOR 1, SELECCIONA UN NUEVO NUMERO EL:");
 			numeroInicial=this.modelo.nuevoNumeroSeleccionado(null);
 		}
 
 
 		//TURNO JUGADOR 2
-		else if ((x>=340)&&(x<=449)&&(y>=295)&&(y<=445)&&(turno==1))//jUGADOR 2 LANZA CARTA 
+		else if ((x>=340)&&(x<=449)&&(y>=295)&&(y<=445)&&(turno==2))//jUGADOR 2 LANZA CARTA 
 		{
+			System.out.println("ENTRA JUGADOR 2");
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador2);//MAZO ACTUALIZADO	
-			mazoJugador2 =this.modelo.lanzamientos(mazoJugador2, cartasLanzadas);	
-			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);		
+			System.out.println("----2> " + cartasLanzadas);
+			mazoJugador2 =this.modelo.lanzamientos(mazoJugador2, cartasLanzadas);
+			System.out.println("LE QUEDAN AL JUGADOR 2: " +mazoJugador2);
+			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);
+			System.out.println("----Central> " +mazoCentral);
 			this.vistaJugando.reversoCarta();
-			turno = 2;
+			turno = 3;
 			System.out.println("JUGADOR 2 HA LANZADO CARTA, TURNO DEL JUGADOR 2.");
 			System.out.println("JUGADOR 3 ¿LANZAS O LEVANTAS?");
 		} 
 
-		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==1))//JUGADOR 2 LEVANTA CARTA JUGADOR 1
+		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==2))//JUGADOR 2 LEVANTA CARTA JUGADOR 1
 		{
+			
 			//ERROR QUE DEBO CORREGIR
 			System.out.println("JUGADOR 2 LLAMA MENTIROSO AL JUGADOR 1. LEVANTA SUS CARTAS.");
-			if(numeroInicial==cartaActualJugador1)
+			if(numeroInicial==cartasLanzadas.get(1))
 			{
+				mazoJugador2 = this.modelo.devolverCartasAJugadores(mazoJugador2, mazoCentral);
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 1 NO MINTIÓ");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
 			//ERROR QUE DEBO CORREGIR
-			else if(numeroInicial!=cartaActualJugador1)
+			else if(numeroInicial!=cartasLanzadas.get(1))
 			{
+				mazoJugador1 = this.modelo.devolverCartasAJugadores(mazoJugador1, mazoCentral);
 				this.vistaJugando.lblMentido.setText("EL JUGADOR 1 MINTIÓ");
 				this.vistaJugando.dialogoAcusacion2.setVisible(true);
 			}
+			mazoCentral = new ArrayList<Integer>();
 			System.out.println("EL JUGADOR 2, SELECCIONA UN NUEVO NUMERO EL:");
 			numeroInicial=this.modelo.nuevoNumeroSeleccionado(null);
-
+			
 		}
 
 		//TURNO JUGADOR 3
-		else if((x>=60)&&(x<=169)&&(y>=180)&&(y<=330)&&(turno==2))//JUGADOR 3 LANZA CARTA
+		else if((x>=60)&&(x<=169)&&(y>=180)&&(y<=330)&&(turno==3))//JUGADOR 3 LANZA CARTA
 		{
+			System.out.println("ENTRA JUGADOR 3");
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador3);//MAZO ACTUALIZADO	
-			mazoJugador3 =this.modelo.lanzamientos(mazoJugador3, cartasLanzadas);	
-			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);	
+			System.out.println("----3> " + cartasLanzadas);
+			mazoJugador3 =this.modelo.lanzamientos(mazoJugador3, cartasLanzadas);
+			System.out.println("LE QUEDAN AL JUGADOR 3:> " +mazoJugador3);
+			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);
+			System.out.println("----Central> " +mazoCentral);
 			this.vistaJugando.reversoCarta();
-			turno = 3;
-			System.out.println("JUGADOR 3 HA LANZADO CARTA, TURNO DEL JUGADOR 2.");
+			turno = 4;
+			System.out.println("JUGADOR 3 HA LANZADO CARTA, TURNO DEL JUGADOR 4.");
 			System.out.println("JUGADOR 4 ¿LANZAS O LEVANTAS?");
 		}
 
 		//JUGADOR 3 LEVANTA CARTAS DEL JUGADOR 2
-		if((x>=340)&&(x<=419)&&(y>=165)&&(y<=315)&&(turno==2))
+		if((x>=340)&&(x<=419)&&(y>=165)&&(y<=315)&&(turno==3))
 		{
+			
 			System.out.println("JUGADOR 3 LLAMA MENTIROSO AL JUGADOR 2. LEVANTA SUS CARTAS.");
 			//ERROR QUE DEBO CORREGIR
-			if(numeroInicial==cartaActualJugador2)
+			if(numeroInicial==cartasLanzadas.get(1))
 			{
+				mazoJugador3 = this.modelo.devolverCartasAJugadores(mazoJugador3, mazoCentral);
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 2 NO MINTIÓ");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
 			//ERROR QUE DEBO CORREGIR
-			else if(numeroInicial!=cartaActualJugador2)
+			else if(numeroInicial!=cartasLanzadas.get(1))
 			{
+				mazoJugador2 = this.modelo.devolverCartasAJugadores(mazoJugador2, mazoCentral);
 				this.vistaJugando.lblMentido.setText("EL JUGADOR 2 MINTIÓ");
 				this.vistaJugando.dialogoAcusacion2.setVisible(true);
 			}
+			mazoCentral = new ArrayList<Integer>();
 			System.out.println("EL JUGADOR 3, SELECCIONA UN NUEVO NUMERO EL:");
 			numeroInicial=this.modelo.nuevoNumeroSeleccionado(null);
+			
 		}
 
 		//TURNO JUGADOR 4
-		else if((x>=650)&&(x<=759)&&(y>=180)&&(y<=330)&&(turno==3))
+		else if((x>=650)&&(x<=759)&&(y>=180)&&(y<=330)&&(turno==4))
 		{
-			cartasLanzadas = this.modelo.accionJugador(mazoJugador4);//MAZO ACTUALIZADO	
-			mazoJugador4 =this.modelo.lanzamientos(mazoJugador4, cartasLanzadas);	
-			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);	
+			System.out.println("ENTRA JUGADOR 4");
+			cartasLanzadas = this.modelo.accionJugador(mazoJugador4);//EL JUGADOR 1 EJECUTA UNA ACCION
+			System.out.println("----> " + cartasLanzadas);
+			mazoJugador4 =this.modelo.lanzamientos(mazoJugador4, cartasLanzadas); //JUGADOR 1 LANZA CARTAS	
+			System.out.println("LE QUEDAN AL JUGADOR 4: " +mazoJugador1);
+			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);//LAS CARTAS DEL JUGADOR 1 PASAN AL MAZO CENTRAL
+			System.out.println("----Central> " +mazoCentral);
 			this.vistaJugando.reversoCarta();
-			turno = 4;
-			System.out.println("JUGADOR 1 HA LANZADO CARTA, TURNO DEL JUGADOR 2.");
-			System.out.println("JUGADOR 2 ¿LANZAS O LEVANTAS?");
+			turno = 1;
+			System.out.println("JUGADOR 4 HA LANZADO CARTA, TURNO DEL JUGADOR 1.");
+			System.out.println("JUGADOR 1 ¿LANZAS O LEVANTAS?");
+			
 		}
 
 		//JUGADOR 4 LEVANTA CARTAS DEL JUGADOR 3
-		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==3))
+		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==4))
 		{
+			
 			System.out.println("JUGADOR 4 LLAMA MENTIROSO AL JUGADOR 3. LEVANTA SUS CARTAS.");
-			//ERROR QUE DEBO CORREGIR
-			if(numeroInicial==cartaActualJugador3)
+			
+			if(numeroInicial==cartasLanzadas.get(1))
 			{
+				mazoJugador4 = this.modelo.devolverCartasAJugadores(mazoJugador4, mazoCentral);
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 3 NO MINTIÓ");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
-			//ERROR QUE DEBO CORREGIR
-			else if(numeroInicial!=cartaActualJugador3)
+			
+			else if(numeroInicial!=cartasLanzadas.get(1))
 			{
+				mazoJugador3 = this.modelo.devolverCartasAJugadores(mazoJugador3, mazoCentral);
 				this.vistaJugando.lblMentido.setText("EL JUGADOR 3 MINTIÓ");
 				this.vistaJugando.dialogoAcusacion2.setVisible(true);
 			}
+			mazoCentral = new ArrayList<Integer>();
 			System.out.println("EL JUGADOR 4, SELECCIONA UN NUEVO NUMERO EL:");
 			numeroInicial=this.modelo.nuevoNumeroSeleccionado(null);
+			
 		}
 
 		//JUGADOR GANADOR
 		if (mazoJugador1.isEmpty())
 		{
+			puntuacionJugador1++;
 			System.out.println("EL JUGADOR 1 HA GANADO");
+			//CONECTAMOS A LA BASE DE DATOS
+			conexion = this.modelo.conectar();
+			//INSERTAR INFORMACIÓN
+			this.modelo.crearPartidaNueva(conexion,this.vistaCrearP.textoNombreJugador1.getText(),puntuacionJugador1);
+			//CERRAMOS CONEXION
+			this.modelo.cerrar(conexion);
 		} 
 		else if (mazoJugador2.isEmpty())
 		{
+			puntuacionJugador2++;
 			System.out.println("EL JUGADOR 2 HA GANADO");
+			//CONECTAMOS A LA BASE DE DATOS
+			conexion = this.modelo.conectar();
+			//INSERTAR INFORMACIÓN
+			this.modelo.crearPartidaNueva(conexion,this.vistaCrearP.textoNombreJugador2.getText(),puntuacionJugador2);
+			//CERRAMOS CONEXION
+			this.modelo.cerrar(conexion);
 		}
 		else if (mazoJugador3.isEmpty())
 		{
+			puntuacionJugador3++;
 			System.out.println("EL JUGADOR 3 HA GANADO");
+			//CONECTAMOS A LA BASE DE DATOS
+			conexion = this.modelo.conectar();
+			//INSERTAR INFORMACIÓN
+			this.modelo.crearPartidaNueva(conexion,this.vistaCrearP.textoNombreJugador3.getText(),puntuacionJugador3);
+			//CERRAMOS CONEXION
+			this.modelo.cerrar(conexion);
 		}
 		else if (mazoJugador4.isEmpty())
 		{
+			puntuacionJugador4++;
 			System.out.println("EL JUGADOR 4 HA GANADO");
+			//CONECTAMOS A LA BASE DE DATOS
+			conexion = this.modelo.conectar();
+			//INSERTAR INFORMACIÓN
+			this.modelo.crearPartidaNueva(conexion,this.vistaCrearP.textoNombreJugador4.getText(),puntuacionJugador4);
+			//CERRAMOS CONEXION
+			this.modelo.cerrar(conexion);
 		}
-		else{
-			//todavia no hay ganadores
-		}
-
-
-
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
