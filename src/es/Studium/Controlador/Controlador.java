@@ -105,7 +105,6 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	public void actionPerformed(ActionEvent evento) 
 	{
 
-
 		//CREAR PARTIDA
 		if(vistaMenu.buttonCrearPartida.equals(evento.getSource()))
 		{	
@@ -159,6 +158,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 				//SELECCIONAMOS UN NUMERO INICIAL PARA LANZAR CON EL METODO DEL MODELO
 				numeroInicial= this.modelo.numeroInicialSeleccionado(null); 
 				this.vistaJugando.lblComienzo.setText("CARTAS REPARTIDAS:");
+				this.vistaJugando.avisoTurno(+1);
 				this.vistaJugando.dialogoComienzo.setVisible(true);
 				//DEL 0 AL 12 ASIGNAMOS LAS CARTAS A LOS JUGADORES	
 				System.out.println("MAZO JUGADOR 1: " + mazoJugador1+""
@@ -205,6 +205,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		{
 			this.vistaMejoresJ.ventanaMejoresJugadores.setVisible(false);
 		}
+
 	}
 
 
@@ -277,25 +278,24 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 			//JUGADOR 3==3
 			//JUGADOR 4==4
 		{   
-			System.out.println("ENTRA JUGADOR 1");
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador1);//EL JUGADOR 1 EJECUTA UNA ACCION
 			System.out.println("LANZA CARTAS EL JUGADOR 1 " + cartasLanzadas);
 			mazoJugador1 =this.modelo.lanzamientos(mazoJugador1, cartasLanzadas); //JUGADOR 1 LANZA CARTAS	
 			System.out.println("LE QUEDAN AL JUGADOR 1: " +mazoJugador1);
 			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);//LAS CARTAS DEL JUGADOR 1 PASAN AL MAZO CENTRAL
-			System.out.println("MAZO Central> " +mazoCentral);
 			this.vistaJugando.reversoCarta();//MUESTRA EL DIBUJO DEL REVERSO DE LA CARTA
 			turno = 2;//PASA EL TURNO AL JUGADOR 2
-			System.out.println("JUGADOR 1 HA LANZADO CARTA, TURNO DEL JUGADOR 2.");
+			if(turno==2)
+			{
+				this.vistaJugando.avisoTurno(+2);
+			}
 			System.out.println("JUGADOR 2 ¿LANZAS O LEVANTAS?");
 
 		}
 
 		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==1))//JUGADOR 1 LEVANTA LA CARTA DEL JUGADOR 4
 		{
-			
 			System.out.println("JUGADOR 1 LLAMA MENTIROSO AL JUGADOR 4. LEVANTA SUS CARTAS.");
-			
 			if(numeroInicial==cartasLanzadas.get(1))
 			{
 				mazoJugador1 = this.modelo.devolverCartasAJugadores(mazoJugador1, mazoCentral);
@@ -311,30 +311,30 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 
 			}
 			mazoCentral = new ArrayList<Integer>();
-			System.out.println("EL JUGADOR 1, SELECCIONA UN NUEVO NUMERO EL:");
-			numeroInicial=this.modelo.nuevoNumeroSeleccionado(null);
+			System.out.println("EL JUGADOR 1, SELECCIONA UN NUEVO NUMERO EL:" + (numeroInicial=this.modelo.nuevoNumeroSeleccionado(null)));
 		}
 
 
 		//TURNO JUGADOR 2
 		else if ((x>=340)&&(x<=449)&&(y>=295)&&(y<=445)&&(turno==2))//jUGADOR 2 LANZA CARTA 
 		{
-			System.out.println("ENTRA JUGADOR 2");
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador2);//MAZO ACTUALIZADO	
-			System.out.println("----2> " + cartasLanzadas);
+			System.out.println("LANZA CARTAS EL JUGADOR 2 " + cartasLanzadas);
 			mazoJugador2 =this.modelo.lanzamientos(mazoJugador2, cartasLanzadas);
 			System.out.println("LE QUEDAN AL JUGADOR 2: " +mazoJugador2);
 			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);
-			System.out.println("----Central> " +mazoCentral);
 			this.vistaJugando.reversoCarta();
 			turno = 3;
-			System.out.println("JUGADOR 2 HA LANZADO CARTA, TURNO DEL JUGADOR 2.");
+			if(turno==3)
+			{
+				this.vistaJugando.avisoTurno(+3);
+			}
 			System.out.println("JUGADOR 3 ¿LANZAS O LEVANTAS?");
 		} 
 
 		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==2))//JUGADOR 2 LEVANTA CARTA JUGADOR 1
 		{
-			
+
 			//ERROR QUE DEBO CORREGIR
 			System.out.println("JUGADOR 2 LLAMA MENTIROSO AL JUGADOR 1. LEVANTA SUS CARTAS.");
 			if(numeroInicial==cartasLanzadas.get(1))
@@ -351,31 +351,32 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 				this.vistaJugando.dialogoAcusacion2.setVisible(true);
 			}
 			mazoCentral = new ArrayList<Integer>();
-			System.out.println("EL JUGADOR 2, SELECCIONA UN NUEVO NUMERO EL:");
-			numeroInicial=this.modelo.nuevoNumeroSeleccionado(null);
-			
+			System.out.println("EL JUGADOR 2, SELECCIONA UN NUEVO NUMERO EL:" + (numeroInicial=this.modelo.nuevoNumeroSeleccionado(null)));
+
 		}
 
 		//TURNO JUGADOR 3
 		else if((x>=60)&&(x<=169)&&(y>=180)&&(y<=330)&&(turno==3))//JUGADOR 3 LANZA CARTA
 		{
-			System.out.println("ENTRA JUGADOR 3");
+			this.vistaJugando.avisoTurno(+1);
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador3);//MAZO ACTUALIZADO	
-			System.out.println("----3> " + cartasLanzadas);
+			System.out.println("LANZA CARTAS EL JUGADOR 3 " + cartasLanzadas);
 			mazoJugador3 =this.modelo.lanzamientos(mazoJugador3, cartasLanzadas);
 			System.out.println("LE QUEDAN AL JUGADOR 3:> " +mazoJugador3);
 			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);
-			System.out.println("----Central> " +mazoCentral);
 			this.vistaJugando.reversoCarta();
 			turno = 4;
-			System.out.println("JUGADOR 3 HA LANZADO CARTA, TURNO DEL JUGADOR 4.");
+			if(turno==4)
+			{
+				this.vistaJugando.avisoTurno(+4);
+			}
 			System.out.println("JUGADOR 4 ¿LANZAS O LEVANTAS?");
 		}
 
 		//JUGADOR 3 LEVANTA CARTAS DEL JUGADOR 2
 		if((x>=340)&&(x<=419)&&(y>=165)&&(y<=315)&&(turno==3))
 		{
-			
+			this.vistaJugando.avisoTurno(+1);
 			System.out.println("JUGADOR 3 LLAMA MENTIROSO AL JUGADOR 2. LEVANTA SUS CARTAS.");
 			//ERROR QUE DEBO CORREGIR
 			if(numeroInicial==cartasLanzadas.get(1))
@@ -392,41 +393,38 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 				this.vistaJugando.dialogoAcusacion2.setVisible(true);
 			}
 			mazoCentral = new ArrayList<Integer>();
-			System.out.println("EL JUGADOR 3, SELECCIONA UN NUEVO NUMERO EL:");
-			numeroInicial=this.modelo.nuevoNumeroSeleccionado(null);
-			
+			System.out.println("EL JUGADOR 3, SELECCIONA UN NUEVO NUMERO EL:" + (numeroInicial=this.modelo.nuevoNumeroSeleccionado(null)));
+
 		}
 
 		//TURNO JUGADOR 4
 		else if((x>=650)&&(x<=759)&&(y>=180)&&(y<=330)&&(turno==4))
 		{
-			System.out.println("ENTRA JUGADOR 4");
+			this.vistaJugando.avisoTurno(+1);
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador4);//EL JUGADOR 1 EJECUTA UNA ACCION
-			System.out.println("----> " + cartasLanzadas);
+			System.out.println("LANZA CARTAS EL JUGADOR 4 " + cartasLanzadas);
 			mazoJugador4 =this.modelo.lanzamientos(mazoJugador4, cartasLanzadas); //JUGADOR 1 LANZA CARTAS	
 			System.out.println("LE QUEDAN AL JUGADOR 4: " +mazoJugador1);
 			mazoCentral=this.modelo.mazoCartaCentral(mazoCentral, cartasLanzadas);//LAS CARTAS DEL JUGADOR 1 PASAN AL MAZO CENTRAL
-			System.out.println("----Central> " +mazoCentral);
 			this.vistaJugando.reversoCarta();
 			turno = 1;
-			System.out.println("JUGADOR 4 HA LANZADO CARTA, TURNO DEL JUGADOR 1.");
 			System.out.println("JUGADOR 1 ¿LANZAS O LEVANTAS?");
-			
+
 		}
 
 		//JUGADOR 4 LEVANTA CARTAS DEL JUGADOR 3
 		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==4))
 		{
-			
+
 			System.out.println("JUGADOR 4 LLAMA MENTIROSO AL JUGADOR 3. LEVANTA SUS CARTAS.");
-			
+
 			if(numeroInicial==cartasLanzadas.get(1))
 			{
 				mazoJugador4 = this.modelo.devolverCartasAJugadores(mazoJugador4, mazoCentral);
 				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 3 NO MINTIÓ");
 				this.vistaJugando.dialogoAcusacion1.setVisible(true);
 			}
-			
+
 			else if(numeroInicial!=cartasLanzadas.get(1))
 			{
 				mazoJugador3 = this.modelo.devolverCartasAJugadores(mazoJugador3, mazoCentral);
@@ -434,16 +432,16 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 				this.vistaJugando.dialogoAcusacion2.setVisible(true);
 			}
 			mazoCentral = new ArrayList<Integer>();
-			System.out.println("EL JUGADOR 4, SELECCIONA UN NUEVO NUMERO EL:");
-			numeroInicial=this.modelo.nuevoNumeroSeleccionado(null);
-			
+			System.out.println("EL JUGADOR 4, SELECCIONA UN NUEVO NUMERO EL:" + (numeroInicial=this.modelo.nuevoNumeroSeleccionado(null)));
+
 		}
 
 		//JUGADOR GANADOR
 		if (mazoJugador1.isEmpty())
 		{
 			puntuacionJugador1++;
-			System.out.println("EL JUGADOR 1 HA GANADO");
+			this.vistaJugando.lblVictoria.setText("EL JUGADOR 1" + this.vistaCrearP.textoNombreJugador1.getText() + "HA GANADO");
+			this.vistaJugando.dialogoVictoria.setVisible(true);
 			//CONECTAMOS A LA BASE DE DATOS
 			conexion = this.modelo.conectar();
 			//INSERTAR INFORMACIÓN
@@ -454,7 +452,8 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		else if (mazoJugador2.isEmpty())
 		{
 			puntuacionJugador2++;
-			System.out.println("EL JUGADOR 2 HA GANADO");
+			this.vistaJugando.lblVictoria.setText("EL JUGADOR 2" + this.vistaCrearP.textoNombreJugador2.getText() + "HA GANADO");
+			this.vistaJugando.dialogoVictoria.setVisible(true);
 			//CONECTAMOS A LA BASE DE DATOS
 			conexion = this.modelo.conectar();
 			//INSERTAR INFORMACIÓN
@@ -465,7 +464,8 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		else if (mazoJugador3.isEmpty())
 		{
 			puntuacionJugador3++;
-			System.out.println("EL JUGADOR 3 HA GANADO");
+			this.vistaJugando.lblVictoria.setText("EL JUGADOR 3" + this.vistaCrearP.textoNombreJugador2.getText() + "HA GANADO");
+			this.vistaJugando.dialogoVictoria.setVisible(true);
 			//CONECTAMOS A LA BASE DE DATOS
 			conexion = this.modelo.conectar();
 			//INSERTAR INFORMACIÓN
@@ -476,7 +476,8 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		else if (mazoJugador4.isEmpty())
 		{
 			puntuacionJugador4++;
-			System.out.println("EL JUGADOR 4 HA GANADO");
+			this.vistaJugando.lblVictoria.setText("EL JUGADOR 4" + this.vistaCrearP.textoNombreJugador2.getText() + "HA GANADO");
+			this.vistaJugando.dialogoVictoria.setVisible(true);
 			//CONECTAMOS A LA BASE DE DATOS
 			conexion = this.modelo.conectar();
 			//INSERTAR INFORMACIÓN

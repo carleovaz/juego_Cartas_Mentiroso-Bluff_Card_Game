@@ -10,8 +10,6 @@ import java.awt.Image;
 import java.awt.Label;
 import java.awt.Toolkit;
 
-import es.Studium.Musica.Sonido2;
-
 public class VistaJugando extends Frame
 {
 	private static final long serialVersionUID = 1L;
@@ -30,10 +28,7 @@ public class VistaJugando extends Frame
 	int imagenAmostrar3 = 0;
 	int imagenAmostrar4 = 0;
 	int imagenAmostrar5 = 0;
-	String turnoJugador1;
-	String turnoJugador2;
-	String turnoJugador3;
-	String turnoJugador4;
+	int turno = 0;
 
 	public Frame ventanaJuego = new Frame ("¡EL MENTIROSO!: JUGANDO");
 	public Dialog dialogoTurno = new Dialog(this, "TURNO", true);
@@ -105,6 +100,9 @@ public class VistaJugando extends Frame
 		g.drawImage(reverso, 20, 180, this);
 		g.drawString("Jugador 4", 610, 175);
 		g.drawImage(reverso, 600, 180, this); 
+		g.setColor(Color.black);
+		g.drawRect(85, 35, 175, 35);
+		g.drawString("Turno del jugador " + turno, 90, 55);
 
 		//JUGADOR1
 		//POSICION DE LAS CARTAS
@@ -952,11 +950,12 @@ public class VistaJugando extends Frame
 		cartaReverso++;
 		repaint();
 	}
-
-
-	public void musica()
+	
+	public void avisoTurno(int t)
 	{
-		new Sonido2();
+		this.turno=t;
+		repaint();
 	}
+
 
 }
