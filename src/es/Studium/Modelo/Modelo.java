@@ -93,7 +93,8 @@ public class Modelo
 		if(mazoJugador.size()<5)
 		{
 
-			cantidadCartaUsada = cantidadCarta.nextInt(mazoJugador.size());
+			cantidadCartaUsada = 1;
+		
 		}
 		else
 		{
@@ -111,7 +112,16 @@ public class Modelo
 			while(bandera1==false)
 			{ 
 				//GENERAMOS EL RANDOM
-				Integer posicionCartaElegida = cantidadCarta.nextInt(mazoJugador.size()-1);
+				Integer posicionCartaElegida = 0;
+				if (cantidadCartaUsada==1)
+				{
+					posicionCartaElegida=0;
+				}
+				
+				else
+				{
+					posicionCartaElegida= cantidadCarta.nextInt(mazoJugador.size()-1);
+				}
 				//SI EL ARRAY DE POSICIONES ES VACIO
 				if(cartasLanzadasPosicion.size()==0)
 				{
@@ -151,7 +161,7 @@ public class Modelo
 		{
 			mazoCentral.add(CartasLanzadas.get(i));
 		}
-
+		
 		return mazoCentral;
 	}
 
@@ -162,6 +172,7 @@ public class Modelo
 			mazoJugador.add(mazoCentral.get(i));
 		}
 		return mazoJugador;
+		
 	}
 
 
@@ -171,7 +182,8 @@ public class Modelo
 	public int numeroInicialSeleccionado(int numero[])
 	{
 		Math.random();
-		int numeroAleatorio = (int) (Math.random()*12+1);
+//		int numeroAleatorio = (int) (Math.random()*12+1);
+		int numeroAleatorio =7;
 		System.out.println("EL NUMERO INICIAL A LANZAR ES UN: " + numeroAleatorio + " BUENA SUERTE, MENTIROSOS");
 		return numeroAleatorio;
 	}
@@ -181,7 +193,6 @@ public class Modelo
 	{
 		Math.random();
 		int numeroAleatorio = (int) (Math.random()*12+1);
-		System.out.println(numeroAleatorio);
 		return numeroAleatorio;
 	}
 
