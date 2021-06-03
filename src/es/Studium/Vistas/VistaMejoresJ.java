@@ -9,6 +9,7 @@ import java.awt.Label;
 import java.awt.TextArea;
 
 
+
 public class VistaMejoresJ  extends Frame
 {
 	private static final long serialVersionUID = 1L;
@@ -16,8 +17,9 @@ public class VistaMejoresJ  extends Frame
 	//VENTANA MEJORES JUGADORES
 	public Frame ventanaMejoresJugadores = new Frame("Mejores Mentirosos");
 	public Label labelMejores = new Label ("El Mentiroso: ¡Mejores Mentirosos!");
-	public TextArea listadoJugadores = new TextArea(5, 30);
+	public TextArea listadoJugadores = new TextArea(15, 40);
 	public Button cerrar = new Button("cerrar");
+
 
 	public VistaMejoresJ()
 	{
@@ -28,11 +30,14 @@ public class VistaMejoresJ  extends Frame
 		ventanaMejoresJugadores.add(listadoJugadores);
 		listadoJugadores.append("ID\tJUGADOR\tPUNTOS\n");
 		ventanaMejoresJugadores.add(cerrar);
-		ventanaMejoresJugadores.setSize(300,220);
+		ventanaMejoresJugadores.setSize(600,420);
 		ventanaMejoresJugadores.setBackground(Color.white);
 		ventanaMejoresJugadores.setLocationRelativeTo(null);
 		ventanaMejoresJugadores.setResizable(false);
 
+
 	}
+	
+
 
 }

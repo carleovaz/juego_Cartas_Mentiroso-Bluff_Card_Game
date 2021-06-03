@@ -48,7 +48,7 @@ public class VistaJugando extends Frame
 		tapete = herramientas.getImage("tapete2.png");
 		reverso = herramientas.getImage("reverso.png");
 		cargarCartas();
-		this.setTitle("Cartas");
+		this.setTitle("¡EL MENTIROSO! - JUGANDO");
 		this.setSize(820,490);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);

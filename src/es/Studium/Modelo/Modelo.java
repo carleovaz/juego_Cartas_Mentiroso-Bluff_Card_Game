@@ -184,7 +184,6 @@ public class Modelo
 		Math.random();
 //		int numeroAleatorio = (int) (Math.random()*12+1);
 		int numeroAleatorio =7;
-		System.out.println("EL NUMERO INICIAL A LANZAR ES UN: " + numeroAleatorio + " BUENA SUERTE, MENTIROSOS");
 		return numeroAleatorio;
 	}
 
@@ -245,7 +244,7 @@ public class Modelo
 		String datos ="";
 		Statement statement = null;
 		ResultSet rs = null;
-		String sentencia = "SELECT idJugador, nombreJugador, puntosJugador FROM jugadores ORDER BY puntosJugador DESC;";
+		String sentencia = "SELECT idJugador, nombreJugador, puntosJugador FROM jugadores ORDER BY puntosJugador DESC LIMIT 10;";
 
 		try
 		{
@@ -254,8 +253,8 @@ public class Modelo
 			rs = statement.executeQuery(sentencia);
 			while(rs.next())
 			{
-				datos = datos + rs.getInt("idJugador") + "\t";
-				datos = datos + rs.getString("nombreJugador")+ "\t";
+				datos = datos + rs.getInt("idJugador") + "\t" ;
+				datos = datos + rs.getString("nombreJugador")+ "\t"+ "\t";
 				datos = datos + rs.getInt("puntosJugador") + "\n";
 			}
 		}
@@ -293,7 +292,7 @@ public class Modelo
 		try 
 		{ 
 			//EJECUTA EL ARCHIVO DE AYUDA
-			Runtime.getRuntime().exec("hh.exe ayuda.chm"); 
+			Runtime.getRuntime().exec("hh.exe ayudaJuego.chm"); 
 		} 
 		catch (IOException e) 
 		{ 

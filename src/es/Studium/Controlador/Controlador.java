@@ -51,6 +51,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 	int puntuacionJugador3=0;
 	int puntuacionJugador4=0;
 	int uno,dos,tres,cuatro;
+	boolean bandera =false;
 
 	//COLOCAMOS LOS PARAMETROS EN EL CONTROLADOR
 	public Controlador(VistaMejoresJ objvistaMej, VistaMenuPrincipal objvistaM, VistaCrearPartida objvistaP, VistaJugando objvistaJug, Modelo objmodelo)
@@ -150,15 +151,12 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 
 			if(this.vistaCrearP.buttonIniciarPartida.equals(evento.getSource()))
 			{
-				//MOSTRAMOS LA VISTA DEL JUEGO, EL TAPETE CON SUS CARTAS
 				new VistaJugando();	
 				this.vistaJugando.setVisible(true);
 				//BARAJAMOS LAS CARTAS CON EL METODO DEL MODELO
 				this.modelo.barajar(mazoJugador1, mazoJugador2, mazoJugador3, mazoJugador4); 
-				//SELECCIONAMOS UN NUMERO INICIAL PARA LANZAR CON EL METODO DEL MODELO
-				numeroInicial= this.modelo.numeroInicialSeleccionado(null); 
-				numeroInicial=7;
-				this.vistaJugando.lblComienzo.setText("CARTAS REPARTIDAS:");
+				numeroInicial=7; 
+				this.vistaJugando.lblComienzo.setText("CARTAS REPARTIDAS, NUMERO A LANZAR:" + this.modelo.numeroInicialSeleccionado(null) );
 				this.vistaJugando.avisoTurno(+1);
 				this.vistaJugando.dialogoComienzo.setVisible(true);
 				//DEL 0 AL 12 ASIGNAMOS LAS CARTAS A LOS JUGADORES	
@@ -268,6 +266,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		int x = evento.getX();
 		int y = evento.getY();
 
+
 		//TURNOS
 		/* JUGADOR 1==1
 		 * JUGADOR 2==2
@@ -279,7 +278,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		if((x>=340)&&(x<=449)&&(y>=65)&&(y<=215)&&(turno==1))//JUGADOR 1 LANZA CARTA
 
 		{   
-			
+			bandera=false;
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador1);//EL JUGADOR 1 EJECUTA UNA ACCION
 			cartasLanzadas = new ArrayList<Integer>();
 			cartasLanzadas.add(7);
@@ -301,41 +300,48 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 
 		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==1))//JUGADOR 1 LEVANTA LA CARTA DEL JUGADOR 4
 		{
-			boolean bandera1=false;
-			System.out.println("JUGADOR 1 LLAMA MENTIROSO AL JUGADOR 4. LEVANTA SUS CARTAS.");
-			for(int i=0;i<cartasLanzadas.size();i++)
+			if(bandera==false)//ASEGURA QUE SE PASE EL TURNO A OTRO JUGADOR
 			{
-				//SI VE QUE UNA DE LAS CARTAS ES DISTINTA
-				if(numeroInicial!=cartasLanzadas.get(i))
+				boolean bandera1=false;//DETERMINA SI EL JUGADOR HA MENTIDO
+				System.out.println("JUGADOR 1 LLAMA MENTIROSO AL JUGADOR 4. LEVANTA SUS CARTAS.");
+				for(int i=0;i<cartasLanzadas.size();i++)
 				{
-					bandera1=true;
+					//SI VE QUE UNA DE LAS CARTAS ES DISTINTA
+					if(numeroInicial!=cartasLanzadas.get(i))
+					{
+						bandera1=true;
+					}
 				}
-			}
-			//SI VE QUE NINGUNA CARTA ES DISTINTA
-			if(bandera1==false)
-			{
-				//Todas las cartas son iguales
-				mazoJugador1 = this.modelo.devolverCartasAJugadores(mazoJugador1, mazoCentral);
-				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 4 NO MINTIÓ");
-				this.vistaJugando.dialogoAcusacion1.setVisible(true);
-				turno=2;
+				//SI VE QUE NINGUNA CARTA ES DISTINTA
+				if(bandera1==false)
+				{
+					//Todas las cartas son iguales
+					mazoJugador1 = this.modelo.devolverCartasAJugadores(mazoJugador1, mazoCentral);
+					this.vistaJugando.lblNoMintio.setText("EL JUGADOR 4 NO MINTIÓ");
+					this.vistaJugando.dialogoAcusacion1.setVisible(true);
+					turno=2;
+					bandera=true;
+					this.vistaJugando.avisoTurno(+2);
+				}
+
+				else
+				{
+					mazoJugador4 = this.modelo.devolverCartasAJugadores(mazoJugador4, mazoCentral);
+					this.vistaJugando.lblMentido.setText("EL JUGADOR 4 MINTIÓ");
+					this.vistaJugando.dialogoAcusacion2.setVisible(true);
+					turno=1;
+				}
+				mazoCentral = new ArrayList<Integer>();
+				System.out.println("EL JUGADOR 1, SELECCIONA UN NUEVO NUMERO EL:" + (numeroInicial=this.modelo.nuevoNumeroSeleccionado(null)));
 			}
 			
-			else
-			{
-				mazoJugador4 = this.modelo.devolverCartasAJugadores(mazoJugador4, mazoCentral);
-				this.vistaJugando.lblMentido.setText("EL JUGADOR 4 MINTIÓ");
-				this.vistaJugando.dialogoAcusacion2.setVisible(true);
-				turno=1;
-			}
-			mazoCentral = new ArrayList<Integer>();
-			System.out.println("EL JUGADOR 1, SELECCIONA UN NUEVO NUMERO EL:" + (numeroInicial=this.modelo.nuevoNumeroSeleccionado(null)));
 		}
 
 
 		//TURNO JUGADOR 2
 		else if ((x>=340)&&(x<=449)&&(y>=295)&&(y<=445)&&(turno==2))//jUGADOR 2 LANZA CARTA 
 		{
+			bandera=false;
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador2);//MAZO ACTUALIZADO	
 			System.out.println("LANZA CARTAS EL JUGADOR 2 " + cartasLanzadas);
 			mazoJugador2 =this.modelo.lanzamientos(mazoJugador2, cartasLanzadas);
@@ -353,43 +359,51 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==2))//JUGADOR 2 LEVANTA CARTA JUGADOR 1
 		{
 
-			boolean bandera1=false;
-			System.out.println("JUGADOR 1 LLAMA MENTIROSO AL JUGADOR 4. LEVANTA SUS CARTAS.");
-			for(int i=0;i<cartasLanzadas.size();i++)
+			if(bandera==false)
 			{
-				//SI VE QUE UNA DE LAS CARTAS ES DISTINTA
-				if(numeroInicial!=cartasLanzadas.get(i))
+				boolean bandera1=false;
+				System.out.println("JUGADOR 1 LLAMA MENTIROSO AL JUGADOR 4. LEVANTA SUS CARTAS.");
+				for(int i=0;i<cartasLanzadas.size();i++)
 				{
-					bandera1=true;
+					//SI VE QUE UNA DE LAS CARTAS ES DISTINTA
+					if(numeroInicial!=cartasLanzadas.get(i))
+					{
+						bandera1=true;
+					}
 				}
+				//SI VE QUE NINGUNA CARTA ES DISTINTA
+				if(bandera1==false)
+				{
+					//Todas las cartas son iguales
+					mazoJugador2 = this.modelo.devolverCartasAJugadores(mazoJugador2, mazoCentral);
+					this.vistaJugando.lblNoMintio.setText("EL JUGADOR 1 NO MINTIÓ");
+					this.vistaJugando.dialogoAcusacion1.setVisible(true);
+					turno=3;
+					bandera=true;
+					this.vistaJugando.avisoTurno(+3);
+
+				}
+
+				else
+				{
+					mazoJugador1 = this.modelo.devolverCartasAJugadores(mazoJugador1, mazoCentral);
+					this.vistaJugando.lblMentido.setText("EL JUGADOR 1 MINTIÓ");
+					this.vistaJugando.dialogoAcusacion2.setVisible(true);
+					turno=2;
+					
+
+				}
+				mazoCentral = new ArrayList<Integer>();
+				System.out.println("EL JUGADOR 2, SELECCIONA UN NUEVO NUMERO EL:" + (numeroInicial=this.modelo.nuevoNumeroSeleccionado(null)));
 			}
-			//SI VE QUE NINGUNA CARTA ES DISTINTA
-			if(bandera1==false)
-			{
-				//Todas las cartas son iguales
-				mazoJugador2 = this.modelo.devolverCartasAJugadores(mazoJugador2, mazoCentral);
-				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 1 NO MINTIÓ");
-				this.vistaJugando.dialogoAcusacion1.setVisible(true);
-				turno=3;
-				
-				
-			}
-			
-			else
-			{
-				mazoJugador1 = this.modelo.devolverCartasAJugadores(mazoJugador1, mazoCentral);
-				this.vistaJugando.lblMentido.setText("EL JUGADOR 1 MINTIÓ");
-				this.vistaJugando.dialogoAcusacion2.setVisible(true);
-				turno=2;
-			}
-			mazoCentral = new ArrayList<Integer>();
-			System.out.println("EL JUGADOR 2, SELECCIONA UN NUEVO NUMERO EL:" + (numeroInicial=this.modelo.nuevoNumeroSeleccionado(null)));
+
 
 		}
 
 		//TURNO JUGADOR 3
 		else if((x>=60)&&(x<=169)&&(y>=180)&&(y<=330)&&(turno==3))//JUGADOR 3 LANZA CARTA
 		{
+			bandera=false;
 			this.vistaJugando.avisoTurno(+1);
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador3);//MAZO ACTUALIZADO	
 			System.out.println("LANZA CARTAS EL JUGADOR 3 " + cartasLanzadas);
@@ -408,44 +422,49 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		//JUGADOR 3 LEVANTA CARTAS DEL JUGADOR 2
 		if((x>=340)&&(x<=419)&&(y>=165)&&(y<=315)&&(turno==3))
 		{
-			this.vistaJugando.avisoTurno(+1);
-			//DE AQUI
-			boolean bandera1=false;
-			System.out.println("JUGADOR 3 LLAMA MENTIROSO AL JUGADOR 2. LEVANTA SUS CARTAS.");
-			for(int i=0;i<cartasLanzadas.size();i++)
+			if(bandera==false)
 			{
-				//SI VE QUE UNA DE LAS CARTAS ES DISTINTA
-				if(numeroInicial!=cartasLanzadas.get(i))
+				this.vistaJugando.avisoTurno(+1);
+				boolean bandera1=false;
+				System.out.println("JUGADOR 3 LLAMA MENTIROSO AL JUGADOR 2. LEVANTA SUS CARTAS.");
+				for(int i=0;i<cartasLanzadas.size();i++)
 				{
-					bandera1=true;
+					//SI VE QUE UNA DE LAS CARTAS ES DISTINTA
+					if(numeroInicial!=cartasLanzadas.get(i))
+					{
+						bandera1=true;
+					}
 				}
+				//SI VE QUE NINGUNA CARTA ES DISTINTA
+				if(bandera1==false)
+				{
+					//Todas las cartas son iguales
+					mazoJugador3 = this.modelo.devolverCartasAJugadores(mazoJugador3, mazoCentral);
+					this.vistaJugando.lblNoMintio.setText("EL JUGADOR 2 NO MINTIÓ");
+					this.vistaJugando.dialogoAcusacion1.setVisible(true);
+					turno=4;
+					bandera=true;
+					this.vistaJugando.avisoTurno(+4);
+				}
+
+				else
+				{
+					mazoJugador2 = this.modelo.devolverCartasAJugadores(mazoJugador2, mazoCentral);
+					this.vistaJugando.lblMentido.setText("EL JUGADOR 2 MINTIÓ");
+					this.vistaJugando.dialogoAcusacion2.setVisible(true);
+					turno=3;
+				}
+				mazoCentral = new ArrayList<Integer>();
+				System.out.println("EL JUGADOR 3, SELECCIONA UN NUEVO NUMERO EL:" + (numeroInicial=this.modelo.nuevoNumeroSeleccionado(null)));
+
 			}
-			//SI VE QUE NINGUNA CARTA ES DISTINTA
-			if(bandera1==false)
-			{
-				//Todas las cartas son iguales
-				mazoJugador3 = this.modelo.devolverCartasAJugadores(mazoJugador3, mazoCentral);
-				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 2 NO MINTIÓ");
-				this.vistaJugando.dialogoAcusacion1.setVisible(true);
-				turno=4;
-			}
-			
-			else
-			{
-				mazoJugador2 = this.modelo.devolverCartasAJugadores(mazoJugador2, mazoCentral);
-				this.vistaJugando.lblMentido.setText("EL JUGADOR 2 MINTIÓ");
-				this.vistaJugando.dialogoAcusacion2.setVisible(true);
-				turno=3;
-			}
-			//HASTA AQUI
-			mazoCentral = new ArrayList<Integer>();
-			System.out.println("EL JUGADOR 3, SELECCIONA UN NUEVO NUMERO EL:" + (numeroInicial=this.modelo.nuevoNumeroSeleccionado(null)));
 
 		}
 
 		//TURNO JUGADOR 4
 		else if((x>=650)&&(x<=759)&&(y>=180)&&(y<=330)&&(turno==4))
 		{
+			bandera=false;
 			this.vistaJugando.avisoTurno(+1);
 			cartasLanzadas = this.modelo.accionJugador(mazoJugador4);//EL JUGADOR 1 EJECUTA UNA ACCION
 			System.out.println("LANZA CARTAS EL JUGADOR 4 " + cartasLanzadas);
@@ -461,36 +480,40 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		//JUGADOR 4 LEVANTA CARTAS DEL JUGADOR 3
 		if((x>=340)&&(x<=449)&&(y>=165)&&(y<=315)&&(turno==4))
 		{
-
-			boolean bandera1=false;
-			System.out.println("JUGADOR 4 LLAMA MENTIROSO AL JUGADOR 3. LEVANTA SUS CARTAS.");
-			for(int i=0;i<cartasLanzadas.size();i++)
+			if(bandera==false)
 			{
-				//SI VE QUE UNA DE LAS CARTAS ES DISTINTA
-				if(numeroInicial!=cartasLanzadas.get(i))
+				boolean bandera1=false;
+				System.out.println("JUGADOR 4 LLAMA MENTIROSO AL JUGADOR 3. LEVANTA SUS CARTAS.");
+				for(int i=0;i<cartasLanzadas.size();i++)
 				{
-					bandera1=true;
+					//SI VE QUE UNA DE LAS CARTAS ES DISTINTA
+					if(numeroInicial!=cartasLanzadas.get(i))
+					{
+						bandera1=true;
+					}
 				}
+				//SI VE QUE NINGUNA CARTA ES DISTINTA
+				if(bandera1==false)
+				{
+					//Todas las cartas son iguales
+					mazoJugador4 = this.modelo.devolverCartasAJugadores(mazoJugador4, mazoCentral);
+					this.vistaJugando.lblNoMintio.setText("EL JUGADOR 3 NO MINTIÓ");
+					this.vistaJugando.dialogoAcusacion1.setVisible(true);
+					turno=1;
+					bandera=true;
+					this.vistaJugando.avisoTurno(+1);
+				}
+
+				else
+				{
+					mazoJugador3 = this.modelo.devolverCartasAJugadores(mazoJugador3, mazoCentral);
+					this.vistaJugando.lblMentido.setText("EL JUGADOR 3 MINTIÓ");
+					this.vistaJugando.dialogoAcusacion2.setVisible(true);
+					turno=4;
+				}
+				mazoCentral = new ArrayList<Integer>();
+				System.out.println("EL JUGADOR 4, SELECCIONA UN NUEVO NUMERO EL:" + (numeroInicial=this.modelo.nuevoNumeroSeleccionado(null)));
 			}
-			//SI VE QUE NINGUNA CARTA ES DISTINTA
-			if(bandera1==false)
-			{
-				//Todas las cartas son iguales
-				mazoJugador4 = this.modelo.devolverCartasAJugadores(mazoJugador4, mazoCentral);
-				this.vistaJugando.lblNoMintio.setText("EL JUGADOR 3 NO MINTIÓ");
-				this.vistaJugando.dialogoAcusacion1.setVisible(true);
-				turno=1;
-			}
-			
-			else
-			{
-				mazoJugador3 = this.modelo.devolverCartasAJugadores(mazoJugador3, mazoCentral);
-				this.vistaJugando.lblMentido.setText("EL JUGADOR 3 MINTIÓ");
-				this.vistaJugando.dialogoAcusacion2.setVisible(true);
-				turno=4;
-			}
-			mazoCentral = new ArrayList<Integer>();
-			System.out.println("EL JUGADOR 4, SELECCIONA UN NUEVO NUMERO EL:" + (numeroInicial=this.modelo.nuevoNumeroSeleccionado(null)));
 
 		}
 
@@ -498,7 +521,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		if (mazoJugador1.isEmpty())
 		{
 			puntuacionJugador1++;
-			this.vistaJugando.lblVictoria.setText("EL JUGADOR 1" + this.vistaCrearP.textoNombreJugador1.getText() + "HA GANADO");
+			this.vistaJugando.lblVictoria.setText("EL JUGADOR 1 " + this.vistaCrearP.textoNombreJugador1.getText() + " HA GANADO");
 			this.vistaJugando.dialogoVictoria.setVisible(true);
 			//CONECTAMOS A LA BASE DE DATOS
 			conexion = this.modelo.conectar();
@@ -510,7 +533,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		else if (mazoJugador2.isEmpty())
 		{
 			puntuacionJugador2++;
-			this.vistaJugando.lblVictoria.setText("EL JUGADOR 2" + this.vistaCrearP.textoNombreJugador2.getText() + "HA GANADO");
+			this.vistaJugando.lblVictoria.setText("EL JUGADOR 2 " + this.vistaCrearP.textoNombreJugador2.getText() + " HA GANADO");
 			this.vistaJugando.dialogoVictoria.setVisible(true);
 			//CONECTAMOS A LA BASE DE DATOS
 			conexion = this.modelo.conectar();
@@ -522,7 +545,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		else if (mazoJugador3.isEmpty())
 		{
 			puntuacionJugador3++;
-			this.vistaJugando.lblVictoria.setText("EL JUGADOR 3" + this.vistaCrearP.textoNombreJugador2.getText() + "HA GANADO");
+			this.vistaJugando.lblVictoria.setText("EL JUGADOR 3 " + this.vistaCrearP.textoNombreJugador3.getText() + " HA GANADO");
 			this.vistaJugando.dialogoVictoria.setVisible(true);
 			//CONECTAMOS A LA BASE DE DATOS
 			conexion = this.modelo.conectar();
@@ -534,7 +557,7 @@ public class Controlador implements ActionListener, WindowListener, MouseListene
 		else if (mazoJugador4.isEmpty())
 		{
 			puntuacionJugador4++;
-			this.vistaJugando.lblVictoria.setText("EL JUGADOR 4" + this.vistaCrearP.textoNombreJugador2.getText() + "HA GANADO");
+			this.vistaJugando.lblVictoria.setText("EL JUGADOR 4 " + this.vistaCrearP.textoNombreJugador4.getText() + " HA GANADO");
 			this.vistaJugando.dialogoVictoria.setVisible(true);
 			//CONECTAMOS A LA BASE DE DATOS
 			conexion = this.modelo.conectar();

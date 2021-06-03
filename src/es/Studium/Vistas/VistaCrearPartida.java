@@ -9,12 +9,8 @@ import java.awt.Image;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
-public class VistaCrearPartida extends Frame implements WindowListener, ActionListener
+public class VistaCrearPartida extends Frame 
 {
 	private static final long serialVersionUID = 1L;
 
@@ -37,11 +33,10 @@ public class VistaCrearPartida extends Frame implements WindowListener, ActionLi
 
 	//HERRAMIENTA PARA IMAGENES
 	Toolkit herramienta;
-	Image fondoMenu;
+	Image fondoCrearPartida;
 
 	public VistaCrearPartida() 
 	{
-		addWindowListener(this);
 		setTitle("¡El Mentiroso!: Crear Jugador");
 		setLayout(new FlowLayout());
 		add(labelNombreJugador1);
@@ -55,7 +50,7 @@ public class VistaCrearPartida extends Frame implements WindowListener, ActionLi
 		add(buttonIniciarPartida);
 		add(cerrarPartida);
 		herramienta = getToolkit(); 
-		fondoMenu = herramienta.getImage("fondoCrearPartida.jpg");
+		fondoCrearPartida = herramienta.getImage("fondoCrearPartida.jpg");
 		setVisible(false);
 		setSize(300,455); 
 		setLocationRelativeTo(null);
@@ -70,56 +65,9 @@ public class VistaCrearPartida extends Frame implements WindowListener, ActionLi
 
 	public void paint(Graphics g) 
 	{ 
-		g.drawImage(fondoMenu,0,295,this); 
-	}
-	@Override
-	public void windowActivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		g.drawImage(fondoCrearPartida,0,295,this); 
 	}
 
-	@Override
-	public void windowClosed(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowClosing(WindowEvent arg0) 
-	{
-		
-		
-	}
-
-	@Override
-	public void windowDeactivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowDeiconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowIconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowOpened(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 }
 
 
