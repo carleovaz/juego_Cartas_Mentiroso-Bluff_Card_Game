@@ -1,6 +1,5 @@
 package es.Studium.Musica;
 
-import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioFileFormat;
@@ -11,9 +10,9 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-public class Sonido extends Frame
+
+public class Sonido
 {
-	private static final long serialVersionUID = 1L;
 	public Sonido()
 	{
 		File sf = new File("Cantina band.wav");
@@ -50,6 +49,5 @@ public class Sonido extends Frame
 			e.printStackTrace();
 		}
 	}
-
 }
 

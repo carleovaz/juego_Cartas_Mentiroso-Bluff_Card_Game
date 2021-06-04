@@ -94,18 +94,17 @@ public class Modelo
 		Integer cantidadCartaUsada = cantidadCarta.nextInt(5);
 		ArrayList<Integer>cartasLanzadasPosicion = new ArrayList<Integer>();
 
-		//EVITAR QUE EL JUGADOR SELECCIONE LA MISMA CARTA DE LA POSICIÓN
-		//SI EL RANDOM SALE 0
+		//SI EL JUGADOR TIENE MENOS DE CINCO CARTAS
 		if(mazoJugador.size()<5)
 		{
-
+			//QUE EMPIECE A LANZAR DE UNA EN UNA, EVITAR ERRORES
 			cantidadCartaUsada = 1;
 		
 		}
 		else
-		{
+		{	//MIENTRAS CANTIDAD USADA SEA IGUAL A 0
 			while(cantidadCartaUsada==0)
-			{
+			{	//SE SIGUE LANZANDO CON NORMALIDAD
 				cantidadCartaUsada = cantidadCarta.nextInt(5);
 			}
 		}
@@ -114,42 +113,41 @@ public class Modelo
 		for(int i=0; i<cantidadCartaUsada;i++)
 		{
 			//CONTROLA QUE NO SE REPTITA LA POSICION DE UNA CARTA ELEGIDA
-			boolean bandera1 = false;
-			while(bandera1==false)
+			boolean controlRepiticion = false;
+			while(controlRepiticion==false)
 			{ 
-				//GENERAMOS EL RANDOM
 				Integer posicionCartaElegida = 0;
 				if (cantidadCartaUsada==1)
 				{
 					posicionCartaElegida=0;
-				}
-				
+				}				
 				else
 				{
 					posicionCartaElegida= cantidadCarta.nextInt(mazoJugador.size()-1);
 				}
-				//SI EL ARRAY DE POSICIONES ES VACIO
+
 				if(cartasLanzadasPosicion.size()==0)
 				{
-					bandera1=true;
+					controlRepiticion=true;
 					cartasLanzadasPosicion.add(posicionCartaElegida);
 					cartasLanzadas.add(mazoJugador.get(posicionCartaElegida));
 				}
+				
 				//CUANDO YA EXISTE UNA POSICION DENTRO DEL ARRAYLIST
 				else
 				{
-					boolean bandera2=false;
+					boolean controlRepiticion2=false;
 					for(int j=0; j<cartasLanzadasPosicion.size();j++)
 					{
 						if(cartasLanzadasPosicion.get(j)==posicionCartaElegida)
 						{
-							bandera2=true;
+							controlRepiticion2=true;
 						}
 					}
 					//SI NO COINCIDE LA POSICION
-					if(bandera2==false)
+					if(controlRepiticion2==false)
 					{
-						bandera1=true;
+						controlRepiticion=true;
 						cartasLanzadasPosicion.add(posicionCartaElegida);
 						cartasLanzadas.add(mazoJugador.get(posicionCartaElegida));
 					}
@@ -171,6 +169,7 @@ public class Modelo
 		return mazoCentral;
 	}
 
+	//METODO POR EL CUAL DEVOLVEMOS LA CARTA DEL MAZO CENTRAL AL JUGADOR
 	public ArrayList<Integer>devolverCartasAJugadores(ArrayList<Integer>mazoJugador, ArrayList<Integer>mazoCentral)
 	{
 		for(int i=0; i<mazoCentral.size();i++)
@@ -181,15 +180,11 @@ public class Modelo
 		
 	}
 
-
-
-
 	//ESCOGEMOS UN NUMERO INICIAL UNA VEZ INICIADA LA PARTIDA, PARA QUE SEA ESE NUMERO EL QUE TENGA QUE LANZAR LOS JUGADORES
 	public int numeroInicialSeleccionado(int numero[])
 	{
 		Math.random();
 		int numeroAleatorio = (int) (Math.random()*12+1);
-//		int numeroAleatorio =7;
 		return numeroAleatorio;
 	}
 
@@ -291,7 +286,6 @@ public class Modelo
 		}
 
 	}
-
 	//METODO POR EL CUAL SE ABRE EL "MENU" AYUDA
 	public void ayuda() 
 	{
