@@ -20,6 +20,7 @@ public class Modelo
 		int jugador = 0;
 		int numeroArepartir = 1;
 		int contador1=0, contador2=0, contador3=0, contador4=0;
+		//REPARTIMOS LAS CARTAS PARA CADA JUGADOR
 		for(int i = 0; i < 48; i++)
 		{
 			jugador = rnd.nextInt(4);
@@ -63,10 +64,15 @@ public class Modelo
 		for(int i=0; i<CartasLanzadas.size();i++)
 		{	
 			//CON EL BOOLEAN CONTROLAMOS QUE NO SE ELIMINEN NUMEROS DUPLICADOS DEL MAZO POR ERROR
+			/*
+			 * Es decir, si un jugador lanza un 2 y un 4, y en su mazo tiene tres 4, no se elimen
+			 * los tres, sino solo el que ha lanzado, es por ello que recorre el mazo y las cartas que 
+			 * se han lanzado.
+			 */
 			boolean noRepetir = false;
 			for(int j=0;j<Mazo.size();j++)
 			{
-				//si la carta
+				
 				if(CartasLanzadas.get(i)==Mazo.get(j) && (noRepetir==false)) 
 				{
 					Mazo.remove(j);
@@ -79,7 +85,7 @@ public class Modelo
 
 	/*METODO POR EL CUAL SELECCIONAMOS CUANTAS CARTAS VA A LANZAR EL JUGADOR CON UN RANDOM, SI 1 O 4
 	 * CON EL OTRO RANDOM, POSICIONCARTA, LO QUE HACEMOS ES QUE ESCOJA LAS CARTAS SEGÚN SU POSICION, ES
-	 * DECIR ENTRE LA POSICION UNA A 12.
+	 * DECIR ENTRE LA POSICION 0 A 11.
 	 */
 	public ArrayList<Integer>accionJugador(ArrayList<Integer>mazoJugador) 
 	{
@@ -182,8 +188,8 @@ public class Modelo
 	public int numeroInicialSeleccionado(int numero[])
 	{
 		Math.random();
-//		int numeroAleatorio = (int) (Math.random()*12+1);
-		int numeroAleatorio =7;
+		int numeroAleatorio = (int) (Math.random()*12+1);
+//		int numeroAleatorio =7;
 		return numeroAleatorio;
 	}
 

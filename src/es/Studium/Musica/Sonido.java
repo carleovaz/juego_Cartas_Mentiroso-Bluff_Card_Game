@@ -50,9 +50,6 @@ public class Sonido extends Frame
 			e.printStackTrace();
 		}
 	}
-	public static void main(String[] args)
-	{
-		
-	}
+
 }
 

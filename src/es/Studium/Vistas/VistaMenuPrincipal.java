@@ -16,7 +16,7 @@ public class VistaMenuPrincipal extends Frame
 	public Frame ventanaMenu = new Frame ("¡El Mentiroso!");
 	public Label labelMenu = new Label("¡BIENVENIDO AL MENTIROSO!");
 	public Button buttonCrearPartida = new Button ("Nueva Partida");
-	public Button buttonMejoresJugadores = new Button ("Mejores jugadores");//SIMILAR A CONSULTA DE PROGRAMA DE GESTIÓN
+	public Button buttonMejoresJugadores = new Button ("Mejores jugadores");
 	public Button buttoncomoSeJuega = new Button ("¿Como se juega?");
 	public Button buttonSalirMenu = new Button ("Salir");
 
@@ -41,6 +41,7 @@ public class VistaMenuPrincipal extends Frame
 		setLocationRelativeTo(null);
 	}
 	
+	//DIBUJAMOS
 	public void paint(Graphics g) 
 	{ 
 		g.drawImage(fondoMenu,30,140,this); 

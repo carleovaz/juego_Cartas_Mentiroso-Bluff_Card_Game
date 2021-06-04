@@ -1,6 +1,5 @@
 package es.Studium.Vistas;
 
-//ESTRUCTURA DE LA CLASE VISTA
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -20,11 +19,9 @@ public class VistaMejoresJ  extends Frame
 	public TextArea listadoJugadores = new TextArea(15, 40);
 	public Button cerrar = new Button("cerrar");
 
-
+	//CONSTRUCTOR
 	public VistaMejoresJ()
 	{
-
-		//MEJORES JUGADORES
 		ventanaMejoresJugadores.setLayout(new FlowLayout());
 		ventanaMejoresJugadores.add(labelMejores);
 		ventanaMejoresJugadores.add(listadoJugadores);
@@ -34,10 +31,6 @@ public class VistaMejoresJ  extends Frame
 		ventanaMejoresJugadores.setBackground(Color.white);
 		ventanaMejoresJugadores.setLocationRelativeTo(null);
 		ventanaMejoresJugadores.setResizable(false);
-
-
 	}
 	
-
-
 }

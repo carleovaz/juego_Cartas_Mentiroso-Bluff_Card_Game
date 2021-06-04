@@ -13,8 +13,6 @@ import java.awt.Toolkit;
 public class VistaCrearPartida extends Frame 
 {
 	private static final long serialVersionUID = 1L;
-
-	//VENTANA MENU
 	public Frame ventanaCrearPartida = new Frame ("¡El Mentiroso!: Crear Partida");
 	public Label labelNombreJugador1 = new Label ("Nombre Jugador 1:");
 	public TextField textoNombreJugador1 = new TextField (30);
@@ -30,8 +28,6 @@ public class VistaCrearPartida extends Frame
 	public Label partidaCreada = new Label ("ERROR: Faltan datos");
 	public Button buttonIniciarPartida = new Button ("Iniciar"); 
 	public Button cerrarPartida = new Button ("Cerrar");
-
-	//HERRAMIENTA PARA IMAGENES
 	Toolkit herramienta;
 	Image fondoCrearPartida;
 
@@ -62,7 +58,7 @@ public class VistaCrearPartida extends Frame
 		dialogoMensajePartidaCreada.setResizable(false);
 		dialogoMensajePartidaCreada.add(partidaCreada);
 	}
-
+	//DIBUJAMOS
 	public void paint(Graphics g) 
 	{ 
 		g.drawImage(fondoCrearPartida,0,295,this); 
