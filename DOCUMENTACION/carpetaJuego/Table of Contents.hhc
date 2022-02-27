@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Manual">
+		<param name="Local" value="Indice.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Contenido">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Menu Principal">
+			<param name="Local" value="Menu_principal.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Crear Partida">
+			<param name="Local" value="Crear_partida.html">
+			<param name="Local" value="Mejores_jugadores.html">
+			<param name="Local" value="Como_se_juega.html">
+			<param name="Local" value="Menu_principal.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Mejores Jugadores">
+			<param name="Local" value="Mejores_jugadores.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="&iquest;Como se juega?">
+			<param name="Local" value="Como_se_juega.html">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>

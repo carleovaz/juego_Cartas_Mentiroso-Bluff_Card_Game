@@ -1,0 +1,19 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=ayudaJuego.chm
+Contents file=Table of Contents.hhc
+Default topic=Indice.html
+Display compile progress=No
+Language=0xc0a Español (España, internacional)
+Title=Manual
+
+
+[FILES]
+Como_se_juega.html
+Crear_partida.html
+Indice.html
+Mejores_jugadores.html
+Menu_principal.html
+
+[INFOTYPES]
+
